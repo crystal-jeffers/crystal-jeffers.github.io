@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Jeffers · Systems & Workflow Design</title>
+<meta name="description" content="Crystal (CJ) Jeffers: systems that improve communication, efficiency and access for a growing service department.">
+<link rel="stylesheet" href="assets/style.css?v=2">
+</head>
+<body>
+
+<header class="sticky">
+  <div class="top-row">
+    <div>
+      <h1>Crystal Jeffers</h1>
+      <span class="role-tag">Systems &amp; workflow design</span>
+    </div>
+    <nav aria-label="Page sections">
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h2>I build the systems a growing service department runs on.</h2>
+    <p>Southland Industries' Service Department keeps hiring and plans to grow much larger. My work is the scaffolding that lets it: clearer communication, fewer manual steps, and information people can reach from wherever they work.</p>
+    <p>It started with the problems in front of me. Then the service manager kept bringing me in: first to replace a spreadsheet for tracking start-up technicians, then to make field procedures usable, then to fix onboarding.</p>
+    <div class="cta-row">
+      <a class="btn btn-dark" href="#work">See the work</a>
+      <a class="btn btn-light" href="#about">Get in touch</a>
+    </div>
+  </section>
+
+  <p class="section-label">What I improve</p>
+  <ul class="pillars">
+    <li><strong>Communication</strong><span>Each person gets the information they own, in a form they can act on.</span></li>
+    <li><strong>Efficiency</strong><span>Routine steps run on their own, and checks catch mistakes before they cost anything.</span></li>
+    <li><strong>Access</strong><span>Procedures and status live where people work, including a phone on a job site.</span></li>
+  </ul>
+
+  <p class="section-label">Skills</p>
+  <ul class="chips" aria-label="Skills">
+    <li>Process &amp; workflow design</li>
+    <li>UX for internal tools</li>
+    <li>Stakeholder interviews &amp; requirements</li>
+    <li>Human-in-the-loop automation</li>
+    <li>Data modeling (Airtable)</li>
+    <li>Excel macros &amp; email automation</li>
+    <li>Knowledge base &amp; documentation</li>
+    <li>Information architecture</li>
+    <li>AI-assisted building</li>
+  </ul>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <p class="section-label" id="work">Selected work</p>
+
+  <!-- 1. Employee Lifecycle -->
+  <article class="project" id="lifecycle">
+    <div class="project-head">
+      <h3>Employee Lifecycle System</h3>
+      <span class="status-pill">Built, pilot pending</span>
+    </div>
+    <p class="improves">Communication · Efficiency</p>
+    <p class="lede">Managers asked for a checklist. I delivered the checklist, and the system behind it that sends, tracks and confirms each item.</p>
+
+    <dl class="pbr">
+      <div>
+        <dt>Problem</dt>
+        <dd>Onboarding lived in inboxes and memory. One new hire touched IT, Safety, Fleet, Facilities, Accounting and the union hall, and every manager did it a little differently. Steps were missed, and nobody could see where a hire stood. Role changes and departures had the same problem, plus confidentiality risk.</dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          <ul>
+            <li><strong>One engine, three case types.</strong> Onboarding, role change and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle and more.</li>
+            <li><strong>One owner per step.</strong> Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</li>
+            <li><strong>Automation with judgment.</strong> Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</li>
+            <li><strong>Docs for each audience.</strong> A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Why it matters</dt>
+        <dd>It was built from the superintendents' own New Hire Protocols doc, matched item by item, so the people who asked for it recognize their process in it. Every new hire the department adds runs through the same steps.</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Skills used">
+      <li>Requirements from stakeholder docs</li><li>Data model</li><li>Rules engine</li><li>Human-in-the-loop</li><li>Role-based UX</li><li>Documentation</li>
+    </ul>
+
+    <div class="shots">
+      <figure class="shot">
+        <a href="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" target="_blank" rel="noopener">
+          <img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR dashboard showing every open case, with overdue and due-soon counts" loading="lazy">
+        </a>
+        <figcaption>HR view: every open case and what's overdue.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage.png" target="_blank" rel="noopener">
+          <img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage.png" alt="Manager triage page listing the manager's open steps by case" loading="lazy">
+        </a>
+        <figcaption>Manager view: only their own steps, sorted by what's due.</figcaption>
+      </figure>
+    </div>
+
+    <div class="project-links">
+      <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">Open the guide site ↗</a>
+      <a class="btn btn-light" href="https://crystal-jeffers.github.io/onboarding/guide.html?role=hr&amp;file=guides%2Fhow-it-works.md" target="_blank" rel="noopener">How it works ↗</a>
+    </div>
+  </article>
+
+  <!-- 2. Start-up tracking / dispatch board -->
+  <article class="project" id="dispatch">
+    <div class="project-head">
+      <h3>Start-Up Crew Tracking &amp; Dispatch</h3>
+      <span class="status-pill">Built, pilot pending</span>
+    </div>
+    <p class="improves">Communication · Access</p>
+    <p class="lede">The service manager's team tracked start-up technicians in an Excel sheet. I gave them a scheduling board that knows each technician's union holidays.</p>
+
+    <dl class="pbr">
+      <div>
+        <dt>Problem</dt>
+        <dd>Crew scheduling and job tracking lived in a spreadsheet and email. Union holidays differ by local and by agreement, so it was easy to book someone on a day they're off, and nobody would know until the day came.</dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          <ul>
+            <li><strong>Timeline and calendar views</strong> of every technician's jobs, training and time off, with job tracking and a start-up checklist per job.</li>
+            <li><strong>Union holidays added automatically.</strong> Each tech gets their own local's paid holidays and off days, about 90 days ahead.</li>
+            <li><strong>Warn, don't block.</strong> If a job lands on someone's holiday, the bar is flagged and the warning clears when it moves. The supervisor keeps the final call.</li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Why it matters</dt>
+        <dd>Holiday rules that lived in union agreements now show up where scheduling decisions are made. At launch, the board pre-loaded 132 holiday entries for 16 union technicians.</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Skills used">
+      <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li>
+    </ul>
+
+    <div class="shots">
+      <figure class="shot">
+        <a href="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" target="_blank" rel="noopener">
+          <img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline showing each technician's assignments across the week" loading="lazy">
+        </a>
+        <figcaption>Timeline: the whole crew at a glance.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" target="_blank" rel="noopener">
+          <img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Calendar with union holiday entries alongside job assignments" loading="lazy">
+        </a>
+        <figcaption>Union holidays sit right on the calendar.</figcaption>
+      </figure>
+    </div>
+
+    <div class="project-links">
+      <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
+    </div>
+  </article>
+
+  <!-- 3. SOP site -->
+  <article class="project" id="sops">
+    <div class="project-head">
+      <h3>Start-Up Procedures Site</h3>
+      <span class="status-pill live">Live</span>
+    </div>
+    <p class="improves">Access</p>
+    <p class="lede">A 12-page procedures document nobody read, rebuilt as a phone-first site with a focused view for each role.</p>
+
+    <dl class="pbr">
+      <div>
+        <dt>Problem</dt>
+        <dd>Procedures lived in one long document written for everyone at once. A technician on a job site, on a phone, had to dig for the few steps that applied to them, so mostly they didn't.</dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          <ul>
+            <li><strong>Role-based views</strong> for apprentices, technicians, lead technicians and supervisors. Each sees their own procedures first.</li>
+            <li><strong>Built to be scanned on site:</strong> large text that respects phone settings, collapsible sections, jump-to navigation and chunked checklists.</li>
+            <li><strong>Maintainable without a developer.</strong> Procedures are plain text files, and one settings file controls which roles see what.</li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Why it matters</dt>
+        <dd>Content structured by audience and task, not by document, is easier to use in the field and easier for the team to keep current as new people join.</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Skills used">
+      <li>Information architecture</li><li>Content design</li><li>Mobile-first</li><li>Accessibility</li><li>Docs-as-code</li>
+    </ul>
+
+    <div class="project-links">
+      <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener">Open the site ↗</a>
+    </div>
+  </article>
+
+  <!-- 4. Technician PM reporting -->
+  <article class="project" id="pm-reporting">
+    <div class="project-head">
+      <h3>Technician PM Reporting</h3>
+      <span class="status-pill live">In use</span>
+    </div>
+    <p class="improves">Communication · Efficiency</p>
+    <p class="lede">Each technician gets a monthly email with only their own preventive maintenance work, sorted into what needs doing next.</p>
+
+    <dl class="pbr">
+      <div>
+        <dt>Problem</dt>
+        <dd>A technician's preventive maintenance (PM) work was buried in the department's full schedule. Follow-up calls started with finding the right rows before anyone could talk about the work.</dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          <ul>
+            <li><strong>A monthly schedule email per technician</strong> listing only their outstanding and upcoming PMs. Sales and backup technicians are copied, so coverage is never a surprise.</li>
+            <li><strong>A personalized action email</strong> that breaks open items into tables by what they need: notes needed, return visit needed, or ready to schedule.</li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Why it matters</dt>
+        <dd>Everyone sees the same to-do list at a glance, so phone calls go straight to decisions instead of searching.</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Skills used">
+      <li>Personalized reporting</li><li>Email automation</li><li>Information design</li>
+    </ul>
+  </article>
+
+  <!-- 5. PM parts ordering. Add screenshots/repo link when available -->
+  <article class="project" id="pm-parts">
+    <div class="project-head">
+      <h3>PM Parts Ordering with Technician Review</h3>
+      <span class="status-pill live">In use</span>
+    </div>
+    <p class="improves">Efficiency · Communication</p>
+    <p class="lede">An automated parts-ordering process with a quality check built in: the technician reviews the list before anything is ordered.</p>
+
+    <dl class="pbr">
+      <div>
+        <dt>Problem</dt>
+        <dd>PM parts lists had constant versioning issues, so orders could go out from an outdated list, and part orders were hard to tell apart.</dd>
+      </div>
+      <div>
+        <dt>What I built</dt>
+        <dd>
+          <ul>
+            <li><strong>Automatic ordering with Excel macros</strong>, giving every order its own correct PO number, even when one customer has several orders in a month.</li>
+            <li><strong>A review step before ordering.</strong> Each technician gets the upcoming parts lists for their sites to check and update before the order goes out.</li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Why it matters</dt>
+        <dd>The person who knows the equipment checks the list before money is spent.</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Skills used">
+      <li>VBA / Excel macros</li><li>Quality control design</li><li>Human-in-the-loop</li>
+    </ul>
+  </article>
+
+  <!-- ===================== APPROACH ===================== -->
+  <p class="section-label" id="approach">How I work</p>
+  <ul class="principles">
+    <li><strong>Start from the real ask.</strong><span>I build from the documents and habits people already have, so the new system feels like their process, not mine.</span></li>
+    <li><strong>Give every step one owner.</strong><span>Hand-offs are where work gets lost. Each step has one person responsible and a clear "done."</span></li>
+    <li><strong>Keep people in the loop where it counts.</strong><span>Automate the routine, and have the right person review anything sensitive or costly before it goes out.</span></li>
+    <li><strong>Build for the next hire.</strong><span>Every system ships with guides written for the people who use it, so it keeps working as the team grows.</span></li>
+  </ul>
+
+  <!-- ===================== ABOUT ===================== -->
+  <p class="section-label" id="about">About</p>
+  <div class="about">
+    <p>I'm CJ, a Service Coordinator in Southland Industries' Northern California Service Department. I schedule preventive maintenance, order parts and dispatch technicians, and that day-to-day work is where I find what to fix.</p>
+    <p><strong>Contact:</strong> <a href="mailto:crystal.jeffers@outlook.com">crystal.jeffers@outlook.com</a><!-- LINKEDIN: add " · <a href="https://www.linkedin.com/in/YOUR-URL" target="_blank" rel="noopener">LinkedIn ↗</a>" once the public URL is known --></p>
+  </div>
+
+</main>
+
+<footer>
+  Systems shown were built at Southland Industries and are shown with demo data. Status labels reflect each project's current stage.
+</footer>
+
+</body>
+</html>
