@@ -214,6 +214,71 @@ figure.shot figcaption { font-size: 0.85rem; color: var(--color-grey); margin-to
   color: var(--color-grey);
 }
 
+/* ---------- Project accordion (Oct 14, v5) ---------- */
+/* Pillar line: small label, not body text */
+.project .improves { font-size: 0.7rem; letter-spacing: 0.08em; margin-top: 0.3rem; }
+
+details.case {
+  margin: 0 0 1rem;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 10px;
+  background: #fcfcfc;
+}
+details.case > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-black);
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+}
+details.case > summary::-webkit-details-marker { display: none; }
+details.case > summary::after {
+  content: "+";
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--color-orange);
+  margin-left: 0.75rem;
+}
+details.case[open] > summary::after { content: "\2013"; }
+details.case > summary:hover { background: var(--color-orange-tint); }
+details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light); border-radius: 10px 10px 0 0; }
+
+.case-body { padding: 0.25rem 1rem 1rem; }
+.case-body h4 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-orange);
+  margin: 1.1rem 0 0.4rem;
+}
+.case-body p { margin: 0; font-size: 1.02rem; }
+
+/* "What I built": each item is its own callout bubble, header on line one */
+.build-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+.build-item {
+  background: var(--color-orange-tint);
+  border: 1px solid #ffd2b0;
+  border-left: 5px solid var(--color-orange);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.build-item strong { display: block; color: var(--color-black); font-size: 1.02rem; margin-bottom: 0.15rem; }
+.build-item span { display: block; font-size: 0.98rem; color: #333; }
+@media (hover: hover) and (pointer: fine) {
+  .build-item:hover { background: #ffe9d8; transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+}
+
+.case-body .tags { margin: 1rem 0 0.75rem; }
+
 /* ---------- About / contact ---------- */
 .about {
   background: var(--color-orange-tint);
