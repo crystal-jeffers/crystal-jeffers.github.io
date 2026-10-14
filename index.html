@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal (CJ) Jeffers: systems that improve communication, efficiency and access for a growing service department.">
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
 
@@ -31,7 +31,6 @@
     <p>It started with the problems in front of me. Then the service manager kept bringing me in: first to replace a spreadsheet for tracking start-up technicians, then to make field procedures usable, then to fix onboarding.</p>
     <div class="cta-row">
       <a class="btn btn-dark" href="#work">See the work</a>
-      <a class="btn btn-light" href="#about">Get in touch</a>
     </div>
   </section>
 
@@ -288,27 +287,7 @@
   <p class="section-label" id="about">About</p>
   <div class="about">
     <p>I'm CJ, a Service Coordinator in Southland Industries' Northern California Service Department. I schedule preventive maintenance, order parts and dispatch technicians, and that day-to-day work is where I find what to fix.</p>
-    <div class="cta-row">
-      <a class="btn btn-dark" href="https://www.linkedin.com/in/crystal-jeffers" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
-      <!-- The address is assembled on click, so it never appears in the page source for spam bots to collect. -->
-      <a class="btn btn-light" id="email-link" href="#about" data-u="crystal.jeffers" data-d="outlook.com">Email me</a>
-    </div>
   </div>
-  <script>
-    (function () {
-      var a = document.getElementById("email-link");
-      if (!a) return;
-      a.addEventListener("click", function (e) {
-        var addr = a.getAttribute("data-u") + "@" + a.getAttribute("data-d");
-        if (a.getAttribute("href").indexOf("mailto:") !== 0) {
-          e.preventDefault();
-          a.setAttribute("href", "mailto:" + addr);
-          a.textContent = addr;
-          window.location.href = "mailto:" + addr;
-        }
-      });
-    })();
-  </script>
 
 </main>
 
