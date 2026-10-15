@@ -1,28 +1,36 @@
 /* Portfolio landing page. Same palette and type as the Start-Up SOP and
    Employee Lifecycle sites, so all three read as one body of work.
 
-   COLOR SCHEME: change these 4 values to re-theme the whole page. */
+   COLOR SCHEME: change these values to re-theme the whole page. */
 :root {
   --color-black: #161616;
   --color-grey: #55565a;
   --color-grey-light: #eeeeee;
   --color-orange: #ff6a00;
   --color-orange-tint: #fff7f0;
+  --color-accent-off: #c9c9c9;   /* left edge of cards not in focus */
+  --ink: #1a1a1a;                /* body text */
+  --ink-dim: #6b6b6b;            /* text on cards not in focus (still AA contrast) */
 }
 
 * { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 1rem;
   line-height: 1.55;
-  color: #1a1a1a;
-  background: #fafafa;
+  color: var(--ink);
+  background: #f6f6f5;
 }
 
 a { color: var(--color-orange); }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
 
 /* ---------- Sticky header ---------- */
 header.sticky {
@@ -39,7 +47,7 @@ header.sticky .top-row {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
 }
 header.sticky h1 { font-size: 1.1rem; margin: 0; }
@@ -57,7 +65,7 @@ header.sticky nav a:hover { color: var(--color-orange); }
 
 /* ---------- Page ---------- */
 main {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 1.5rem 1rem 4rem;
 }
@@ -71,11 +79,12 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-grey);
-  margin: 2.75rem 0 0.75rem;
+  margin: 2.75rem 0 0.9rem;
+  scroll-margin-top: 80px;
 }
 
 /* ---------- Hero ---------- */
-.hero { margin: 0.5rem 0 1.5rem; max-width: 44rem; }
+.hero { margin: 0.5rem 0 1.5rem; max-width: 46rem; }
 .hero h2 { font-size: 2rem; line-height: 1.15; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
 .hero p { color: var(--color-grey); margin: 0 0 0.75rem; font-size: 1.1rem; }
 @media (max-width: 560px) { .hero h2 { font-size: 1.6rem; } }
@@ -96,6 +105,19 @@ img { max-width: 100%; height: auto; }
 .btn-light { background: #fff; color: var(--color-black); border: 1px solid #c4c4c4; }
 .btn-light:hover { border-color: var(--color-orange); }
 
+/* ---------- What I focus on (3 pillars) ---------- */
+.pillars { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
+@media (min-width: 640px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+.pillars li {
+  background: var(--color-black);
+  color: #fff;
+  border-radius: 12px;
+  border-bottom: 5px solid var(--color-orange);
+  padding: 1rem 1.1rem;
+}
+.pillars strong { display: block; font-size: 1.15rem; margin-bottom: 0.25rem; color: #fff; }
+.pillars span { font-size: 0.98rem; opacity: 0.9; }
+
 /* ---------- Skill chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
 .chips li {
@@ -107,20 +129,111 @@ img { max-width: 100%; height: auto; }
   font-size: 0.95rem;
 }
 
-/* ---------- Project cards ---------- */
+/* =========================================================================
+   PROJECT CARDS
+   Default (no script): every card has a shadow and an orange edge, and the
+   first card sits highest. With site.js, the card in focus stands up and
+   the rest settle back and dim slightly. Nothing is ever hidden.
+   ========================================================================= */
 .project {
+  --card-ink: var(--ink);
+  --card-ink-strong: var(--color-black);
+  position: relative;
   background: #fff;
-  border: 1px solid var(--color-grey-light);
+  border: 1px solid #e4e4e4;
   border-left: 6px solid var(--color-orange);
-  border-radius: 12px;
-  padding: 1.25rem 1.3rem 1.4rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 1.25rem 1.3rem 1.3rem;
+  margin-bottom: 1.6rem;
+  color: var(--card-ink);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
 }
+.project:first-of-type {
+  box-shadow: 0 18px 40px -14px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* Focus mode (added by site.js) */
+.focus-ready .project {
+  border-left-color: var(--color-accent-off);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  transform: translateY(4px) scale(0.993);
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.35s ease,
+    color 0.35s ease;
+}
+.focus-ready .project:not(.is-active) {
+  --card-ink: var(--ink-dim);
+  --card-ink-strong: #4d4d4d;
+}
+/* Hovering or tabbing into a resting card brings its text back to full strength */
+.focus-ready .project:not(.is-active):hover,
+.focus-ready .project:not(.is-active):focus-within {
+  --card-ink: var(--ink);
+  --card-ink-strong: var(--color-black);
+}
+.focus-ready .project.is-active {
+  z-index: 2;
+  border-left-color: var(--color-orange);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -16px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* Card top: text left, one image right; image on top on phones */
+.card-top { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.card-media { order: -1; }
+@media (min-width: 760px) {
+  .card-top { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+  .card-media { order: 0; }
+}
+.card-text { min-width: 0; }
+
 .project-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
-.project h3 { font-size: 1.35rem; margin: 0; }
-.project .lede { font-size: 1.1rem; font-weight: 600; color: var(--color-black); margin: 0.6rem 0 0.9rem; }
-.project.upcoming { border-left-color: #c4c4c4; background: #fcfcfc; }
+.project h3 { font-size: 1.35rem; margin: 0; color: var(--card-ink-strong); transition: color 0.35s ease; }
+.project .improves {
+  margin: 0.3rem 0 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-grey);
+}
+.project .lede {
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--card-ink-strong);
+  margin: 0.6rem 0 1rem;
+  transition: color 0.35s ease;
+}
+.project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.card-media {
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+.card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+.card-media.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d0d0d0;
+  background: repeating-linear-gradient(135deg, #f6f6f6 0 12px, #f1f1f1 12px 24px);
+}
+.placeholder-inner { text-align: center; color: var(--color-grey); }
+.placeholder-inner strong { display: block; color: var(--card-ink-strong); }
+.placeholder-inner span { font-size: 0.9rem; }
 
 .status-pill {
   display: inline-block;
@@ -136,90 +249,9 @@ img { max-width: 100%; height: auto; }
 .status-pill.live { background: #eef7ee; border-color: #3c8d3c; color: #1f5a1f; }
 .status-pill.soon { background: var(--color-grey-light); border-color: #c4c4c4; color: var(--color-grey); }
 
-/* Problem / Built / Result rows */
-.pbr { display: grid; gap: 0.75rem; margin: 0 0 1rem; }
-.pbr div { margin: 0; }
-.pbr dt {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-orange);
-  margin: 0 0 0.15rem;
-}
-.pbr dd { margin: 0; font-size: 1.02rem; }
-.pbr ul { margin: 0.25rem 0 0; padding-left: 1.2rem; }
-.pbr li { padding: 0.15rem 0; font-size: 1.02rem; }
-
-.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0.75rem 0 1rem; }
-.tags li {
-  background: var(--color-grey-light);
-  color: var(--color-black);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  font-size: 0.82rem;
-}
-
-/* Screenshots: two side by side on wide screens, stacked on phones */
-.shots { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin: 0.5rem 0 1rem; }
-@media (min-width: 640px) { .shots { grid-template-columns: 1fr 1fr; } }
-figure.shot { margin: 0; }
-figure.shot a { display: block; }
-figure.shot img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  object-position: top left;
-  border: 1px solid #d6d6d6;
-  border-radius: 8px;
-  background: #fff;
-}
-figure.shot figcaption { font-size: 0.85rem; color: var(--color-grey); margin-top: 0.35rem; }
-
-.project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-/* ---------- How I work ---------- */
-.principles { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
-@media (min-width: 640px) { .principles { grid-template-columns: 1fr 1fr; } }
-.principles li {
-  background: #fff;
-  border: 1px solid var(--color-grey-light);
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
-}
-.principles strong { display: block; color: var(--color-black); margin-bottom: 0.25rem; font-size: 1.05rem; }
-.principles span { color: var(--color-grey); font-size: 1rem; }
-
-/* ---------- What I improve (3 pillars) ---------- */
-.pillars { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
-@media (min-width: 640px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
-.pillars li {
-  background: var(--color-black);
-  color: #fff;
-  border-radius: 12px;
-  border-bottom: 5px solid var(--color-orange);
-  padding: 1rem 1.1rem;
-}
-.pillars strong { display: block; font-size: 1.15rem; margin-bottom: 0.25rem; color: #fff; }
-.pillars span { font-size: 0.98rem; opacity: 0.9; }
-
-/* Which pillars a project serves */
-.project .improves {
-  margin: 0.35rem 0 0;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-grey);
-}
-
-/* ---------- Project accordion (Oct 14, v5) ---------- */
-/* Pillar line: small label, not body text */
-.project .improves { font-size: 0.7rem; letter-spacing: 0.08em; margin-top: 0.3rem; }
-
+/* ---------- Accordion ---------- */
 details.case {
-  margin: 0 0 1rem;
+  margin: 1.1rem 0 0;
   border: 1px solid var(--color-grey-light);
   border-radius: 10px;
   background: #fcfcfc;
@@ -234,7 +266,7 @@ details.case > summary {
   padding: 0.6rem 1rem;
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--color-black);
+  color: var(--card-ink-strong);
   border-radius: 10px;
   transition: background-color 0.15s ease;
 }
@@ -259,7 +291,7 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
   color: var(--color-orange);
   margin: 1.1rem 0 0.4rem;
 }
-.case-body p { margin: 0; font-size: 1.02rem; }
+.case-body p { margin: 0; font-size: 1.02rem; color: var(--card-ink); }
 
 /* "What I built": each item is its own callout bubble, header on line one */
 .build-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
@@ -271,15 +303,89 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
   padding: 0.7rem 0.9rem;
   transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
-.build-item strong { display: block; color: var(--color-black); font-size: 1.02rem; margin-bottom: 0.15rem; }
-.build-item span { display: block; font-size: 0.98rem; color: #333; }
+.build-item strong { display: block; color: var(--card-ink-strong); font-size: 1.02rem; margin-bottom: 0.15rem; }
+.build-item span { display: block; font-size: 0.98rem; color: var(--card-ink); }
 @media (hover: hover) and (pointer: fine) {
   .build-item:hover { background: #ffe9d8; transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
 }
 
-.case-body .tags { margin: 1rem 0 0.75rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 1rem 0 0.75rem; }
+.tags li {
+  background: var(--color-grey-light);
+  color: var(--color-black);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.82rem;
+}
 
-/* ---------- About / contact ---------- */
+/* ---------- Carousel ----------
+   Works with no script (swipe, trackpad, or arrow keys once focused).
+   site.js adds the arrow buttons and dots. */
+.carousel { margin-top: 1rem; }
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  border-radius: 8px;
+}
+.carousel.has-controls .carousel-track { scrollbar-width: none; }
+.carousel.has-controls .carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track > figure {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  margin: 0;
+}
+.carousel-track img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #f1f1f1;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+}
+.carousel-phone .carousel-track img { aspect-ratio: 4 / 3; }
+.carousel-track figcaption { font-size: 0.88rem; color: var(--color-grey); margin-top: 0.4rem; }
+.carousel-controls { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 0.6rem; }
+.carousel-btn {
+  background: var(--color-black);
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.carousel-btn:disabled { opacity: 0.3; cursor: default; }
+.carousel-dots { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: #c4c4c4;
+  cursor: pointer;
+}
+.carousel-dot.active { background: var(--color-orange); }
+
+/* ---------- How I work ---------- */
+.principles { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
+@media (min-width: 640px) { .principles { grid-template-columns: 1fr 1fr; } }
+.principles li {
+  background: #fff;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+.principles strong { display: block; color: var(--color-black); margin-bottom: 0.25rem; font-size: 1.05rem; }
+.principles span { color: var(--color-grey); font-size: 1rem; }
+
+/* ---------- About ---------- */
 .about {
   background: var(--color-orange-tint);
   border-left: 5px solid var(--color-orange);
@@ -290,7 +396,7 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
 .about p:last-child { margin-bottom: 0; }
 
 footer {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 1.5rem 1rem 3rem;
   color: var(--color-grey);
@@ -298,5 +404,13 @@ footer {
   border-top: 1px solid var(--color-grey-light);
 }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
-html { scroll-behavior: smooth; }
+/* ---------- Reduced motion ----------
+   No movement, no animated transitions. The card in focus is still marked
+   by its orange edge, shadow and full-strength text. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .focus-ready .project,
+  .focus-ready .project.is-active,
+  .build-item:hover { transform: none !important; }
+}
