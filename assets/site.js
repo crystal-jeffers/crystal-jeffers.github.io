@@ -69,6 +69,72 @@
     pick();
   }
 
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- 3. Revolving-door thumbnails ----------
+     Advances only while its card is the one in focus and on screen, pauses
+     on hover, and never auto-plays for reduced-motion users (a click or
+     Enter still steps through). */
+  Array.prototype.forEach.call(document.querySelectorAll(".rotator"), function (rot) {
+    var slides = Array.prototype.slice.call(rot.querySelectorAll(".slide"));
+    var n = slides.length;
+    if (n < 2) return;
+    var card = rot.closest(".project");
+    var i = 0, hovering = false;
+
+    var label = document.createElement("span");
+    label.className = "rotator-label";
+    label.setAttribute("aria-hidden", "true");
+    rot.appendChild(label);
+    rot.setAttribute("tabindex", "0");
+    rot.setAttribute("aria-label", (rot.getAttribute("aria-label") || "Screenshots") + ". Press Enter for the next screen.");
+    rot.classList.add("is-live");
+
+    function place() {
+      slides.forEach(function (s, k) {
+        var pos = "hidden";
+        if (k === i) pos = "front";
+        else if (k === (i + 1) % n) pos = "next";
+        else if (n > 2 && k === (i - 1 + n) % n) pos = "prev";
+        s.setAttribute("data-pos", pos);
+        s.setAttribute("aria-hidden", pos === "front" ? "false" : "true");
+      });
+      label.textContent = slides[i].getAttribute("data-label") || "";
+    }
+    function step() { i = (i + 1) % n; place(); }
+
+    function onScreen() {
+      var r = rot.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight;
+    }
+    function shouldPlay() {
+      return !calm && !hovering && !document.hidden && onScreen() &&
+        (!card || card.classList.contains("is-active"));
+    }
+
+    rot.addEventListener("mouseenter", function () { hovering = true; });
+    rot.addEventListener("mouseleave", function () { hovering = false; });
+    rot.addEventListener("click", step);
+    rot.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); step(); }
+    });
+
+    place();
+    setInterval(function () { if (shouldPlay()) step(); }, 3400);
+  });
+
+  /* ---------- 4. My Focus fly-in (setup is in the page <head>) ---------- */
+  var pillars = document.querySelector(".pillars");
+  if (pillars && document.documentElement.classList.contains("anim-ready")) {
+    var fly = function () {
+      Array.prototype.forEach.call(pillars.children, function (li) { li.classList.add("flown"); });
+    };
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { fly(); io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(pillars);
+  }
+
   /* ---------- 2. Carousels ---------- */
   Array.prototype.forEach.call(document.querySelectorAll(".carousel"), function (car) {
     var track = car.querySelector(".carousel-track");
@@ -108,7 +174,6 @@
     }
     function go(n) {
       n = Math.max(0, Math.min(slides.length - 1, n));
-      var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       track.scrollTo({ left: n * track.clientWidth, behavior: calm ? "auto" : "smooth" });
     }
     function update() {

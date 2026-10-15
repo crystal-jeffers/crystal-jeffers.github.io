@@ -5,7 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
+<script>
+  /* Set up the My Focus fly-in before first paint. Safety net: if anything
+     goes wrong, the cards are revealed after 4 seconds regardless. */
+  (function () {
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!("IntersectionObserver" in window) || calm) return;
+    document.documentElement.classList.add("anim-ready");
+    setTimeout(function () {
+      var items = document.querySelectorAll(".pillars li");
+      for (var i = 0; i < items.length; i++) items[i].classList.add("flown");
+    }, 4000);
+  })();
+</script>
 </head>
 <body>
 
@@ -23,22 +36,25 @@
   </div>
 </header>
 
-<main>
-
-  <section class="hero">
+<!-- ===================== HERO BANNER ===================== -->
+<section class="hero-banner">
+  <div class="hero-inner">
+    <p class="kicker">Service Department · Southland Industries, Northern California</p>
     <h2>Thoughtful systems that help a growing service team work as one.</h2>
     <p>Southland's Northern California Service Department is growing, and every new hire, job and customer adds another hand-off to coordinate. I design tools and guides that keep that work consistent and connected across roles and departments, so the team can stay focused on excellent execution and an outstanding customer experience.</p>
-    <p>Each project began with listening. The service manager invited me to help with start-up technician tracking, then with making field procedures easier to use, then with onboarding. Each one builds on the last.</p>
-    <div class="cta-row">
-      <a class="btn btn-dark" href="#work">See the work</a>
-    </div>
-  </section>
+    <p class="hero-sub">Each project began with listening. The service manager invited me to help with start-up technician tracking, then with making field procedures easier to use, then with onboarding. Each one builds on the last.</p>
+  </div>
+</section>
 
-  <p class="section-label">What I focus on</p>
+<main>
+
+  <!-- ===================== MY FOCUS ===================== -->
+  <p class="section-label">My Focus</p>
+  <p class="section-intro">Each project supports NorCal's strategic focus: engaged, well-supported people; consistent workflows across offices and departments; and lasting customer relationships.</p>
   <ul class="pillars">
-    <li><strong>Communication</strong><span>Collaboration and connection across departments. Each person gets the information they own, in a form they can act on.</span></li>
-    <li><strong>Efficiency</strong><span>Consistent workflows with fewer gaps. Routine steps run on their own, and checks catch issues early.</span></li>
-    <li><strong>Access</strong><span>Clear expectations in every role. Procedures and status are available wherever people work, including the field.</span></li>
+    <li style="--i:0"><strong>Communication</strong><span>Collaboration and connection between departments. Information reaches the right person in a form they can act on, so customer commitments stay on track.</span></li>
+    <li style="--i:1"><strong>Efficiency</strong><span>Consistent, predictable workflows that close the common gaps between hand-offs and give the team flexible capacity as the backlog grows.</span></li>
+    <li style="--i:2"><strong>Access</strong><span>People understand what's expected to succeed in their role, with procedures and status available wherever they work, including the field.</span></li>
   </ul>
 
   <p class="section-label">Skills</p>
@@ -47,19 +63,20 @@
     <li>UX for internal tools</li>
     <li>Stakeholder interviews &amp; requirements</li>
     <li>Human-in-the-loop automation</li>
-    <li>Data modeling (Airtable)</li>
-    <li>Excel macros &amp; email automation</li>
+    <li>Data modeling (Airtable, Excel)</li>
+    <li>Excel VBA &amp; email automation</li>
     <li>Knowledge base &amp; documentation</li>
     <li>Information architecture</li>
     <li>AI-assisted building</li>
   </ul>
 
   <!-- ===================== PROJECTS =====================
-       Card layout: text + buttons on the left, one image on the right.
-       Inside the <details> toggle: challenge, build bubbles, business impact,
-       skill tags and the full photo carousel.
-       Each "What I built" bubble: <strong> = header line, <span> = detail.
-       To add a carousel photo, copy one <figure> inside .carousel-track. -->
+       Card: text + buttons left, image right. A .rotator is the animated
+       "revolving door" thumbnail: add or remove .slide blocks freely; the
+       first slide shows if the script can't run. data-label is the page
+       name shown on the little caption chip.
+       Inside <details>: challenge, build bubbles, business impact, tags,
+       and the full carousel (copy a <figure> to add a photo). -->
   <p class="section-label" id="work">Selected work</p>
 
   <!-- 1. Employee Lifecycle -->
@@ -77,9 +94,13 @@
           <a class="btn btn-light" href="https://crystal-jeffers.github.io/onboarding/guide.html?role=hr&amp;file=guides%2Fhow-it-works.md" target="_blank" rel="noopener">How it works ↗</a>
         </div>
       </div>
-      <figure class="card-media">
-        <img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR dashboard showing active hires, overdue and due-soon steps, and every case by status" loading="lazy">
-      </figure>
+      <div class="card-media rotator" role="group" aria-label="A walk through the HR workspace">
+        <div class="slide" data-label="HR Home"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"></div>
+        <div class="slide" data-label="Case Progress"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"></div>
+        <div class="slide" data-label="Case Detail"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-detail.png" alt="A single case opened with its details and steps" loading="lazy"></div>
+        <div class="slide" data-label="Task Library"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"></div>
+        <div class="slide" data-label="Program Insights"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: upcoming risk and day-one readiness" loading="lazy"></div>
+      </div>
     </div>
 
     <details class="case">
@@ -133,9 +154,13 @@
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
         </div>
       </div>
-      <figure class="card-media">
-        <img src="assets/img/dispatch/timeline-blurred.png" alt="Dispatch timeline with each technician's jobs across two weeks (names blurred)" loading="lazy">
-      </figure>
+      <div class="card-media rotator" role="group" aria-label="A walk through the dispatch board">
+        <div class="slide" data-label="Timeline"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline of each technician's jobs" loading="lazy"></div>
+        <div class="slide" data-label="Calendar"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Calendar with a union holiday conflict flagged" loading="lazy"></div>
+        <div class="slide" data-label="Job Tracker"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker cards with phase and schedule status" loading="lazy"></div>
+        <div class="slide" data-label="Job Detail"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker-detail.png" alt="One job opened with progress, deadline and contacts" loading="lazy"></div>
+        <div class="slide" data-label="Checklist"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Start-up checklist for a job" loading="lazy"></div>
+      </div>
     </div>
 
     <details class="case">
@@ -160,9 +185,12 @@
 
         <div class="carousel" aria-label="Dispatch board screenshots">
           <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/dispatch/timeline-blurred.png" alt="Dispatch timeline (names blurred)" loading="lazy"><figcaption>Timeline: the whole crew at a glance. Names blurred for privacy.</figcaption></figure>
-            <figure><img src="assets/img/dispatch/calendar-holiday-blurred.png" alt="Dispatch calendar with a holiday conflict warning on an assignment" loading="lazy"><figcaption>A job that overlaps a union holiday is flagged right on the assignment.</figcaption></figure>
-            <figure><img src="assets/img/dispatch/holidays-list.png" alt="Holiday list showing dates and which union locals observe each" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline" loading="lazy"><figcaption>Timeline: the whole crew at a glance.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Dispatch calendar with a holiday conflict warning" loading="lazy"><figcaption>A job that overlaps a union holiday is flagged right on the assignment.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker gallery" loading="lazy"><figcaption>Job tracker: phase and schedule status for every job.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Job checklist" loading="lazy"><figcaption>Each job carries its own start-up checklist.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/holidays-list.png" alt="Holiday list by union local" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Each technician gets next week's schedule by email.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -220,45 +248,107 @@
     </details>
   </article>
 
-  <!-- 4. Technician PM reporting. Swap the placeholder for a sanitized sample email -->
-  <article class="project" id="pm-reporting">
+  <!-- 4. Technician job follow-ups -->
+  <article class="project" id="follow-ups">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
-          <h3>Technician PM Reporting</h3>
+          <h3>Technician Job Follow-Ups</h3>
           <span class="status-pill live">In use</span>
         </div>
         <p class="improves">Communication · Efficiency</p>
-        <p class="lede">Personalized monthly emails that give each technician a clear view of their own preventive maintenance work, organized by next step.</p>
+        <p class="lede">Personalized emails that show each technician their open service jobs, grouped by what's needed to close them: notes, a return visit, parts or scheduling.</p>
       </div>
-      <figure class="card-media placeholder" aria-label="Sample email coming soon">
-        <div class="placeholder-inner"><strong>Sample email</strong><span>Screenshot coming soon</span></div>
-      </figure>
+      <div class="card-media rotator" role="group" aria-label="A follow-up email, a technician's reply, and a thank-you">
+        <div class="slide" data-label="Follow-up email"><img src="assets/img/emails/followup-v2.png" alt="Follow-up email with open jobs in tables: missing notes and return visits needed" loading="lazy"></div>
+        <div class="slide" data-label="Technician replies"><img src="assets/img/emails/followup-tech-reply.png" alt="A technician's reply with an answer added under each job" loading="lazy"></div>
+        <div class="slide fit" data-label="Feedback"><img src="assets/img/emails/followup-thank-you.png" alt="A technician's reply: I appreciate this. Thank you!" loading="lazy"></div>
+      </div>
     </div>
 
     <details class="case">
       <summary>Challenge, build &amp; business impact</summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Each technician's preventive maintenance (PM) work sat within the department's full schedule, so check-ins began with finding the right items before discussing next steps.</p>
+        <p>Open service jobs need to close quickly, and many things can hold one up: notes still to be written, a return visit to finish the work, or parts that have arrived and just need a time on the schedule. Following up job by job meant a lot of back-and-forth.</p>
 
         <h4>What I built</h4>
         <ul class="build-list">
-          <li class="build-item"><strong>A monthly schedule email per technician</strong><span>Only their outstanding and upcoming PMs. Sales and backup technicians are copied, so everyone covering the account stays informed.</span></li>
-          <li class="build-item"><strong>A personalized action email</strong><span>Open items broken into tables by what they need: notes needed, return visit needed, or ready to schedule.</span></li>
+          <li class="build-item"><strong>One email per technician</strong><span>Open jobs grouped by status: missing notes or confirmation, return visits needed, parts, and customer scheduling.</span></li>
+          <li class="build-item"><strong>A specific question on every line</strong><span>Each job shows its last visit and exactly what's needed to move it forward, so a reply can be one line.</span></li>
+          <li class="build-item"><strong>Built from my records</strong><span>Excel macros assemble every email from my dispatch notes and job records. I start each run, review it and send.</span></li>
+          <li class="build-item"><strong>Refined with use</strong><span>The first version was color-coded by status. The current version uses clean tables by category, based on how technicians replied.</span></li>
         </ul>
 
         <h4>Business impact</h4>
-        <p>Strengthens collaboration between technicians, sales and backup coverage, so customer commitments stay on track. Check-ins focus on decisions, supporting reliable service and lasting customer relationships.</p>
+        <p>Closes the common gaps between field work and the office. Technicians answer right in the email, often job by job, so jobs close sooner and customer records stay current. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
 
         <ul class="tags" aria-label="Skills used">
-          <li>Personalized reporting</li><li>Email automation</li><li>Information design</li>
+          <li>Excel VBA</li><li>Email automation</li><li>Information design</li><li>Iterating from feedback</li>
         </ul>
+
+        <div class="carousel" aria-label="Follow-up email screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/emails/followup-v2.png" alt="Current follow-up email" loading="lazy"><figcaption>Current version: clean tables by what each job needs.</figcaption></figure>
+            <figure><img src="assets/img/emails/followup-tech-reply.png" alt="Technician's inline reply" loading="lazy"><figcaption>A technician answers job by job, right in the email.</figcaption></figure>
+            <figure><img src="assets/img/emails/followup-v1.png" alt="First version color-coded by status" loading="lazy"><figcaption>First version: color-coded by status, with a question on each job.</figcaption></figure>
+            <figure><img src="assets/img/emails/followup-thank-you.png" alt="Thank-you reply from a technician" loading="lazy"><figcaption>"I appreciate this. Thank you!!!"</figcaption></figure>
+          </div>
+        </div>
       </div>
     </details>
   </article>
 
-  <!-- 5. PM parts ordering. Add screenshots/repo link when available -->
+  <!-- 5. PM reporting -->
+  <article class="project" id="pm-reporting">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Preventive Maintenance Reporting</h3>
+          <span class="status-pill live">In use</span>
+        </div>
+        <p class="improves">Communication · Efficiency</p>
+        <p class="lede">Preventive maintenance status for every audience: each technician's own list, an all-staff summary, and a management view with parts and coverage.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="PM reports for staff, management and technicians">
+        <div class="slide" data-label="All-staff summary"><img src="assets/img/emails/pm-all-staff.png" alt="All-staff email listing outstanding PMs by month, technician and status" loading="lazy"></div>
+        <div class="slide" data-label="Management view"><img src="assets/img/emails/pm-management-status.png" alt="Management status table color-coded by stage, with technician, backup, account manager and parts" loading="lazy"></div>
+        <div class="slide" data-label="Technician email"><img src="assets/img/emails/pm-monthly-v1.png" alt="Monthly email listing one technician's PMs" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary>Challenge, build &amp; business impact</summary>
+      <div class="case-body">
+        <h4>The challenge</h4>
+        <p>Each technician's preventive maintenance (PM) work sat within the department's full schedule. Technicians, account managers and leadership each needed a different view of the same information.</p>
+
+        <h4>What I built</h4>
+        <ul class="build-list">
+          <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
+          <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
+          <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager and parts status on one line.</span></li>
+        </ul>
+
+        <h4>Business impact</h4>
+        <p>Strengthens collaboration between technicians, sales and leadership around the same source of truth. Commitments on existing buildings stay visible, which supports reliable service and lasting customer relationships.</p>
+
+        <ul class="tags" aria-label="Skills used">
+          <li>Reporting by audience</li><li>Excel VBA</li><li>Email automation</li><li>Information design</li>
+        </ul>
+
+        <div class="carousel" aria-label="PM report screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/emails/pm-all-staff.png" alt="All-staff outstanding PM summary" loading="lazy"><figcaption>All-staff summary: outstanding PMs by month, technician and status.</figcaption></figure>
+            <figure><img src="assets/img/emails/pm-management-status.png" alt="Management PM status table" loading="lazy"><figcaption>Management view: stage, coverage and parts at a glance.</figcaption></figure>
+            <figure><img src="assets/img/emails/pm-monthly-v1.png" alt="Technician monthly PM email" loading="lazy"><figcaption>First version of the monthly technician email.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 6. PM parts ordering -->
   <article class="project" id="pm-parts">
     <div class="card-top">
       <div class="card-text">
@@ -269,8 +359,8 @@
         <p class="improves">Efficiency · Communication</p>
         <p class="lede">Automated parts ordering with a technician review built in, so each order is checked by the person who knows the equipment before it's placed.</p>
       </div>
-      <figure class="card-media placeholder" aria-label="Sample parts list coming soon">
-        <div class="placeholder-inner"><strong>Sample parts review</strong><span>Screenshot coming soon</span></div>
+      <figure class="card-media">
+        <img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email listing upcoming parts by customer, month and vendor for technician review" loading="lazy">
       </figure>
     </div>
 
@@ -283,17 +373,72 @@
         <h4>What I built</h4>
         <ul class="build-list">
           <li class="build-item"><strong>Automatic ordering with Excel macros</strong><span>Every order gets its own correct PO number, even when one customer has several orders in a month.</span></li>
-          <li class="build-item"><strong>A review step before ordering</strong><span>Each technician gets the upcoming parts lists for their sites to check and update before the order goes out.</span></li>
+          <li class="build-item"><strong>A parts audit before ordering</strong><span>Each technician gets the upcoming parts lists for their sites, by customer, month and vendor, to confirm or edit before anything is ordered.</span></li>
         </ul>
 
         <h4>Business impact</h4>
         <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. The technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
 
         <ul class="tags" aria-label="Skills used">
-          <li>VBA / Excel macros</li><li>Quality control design</li><li>Human-in-the-loop</li>
+          <li>Excel VBA</li><li>Quality control design</li><li>Human-in-the-loop</li>
         </ul>
       </div>
     </details>
+  </article>
+
+  <!-- 7. Service coordination database -->
+  <article class="project" id="database">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Service Coordination Database</h3>
+          <span class="status-pill live">In use</span>
+        </div>
+        <p class="improves">Efficiency</p>
+        <p class="lede">The workbook behind the emails: one set of records for service calls, PM visits and PM parts, with macros that turn those records into each report and follow-up.</p>
+      </div>
+      <figure class="card-media placeholder" aria-label="Screenshot coming soon">
+        <div class="placeholder-inner"><strong>Database view</strong><span>Screenshot coming soon</span></div>
+      </figure>
+    </div>
+
+    <details class="case">
+      <summary>Challenge, build &amp; business impact</summary>
+      <div class="case-body">
+        <h4>The challenge</h4>
+        <p>Dispatch notes, PM schedules and parts lists lived in separate places, so every report and follow-up started with gathering information by hand.</p>
+
+        <h4>What I built</h4>
+        <ul class="build-list">
+          <li class="build-item"><strong>One home for service records</strong><span>Service calls, PM visits and PM parts tracked together, with my notes on each job.</span></li>
+          <li class="build-item"><strong>Records become emails</strong><span>Macros build each email from the records: job follow-ups, PM reports, parts audits and orders. I start each run, review it and send.</span></li>
+        </ul>
+
+        <h4>Business impact</h4>
+        <p>A single source of truth for service coordination. Every audience gets consistent information from the same records, and time once spent re-typing goes to following up with technicians and customers.</p>
+
+        <ul class="tags" aria-label="Skills used">
+          <li>Data modeling</li><li>Excel VBA</li><li>Process automation</li>
+        </ul>
+      </div>
+    </details>
+  </article>
+
+  <!-- 8. Dispatch onboarding guide (rebuild in progress) -->
+  <article class="project" id="dispatch-onboarding">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Dispatch Onboarding Guide</h3>
+          <span class="status-pill soon">Rebuild in progress</span>
+        </div>
+        <p class="improves">Access</p>
+        <p class="lede">A guide for new dispatch team members, first built as a linked PDF that navigates like a website, now being rebuilt as a full site.</p>
+      </div>
+      <figure class="card-media placeholder" aria-label="Preview coming soon">
+        <div class="placeholder-inner"><strong>Onboarding guide</strong><span>Preview coming soon</span></div>
+      </figure>
+    </div>
   </article>
 
   <!-- ===================== APPROACH ===================== -->
@@ -314,9 +459,9 @@
 </main>
 
 <footer>
-  Systems shown were built at Southland Industries and are shown with demo data; names in live screenshots are blurred. Status labels reflect each project's current stage.
+  Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=1" defer></script>
+<script src="assets/site.js?v=2" defer></script>
 </body>
 </html>
