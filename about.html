@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · Crystal Jeffers</title>
+<meta name="description" content="Crystal Jeffers: how I spot opportunities, design and build systems, and keep improving them as teams grow.">
+<link rel="stylesheet" href="assets/style.css?v=10">
+<script>
+  document.documentElement.classList.add("js");
+  /* Set up the My Focus fly-in before first paint. Safety net: if anything
+     goes wrong, the cards are revealed after 4 seconds regardless. */
+  (function () {
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!("IntersectionObserver" in window) || calm) return;
+    document.documentElement.classList.add("anim-ready");
+    setTimeout(function () {
+      var items = document.querySelectorAll(".pillars li");
+      for (var i = 0; i < items.length; i++) items[i].classList.add("flown");
+    }, 4000);
+  })();
+</script>
+</head>
+<body>
+
+<header class="sticky">
+  <div class="top-row">
+    <div>
+      <h1><a class="home-link" href="index.html">Crystal Jeffers</a></h1>
+      <span class="role-tag">Systems &amp; workflow design</span>
+    </div>
+    <nav aria-label="Site">
+      <a href="index.html">Portfolio</a>
+      <a href="about.html" aria-current="page">About me</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner hero-short">
+  <div class="hero-inner">
+    <p class="kicker">About me</p>
+    <h2>I build the systems other people work in.</h2>
+    <p>I study how a team actually gets its work done, spot where time, information and confidence slip, and design the fix. Then I keep refining it as the team grows.</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- ===================== WHAT I BRING ===================== -->
+  <p class="section-label" id="bring">What I bring to the table</p>
+  <p class="section-intro">What changes for a team when I build its systems. Open any line for the detail.</p>
+  <div class="bring-stack">
+    <details class="bring-item">
+      <summary><span>Leaders stop being the switchboard.</span></summary>
+      <p>Status, next steps and answers reach people before they have to ask, so managers spend their time on decisions, customers and growth instead of chasing updates.</p>
+    </details>
+    <details class="bring-item">
+      <summary><span>New people become self-sufficient sooner.</span></summary>
+      <p>Guides and checklists teach the work in the order it happens, so a new hire builds confidence on their own instead of pulling an experienced teammate off the job for every question.</p>
+    </details>
+    <details class="bring-item">
+      <summary><span>Work doesn't depend on who remembers.</span></summary>
+      <p>The process lives in the system, not in one person's head, so a vacation, a promotion or a departure doesn't stall jobs or customer commitments.</p>
+    </details>
+    <details class="bring-item">
+      <summary><span>Change lands instead of piling up.</span></summary>
+      <p>When a platform or process shifts, the documentation and tools shift with it, so the team keeps its footing through a rollout.</p>
+    </details>
+    <details class="bring-item">
+      <summary><span>Systems keep getting better.</span></summary>
+      <p>I don't hand off and walk away. Each system is watched in use and refined from what people actually do with it, so it improves as the team grows.</p>
+    </details>
+  </div>
+  <p class="bring-close">The result: a department that can take on more work without the coordination load growing at the same rate.</p>
+
+  <!-- ===================== MY FOCUS: flip cards ===================== -->
+  <p class="section-label" id="focus">My Focus</p>
+  <p class="section-intro">Three outcomes behind every project, tied to NorCal's strategic focus on its people, workflow unity and lasting customer relationships.</p>
+  <p class="flip-hint"><span class="hint-hover">Hover over each card for the business case.</span><span class="hint-touch">Tap each card for the business case.</span></p>
+  <ul class="pillars">
+    <li style="--i:0"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Cohesion</strong><span class="face-label">What it means to me</span><span class="face-text">Being in sync: each person self-sufficient, working from the same information with the same confidence. Teams always have to work together. The systems that connect them decide whether that feels like friction or flow, and that shapes the culture we build.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good cohesion&hellip;</span><span class="face-text">hand-offs land the first time. Jobs close with less follow-up, people trust the information they're handed, and leaders see status without chasing it.</span><span class="back-return"><b>The return:</b> fewer repeat visits, faster close-out and billing, and teams that pull in the same direction.</span></span>
+      </span></button></li>
+    <li style="--i:1"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Efficiency</strong><span class="face-label">What it means to me</span><span class="face-text">Ease of doing business, every day. Nothing wears a team down like fighting through confusion, clunky systems and rework. Clear systems give that energy back, and people spend it on catching errors and doing things right.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good efficiency&hellip;</span><span class="face-text">people start the day with clear work instead of a search for it. The energy saved goes to spotting errors and fixing them when something looks off, before they turn into rework.</span><span class="back-return"><b>The return:</b> less rework, lower cost per job, and capacity that grows faster than headcount.</span></span>
+      </span></button></li>
+    <li style="--i:2"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Access</strong><span class="face-label">What it means to me</span><span class="face-text">Information people can actually take in. Not only where it lives, but how it reads: edited, chunked and shaped for where it's used, from a phone on a job site to a desk. Information that's easy to grasp builds confidence, competence and agency.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good access&hellip;</span><span class="face-text">people become self-sufficient sooner and stay longer. They know where to find the answers. Procedures and expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="back-return"><b>The return:</b> shorter ramp-up, less rework, and a protected investment in every hire.</span></span>
+      </span></button></li>
+  </ul>
+
+  <!-- ===================== HOW I WORK: a progression ===================== -->
+  <p class="section-label" id="approach">How I work</p>
+  <p class="section-intro">The same six steps sit behind every project. Each one shows where it happened in my work.</p>
+  <ol class="process">
+    <li>
+      <span class="step-name">Listen</span>
+      <p>I watch how the work actually gets done and listen for friction. The signals I listen for:</p>
+      <ul class="signals">
+        <li>The same question asked twice</li>
+        <li>A side spreadsheet kept "just in case"</li>
+        <li>"Who has the latest version?"</li>
+        <li>Information re-typed from one place to another</li>
+        <li>A task that only works when one person is in</li>
+      </ul>
+      <p class="step-proof"><b>In practice:</b> the onboarding system started from the superintendents' own New Hire Protocols, not a blank page.</p>
+    </li>
+    <li>
+      <span class="step-name">Spot the real problem</span>
+      <p>When something slips, I look at the system before the person. I find the hand-off where things stall and ask what would make the right action the easy one.</p>
+      <p class="step-proof"><b>In practice:</b> when several PM parts orders for one customer were hard to tell apart, the fix was a PO numbering system, not more careful typing.</p>
+    </li>
+    <li>
+      <span class="step-name">Design with the people who'll use it</span>
+      <p>I start from the tools and habits a team already has, give every step one owner, and decide up front which decisions stay with a person.</p>
+      <p class="step-proof"><b>In practice:</b> union holiday conflicts are flagged on the dispatch board, never blocked. The supervisor keeps the final call.</p>
+    </li>
+    <li>
+      <span class="step-name">Build the smallest version that works</span>
+      <p>In the tools the team already uses (Excel, Airtable, OneNote, a simple website), with the guide written alongside the system, not after it.</p>
+      <p class="step-proof"><b>In practice:</b> the procedures site runs on plain text files and one settings file. No developer needed.</p>
+    </li>
+    <li>
+      <span class="step-name">Iterate from real use</span>
+      <p>Replies, questions and workarounds are feedback. I watch the system in use and refine it until people stop working around it.</p>
+      <p class="step-proof"><b>In practice:</b> technician follow-ups moved from color-coded lists to clean tables, based on how technicians replied.</p>
+    </li>
+    <li>
+      <span class="step-name">Hand it off to last</span>
+      <p>Every system ships with documentation for the people who maintain it, so it keeps working as the team grows and changes.</p>
+      <p class="step-proof"><b>In practice:</b> the onboarding system's guide site has separate paths for HR and managers, an FAQ for every email, and plain-language definitions.</p>
+    </li>
+  </ol>
+
+  <!-- ===================== SKILLS ===================== -->
+  <p class="section-label" id="skills">Skills</p>
+  <ul class="chips" aria-label="Skills">
+    <li>Process &amp; workflow design</li>
+    <li>UX for internal tools</li>
+    <li>Stakeholder interviews &amp; requirements</li>
+    <li>Human-in-the-loop automation</li>
+    <li>Data modeling (Airtable, Excel)</li>
+    <li>Excel VBA &amp; email automation</li>
+    <li>Knowledge base &amp; documentation</li>
+    <li>Information architecture</li>
+    <li>Content editing &amp; formatting</li>
+    <li>AI-assisted building</li>
+  </ul>
+
+  <!-- ===================== ABOUT ===================== -->
+  <p class="section-label" id="about">About</p>
+  <div class="about">
+    <p>I'm Crystal, a Service Coordinator in Southland Industries' Northern California Service Department. Working alongside dispatch, preventive maintenance and parts keeps me close to the daily work, which is where I find the best opportunities to build something better.</p>
+  </div>
+
+  <p class="page-next"><a class="btn btn-dark" href="index.html">See the portfolio &rarr;</a></p>
+
+</main>
+
+<footer>
+  Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
+</footer>
+
+<script src="assets/site.js?v=5" defer></script>
+</body>
+</html>
