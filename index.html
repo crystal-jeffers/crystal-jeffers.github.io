@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -77,7 +77,7 @@
        name shown on the little caption chip.
        Inside <details>: challenge, build bubbles, business impact, tags,
        and the full carousel (copy a <figure> to add a photo). -->
-  <p class="section-label" id="work">Selected work</p>
+  <p class="section-label" id="work">Portfolio Work</p>
 
   <!-- 1. Employee Lifecycle -->
   <article class="project" id="lifecycle">
@@ -85,9 +85,9 @@
       <div class="card-text">
         <div class="project-head">
           <h3>Employee Lifecycle System</h3>
-          <span class="status-pill">Built, pilot pending</span>
         </div>
         <p class="improves">Communication · Efficiency</p>
+        <p class="status-row"><span class="status-pill">Built, pilot pending</span></p>
         <p class="lede">A complete management interface designed to automate routine steps, track case progress, and support faster turnaround for every new hire, role change and departure.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">Open the guide site ↗</a>
@@ -96,10 +96,13 @@
       </div>
       <div class="card-media rotator" role="group" aria-label="A walk through the HR workspace">
         <div class="slide" data-label="HR Home"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"></div>
+        <div class="slide" data-label="Upcoming Risk"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"></div>
         <div class="slide" data-label="Case Progress"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"></div>
-        <div class="slide" data-label="Case Detail"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-detail.png" alt="A single case opened with its details and steps" loading="lazy"></div>
         <div class="slide" data-label="Task Library"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"></div>
-        <div class="slide" data-label="Program Insights"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: upcoming risk and day-one readiness" loading="lazy"></div>
+        <div class="slide" data-label="New Hire Kickoff"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"></div>
+        <div class="slide" data-label="New Hire Email"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"></div>
+        <div class="slide" data-label="Manager Triage"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"></div>
+        <div class="slide" data-label="Draft Queue"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-draft.png" alt="A drafted request email open and ready to edit" loading="lazy"></div>
       </div>
     </div>
 
@@ -126,14 +129,14 @@
 
         <div class="carousel" aria-label="Employee Lifecycle screenshots">
           <div class="carousel-track" tabindex="0">
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard" loading="lazy"><figcaption>HR home: every open case and what's overdue.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"><figcaption>HR home: every open case and what's overdue.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"><figcaption>Upcoming risk: hires starting soon whose steps are behind.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"><figcaption>Case progress: every step, its owner and its status.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"><figcaption>The shared step library HR maintains.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"><figcaption>One form starts each case.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress list with each step's status" loading="lazy"><figcaption>Case progress: every step, its owner and its status.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage.png" alt="Manager triage board" loading="lazy"><figcaption>Managers see only their own steps, sorted by what's due.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-queue.png" alt="Manager draft queue board" loading="lazy"><figcaption>Draft queue: emails wait for review when a manager prefers.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Automated email announcing a new hire's checklist" loading="lazy"><figcaption>Automatic notices tell each owner when their steps are ready.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="Task library table of every step" loading="lazy"><figcaption>The shared step library HR maintains.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights showing upcoming risk and day-one readiness" loading="lazy"><figcaption>Program insights: upcoming risk and day-one readiness.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"><figcaption>The manager is told a new hire was added, with a link to their steps.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"><figcaption>Triage: the manager's own steps, with full detail one click away.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-draft.png" alt="A drafted request email open and ready to edit" loading="lazy"><figcaption>Draft queue: the request is pre-written and ready to review and send.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -146,9 +149,9 @@
       <div class="card-text">
         <div class="project-head">
           <h3>Start-Up Crew Tracking &amp; Dispatch</h3>
-          <span class="status-pill">Built, pilot pending</span>
         </div>
         <p class="improves">Communication · Access</p>
+        <p class="status-row"><span class="status-pill">Built, pilot pending</span></p>
         <p class="lede">A shared scheduling board for the Start-Up crew that tracks every job and accounts for each technician's union holidays, so scheduling stays consistent as the crew grows.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
@@ -203,9 +206,9 @@
       <div class="card-text">
         <div class="project-head">
           <h3>Start-Up Procedures Site</h3>
-          <span class="status-pill live">Live</span>
         </div>
         <p class="improves">Access</p>
+        <p class="status-row"><span class="status-pill live">Live</span></p>
         <p class="lede">Start-up procedures reorganized into a phone-friendly site, with a focused view for each role so technicians can find their steps right from the field.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener">Open the site ↗</a>
@@ -248,21 +251,120 @@
     </details>
   </article>
 
-  <!-- 4. Technician job follow-ups -->
+  <!-- 4. Platform migration documentation -->
+  <article class="project" id="migration">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Platform Migration Documentation</h3>
+        </div>
+        <p class="improves">Communication · Access</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="lede">Workflow documentation for a department moving from COINS and ServiceTrade to ServiceTitan, started in my first week and kept current as each process changed.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the department manager's reply">
+        <div class="slide" data-label="Week one: SOPs shared"><img src="assets/img/migration/week-one-sops-email.png" alt="Email sharing the first week of Service Coordinator SOPs, also converted to editable OneNote pages" loading="lazy"></div>
+        <div class="slide" data-label="Manager's reply"><img src="assets/img/migration/manager-endorsement.png" alt="Department manager's reply: Wow, this is great! Can you update this through the ServiceTitan rollout?" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary>Challenge, build &amp; business impact</summary>
+      <div class="case-body">
+        <h4>The challenge</h4>
+        <p>Shortly after I joined, the department began moving from COINS and ServiceTrade to ServiceTitan. For months, work ran across both systems, and processes kept changing as the rollout progressed.</p>
+
+        <h4>What I built</h4>
+        <ul class="build-list">
+          <li class="build-item"><strong>Week-one SOPs for the Service Coordinator role</strong><span>I documented each workflow in the existing systems during my first week and shared it with the department manager.</span></li>
+          <li class="build-item"><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team prefers its reference material, so others can add to them as systems change.</span></li>
+          <li class="build-item"><strong>Updated through the ServiceTitan rollout</strong><span>At the manager's request, I kept the documentation current as each process moved to the new platform.</span></li>
+          <li class="build-item"><strong>One consolidated ServiceTitan reference</strong><span>Revised and combined the ServiceTitan SOPs shared by the Texas team into one cohesive document that's easier to search and scan.</span></li>
+        </ul>
+
+        <h4>Business impact</h4>
+        <p>Gave the team a shared reference through a period of change, supporting consistent workflows across systems and offices. The department manager endorsed it in week one and asked that it continue through the rollout, and it became the foundation for the dispatch onboarding guide.</p>
+
+        <ul class="tags" aria-label="Skills used">
+          <li>Process documentation</li><li>Change management</li><li>Knowledge management</li><li>Content consolidation</li>
+        </ul>
+
+        <div class="carousel" aria-label="Migration documentation screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/migration/week-one-sops-email.png" alt="Week-one SOP email" loading="lazy"><figcaption>End of week one: Service Coordinator SOPs shared, plus editable OneNote pages.</figcaption></figure>
+            <figure><img src="assets/img/migration/manager-endorsement.png" alt="Manager's reply" loading="lazy"><figcaption>The department manager asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 5. Dispatch onboarding guide & checklist -->
+  <article class="project" id="dispatch-onboarding">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Dispatch Onboarding Guide &amp; Checklist</h3>
+        </div>
+        <p class="improves">Access · Communication</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="lede">A task-based onboarding guide and checklist for new dispatchers, organized by job lifecycle stage so new team members learn the tasks and the big picture together. A web version is in progress.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="Earlier dispatch reference pages, then the new guide and checklist">
+        <div class="slide" data-label="Before: OneNote pages"><img src="assets/img/dispatch-onboarding/before-dispatch-protocols.png" alt="Earlier OneNote page of dispatch protocols" loading="lazy"></div>
+        <div class="slide" data-label="Before: brief pages"><img src="assets/img/dispatch-onboarding/before-pm-job-creation.png" alt="Earlier OneNote page with two lines of guidance" loading="lazy"></div>
+        <div class="slide" data-label="After: guide &amp; checklist"><img src="assets/img/dispatch-onboarding/guide-shared-email.png" alt="Email introducing the onboarding checklist, onboarding guide, consolidated ServiceTitan SOPs and reference folder" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary>Challenge, build &amp; business impact</summary>
+      <div class="case-body">
+        <h4>The challenge</h4>
+        <p>Dispatch reference material lived across OneNote pages written for people who already knew the work. Some pages were brief or still in progress, and the department was changing platforms at the same time.</p>
+
+        <h4>What I built</h4>
+        <ul class="build-list">
+          <li class="build-item"><strong>Onboarding checklist</strong><span>High-level onboarding topics covered in a structured, workflow-first order.</span></li>
+          <li class="build-item"><strong>Onboarding guide</strong><span>Process maps, escalation chains, policies, how-tos and troubleshooting, organized by job lifecycle stage and task. Internal links let it navigate like a knowledge center.</span></li>
+          <li class="build-item"><strong>A reference folder</strong><span>This year's union holidays, labor rates, accounting codes and service forms, all in one place.</span></li>
+          <li class="build-item"><strong>Next: a web version</strong><span>Being rebuilt as a site in the same style as the procedures and lifecycle guides.</span></li>
+        </ul>
+
+        <h4>Business impact</h4>
+        <p>Supports the goal of enhancing onboarding and ongoing support as new hires learn the NorCal Way. A new dispatcher starts with a structured path instead of piecing pages together, and every new hire gets the same foundation in both the tasks and the bigger picture.</p>
+
+        <ul class="tags" aria-label="Skills used">
+          <li>Learning experience design</li><li>Task-based scaffolding</li><li>Information architecture</li><li>Knowledge management</li>
+        </ul>
+
+        <div class="carousel" aria-label="Dispatch onboarding screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/dispatch-onboarding/before-dispatch-protocols.png" alt="Earlier dispatch protocols page" loading="lazy"><figcaption>Before: dispatch protocols in OneNote, written for experienced staff.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/before-pm-job-creation.png" alt="Earlier PM job creation page" loading="lazy"><figcaption>Before: some pages held only a line or two of guidance.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/before-open-so-list.png" alt="Earlier page still in progress" loading="lazy"><figcaption>Before: some pages were still in progress.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/guide-shared-email.png" alt="Email introducing the guide and checklist" loading="lazy"><figcaption>After: the guide, checklist, consolidated ServiceTitan SOPs and reference folder, introduced to the team.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 6. Technician job follow-ups -->
   <article class="project" id="follow-ups">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
           <h3>Technician Job Follow-Ups</h3>
-          <span class="status-pill live">In use</span>
         </div>
         <p class="improves">Communication · Efficiency</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
         <p class="lede">Personalized emails that show each technician their open service jobs, grouped by what's needed to close them: notes, a return visit, parts or scheduling.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="A follow-up email, a technician's reply, and a thank-you">
         <div class="slide" data-label="Follow-up email"><img src="assets/img/emails/followup-v2.png" alt="Follow-up email with open jobs in tables: missing notes and return visits needed" loading="lazy"></div>
         <div class="slide" data-label="Technician replies"><img src="assets/img/emails/followup-tech-reply.png" alt="A technician's reply with an answer added under each job" loading="lazy"></div>
-        <div class="slide fit" data-label="Feedback"><img src="assets/img/emails/followup-thank-you.png" alt="A technician's reply: I appreciate this. Thank you!" loading="lazy"></div>
+        <div class="slide" data-label="Feedback"><img src="assets/img/emails/followup-feedback.png" alt="A technician replies 'I appreciate this. Thank you!!!' to a color-coded follow-up email" loading="lazy"></div>
       </div>
     </div>
 
@@ -291,23 +393,22 @@
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/emails/followup-v2.png" alt="Current follow-up email" loading="lazy"><figcaption>Current version: clean tables by what each job needs.</figcaption></figure>
             <figure><img src="assets/img/emails/followup-tech-reply.png" alt="Technician's inline reply" loading="lazy"><figcaption>A technician answers job by job, right in the email.</figcaption></figure>
-            <figure><img src="assets/img/emails/followup-v1.png" alt="First version color-coded by status" loading="lazy"><figcaption>First version: color-coded by status, with a question on each job.</figcaption></figure>
-            <figure><img src="assets/img/emails/followup-thank-you.png" alt="Thank-you reply from a technician" loading="lazy"><figcaption>"I appreciate this. Thank you!!!"</figcaption></figure>
+            <figure><img src="assets/img/emails/followup-feedback.png" alt="Technician thank-you reply above the first, color-coded version" loading="lazy"><figcaption>The first, color-coded version, and the technician's reply: "I appreciate this. Thank you!!!"</figcaption></figure>
           </div>
         </div>
       </div>
     </details>
   </article>
 
-  <!-- 5. PM reporting -->
+  <!-- 7. PM reporting -->
   <article class="project" id="pm-reporting">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
           <h3>Preventive Maintenance Reporting</h3>
-          <span class="status-pill live">In use</span>
         </div>
         <p class="improves">Communication · Efficiency</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
         <p class="lede">Preventive maintenance status for every audience: each technician's own list, an all-staff summary, and a management view with parts and coverage.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="PM reports for staff, management and technicians">
@@ -348,57 +449,73 @@
     </details>
   </article>
 
-  <!-- 6. PM parts ordering -->
+  <!-- 8. PM parts ordering -->
   <article class="project" id="pm-parts">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
           <h3>PM Parts Ordering with Technician Review</h3>
-          <span class="status-pill live">In use</span>
         </div>
         <p class="improves">Efficiency · Communication</p>
-        <p class="lede">Automated parts ordering with a technician review built in, so each order is checked by the person who knows the equipment before it's placed.</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="lede">Every customer's parts list standardized, then built into an automated ordering system with a technician review, so each order is checked by the person who knows the equipment before it's placed.</p>
       </div>
-      <figure class="card-media">
-        <img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email listing upcoming parts by customer, month and vendor for technician review" loading="lazy">
-      </figure>
+      <div class="card-media rotator" role="group" aria-label="Parts lists before and after, the ordering sheet, and the technician audit">
+        <div class="slide" data-label="Before: per-customer Word doc"><img src="assets/img/parts/before-word-doc.png" alt="Original parts document mixing notes, vendors and quantities" loading="lazy"></div>
+        <div class="slide" data-label="After: standardized doc"><img src="assets/img/parts/after-standardized-doc.png" alt="Rewritten parts document organized by service type and vendor" loading="lazy"></div>
+        <div class="slide" data-label="PM parts list"><img src="assets/img/parts/pm-parts-list.png" alt="Excel parts list by customer, type, vendor and parts" loading="lazy"></div>
+        <div class="slide" data-label="Technician audit"><img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email for technician review" loading="lazy"></div>
+      </div>
     </div>
 
     <details class="case">
       <summary>Challenge, build &amp; business impact</summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>PM parts lists changed often, and keeping every version current took constant attention. When one customer had several orders in a month, telling the orders apart took extra effort.</p>
+        <p>Each customer's PM parts lived in its own Word document, with vendors, quantities, part numbers and inventory notes mixed together, and every document laid out differently. Keeping them current took constant attention, and when one customer had several orders in a month, telling the orders apart took extra effort.</p>
 
         <h4>What I built</h4>
         <ul class="build-list">
-          <li class="build-item"><strong>Automatic ordering with Excel macros</strong><span>Every order gets its own correct PO number, even when one customer has several orders in a month.</span></li>
-          <li class="build-item"><strong>A parts audit before ordering</strong><span>Each technician gets the upcoming parts lists for their sites, by customer, month and vendor, to confirm or edit before anything is ordered.</span></li>
+          <li class="build-item"><strong>Every parts document rewritten to one standard</strong><span>I reorganized each customer's document by service type and vendor, matching how the team already worked, so any coordinator can read any list.</span></li>
+          <li class="build-item"><strong>An ordering system on top</strong><span>An Excel parts list by customer, type and vendor, with macros that build each order and give it its own correct PO number, even when one customer has several orders in a month.</span></li>
+          <li class="build-item"><strong>A parts audit before ordering</strong><span>Each technician gets the upcoming parts lists for their sites to confirm or edit. Their sign-off is tracked month by month before anything is ordered.</span></li>
+          <li class="build-item"><strong>Order tracking through pickup</strong><span>Each order's status, from sent to received to will-call pickup, is visible at a glance.</span></li>
         </ul>
 
         <h4>Business impact</h4>
-        <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. The technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
+        <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. Standard lists make the work transferable, the technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
 
         <ul class="tags" aria-label="Skills used">
-          <li>Excel VBA</li><li>Quality control design</li><li>Human-in-the-loop</li>
+          <li>Content standardization</li><li>Excel VBA</li><li>Quality control design</li><li>Human-in-the-loop</li>
         </ul>
+
+        <div class="carousel" aria-label="PM parts screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/parts/before-word-doc.png" alt="Original parts document" loading="lazy"><figcaption>Before: one customer's parts document, with notes, vendors and quantities mixed together.</figcaption></figure>
+            <figure><img src="assets/img/parts/after-standardized-doc.png" alt="Standardized parts document" loading="lazy"><figcaption>After: the same customer, rewritten to the standard format by service type and vendor.</figcaption></figure>
+            <figure><img src="assets/img/parts/pm-parts-list.png" alt="Excel PM parts list" loading="lazy"><figcaption>The ordering system: every customer's parts by type and vendor.</figcaption></figure>
+            <figure><img src="assets/img/parts/part-list-audit.png" alt="Part list audit sheet with monthly OK and Sent marks" loading="lazy"><figcaption>Audit tracking: each technician's sign-off, month by month.</figcaption></figure>
+            <figure><img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email" loading="lazy"><figcaption>The audit email technicians review before anything is ordered.</figcaption></figure>
+            <figure><img src="assets/img/parts/parts-order-tracker.png" alt="Order tracker color-coded by status" loading="lazy"><figcaption>Order tracking: sent, received or ready for will-call pickup.</figcaption></figure>
+          </div>
+        </div>
       </div>
     </details>
   </article>
 
-  <!-- 7. Service coordination database -->
+  <!-- 9. Service coordination database -->
   <article class="project" id="database">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
           <h3>Service Coordination Database</h3>
-          <span class="status-pill live">In use</span>
         </div>
         <p class="improves">Efficiency</p>
+        <p class="status-row"><span class="status-pill live">In use</span></p>
         <p class="lede">The workbook behind the emails: one set of records for service calls, PM visits and PM parts, with macros that turn those records into each report and follow-up.</p>
       </div>
-      <figure class="card-media placeholder" aria-label="Screenshot coming soon">
-        <div class="placeholder-inner"><strong>Database view</strong><span>Screenshot coming soon</span></div>
+      <figure class="card-media">
+        <img src="assets/img/parts/part-list-audit.png" alt="Workbook with sheets for POs, part list audit, PM parts and vendor contacts" loading="lazy">
       </figure>
     </div>
 
@@ -410,7 +527,7 @@
 
         <h4>What I built</h4>
         <ul class="build-list">
-          <li class="build-item"><strong>One home for service records</strong><span>Service calls, PM visits and PM parts tracked together, with my notes on each job.</span></li>
+          <li class="build-item"><strong>One home for service records</strong><span>Service calls, PM visits, PM parts, POs and vendor contacts on linked sheets, with my notes on each job.</span></li>
           <li class="build-item"><strong>Records become emails</strong><span>Macros build each email from the records: job follow-ups, PM reports, parts audits and orders. I start each run, review it and send.</span></li>
         </ul>
 
@@ -420,25 +537,16 @@
         <ul class="tags" aria-label="Skills used">
           <li>Data modeling</li><li>Excel VBA</li><li>Process automation</li>
         </ul>
+
+        <div class="carousel" aria-label="Database screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/parts/part-list-audit.png" alt="Part list audit sheet" loading="lazy"><figcaption>Linked sheets: POs, part list audit, PM parts and vendor contacts.</figcaption></figure>
+            <figure><img src="assets/img/parts/pm-parts-list.png" alt="PM parts sheet" loading="lazy"><figcaption>PM parts by customer, type and vendor.</figcaption></figure>
+            <figure><img src="assets/img/parts/parts-order-tracker.png" alt="Order tracker" loading="lazy"><figcaption>Order status tracking.</figcaption></figure>
+          </div>
+        </div>
       </div>
     </details>
-  </article>
-
-  <!-- 8. Dispatch onboarding guide (rebuild in progress) -->
-  <article class="project" id="dispatch-onboarding">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Dispatch Onboarding Guide</h3>
-          <span class="status-pill soon">Rebuild in progress</span>
-        </div>
-        <p class="improves">Access</p>
-        <p class="lede">A guide for new dispatch team members, first built as a linked PDF that navigates like a website, now being rebuilt as a full site.</p>
-      </div>
-      <figure class="card-media placeholder" aria-label="Preview coming soon">
-        <div class="placeholder-inner"><strong>Onboarding guide</strong><span>Preview coming soon</span></div>
-      </figure>
-    </div>
   </article>
 
   <!-- ===================== APPROACH ===================== -->
@@ -462,6 +570,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=2" defer></script>
+<script src="assets/site.js?v=3" defer></script>
 </body>
 </html>

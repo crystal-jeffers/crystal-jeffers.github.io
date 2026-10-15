@@ -88,7 +88,7 @@ img { max-width: 100%; height: auto; }
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 60% 90% at 100% 0%, rgba(255,106,0,0.22), transparent 60%),
+    radial-gradient(ellipse 80% 120% at 100% 0%, rgba(255,106,0,0.34), rgba(255,106,0,0.12) 38%, transparent 72%),
     linear-gradient(160deg, #1f1f1f 0%, #121212 100%);
   color: #fff;
   border-bottom: 4px solid var(--color-orange);
@@ -238,6 +238,7 @@ img { max-width: 100%; height: auto; }
   margin: 0.75rem 0 1.1rem;
   transition: color 0.35s ease;
 }
+.status-row { margin: 0.5rem 0 0; line-height: 1; }
 .project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .card-media {
