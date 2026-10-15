@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=8">
+<link rel="stylesheet" href="assets/style.css?v=9">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
+  document.documentElement.classList.add("js");
   (function () {
     var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!("IntersectionObserver" in window) || calm) return;
@@ -51,10 +52,35 @@
   <!-- ===================== MY FOCUS ===================== -->
   <p class="section-label">My Focus</p>
   <p class="section-intro">Each project supports NorCal's strategic focus: engaged, well-supported people; consistent workflows across offices and departments; and lasting customer relationships.</p>
+  <div class="bring">
+    <h3 class="bring-title">What I bring to the table</h3>
+    <p class="bring-lead">I'm an operator who builds. I do the daily coordination work, so I see exactly where time, information and follow-through slip, and I build the fix inside the tools and habits the team already has. That's what having me on a team opens up:</p>
+    <ul class="bring-list">
+      <li><strong>Leaders stop being the switchboard.</strong><span>Status, next steps and answers reach people before they have to ask, so managers spend their time on decisions, customers and growth instead of chasing updates.</span></li>
+      <li><strong>New people contribute sooner.</strong><span>Role-based guides and checklists teach the work in the order it happens, without pulling an experienced teammate off the job for every question.</span></li>
+      <li><strong>Work doesn't depend on who remembers.</strong><span>The process lives in the system, not in one person's head, so a vacation, a promotion or a departure doesn't stall jobs or customer commitments.</span></li>
+      <li><strong>Change lands instead of piling up.</strong><span>When a platform or process shifts, the documentation and tools shift with it, so the team keeps moving through a rollout instead of relearning by word of mouth.</span></li>
+    </ul>
+    <p class="bring-close">The result: a department that can take on more work without the coordination load growing at the same rate.</p>
+  </div>
+
+  <p class="flip-hint"><span class="hint-hover">Hover over each card for the business case.</span><span class="hint-touch">Tap each card for the business case.</span></p>
   <ul class="pillars">
-    <li style="--i:0"><strong>Communication</strong><span>Collaboration and connection between departments. Information reaches the right person in a form they can act on, so customer commitments stay on track.</span></li>
-    <li style="--i:1"><strong>Efficiency</strong><span>Consistent, predictable workflows that close the common gaps between hand-offs and give the team flexible capacity as the backlog grows.</span></li>
-    <li style="--i:2"><strong>Access</strong><span>People understand what's expected to succeed in their role, with procedures and status available wherever they work, including the field.</span></li>
+    <li style="--i:0"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Communication</strong><span class="face-text">Collaboration and connection between departments. Information reaches the right person in a form they can act on, so customer commitments stay on track.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">When communication is present&hellip;</span><span class="face-text">hand-offs stop costing time. Jobs close on the first follow-up, parts are confirmed before a truck rolls, and leaders see status without chasing it.</span><span class="back-return"><b>The return:</b> fewer repeat visits, faster close-out and billing, and commitments kept on every existing building.</span></span>
+      </span></button></li>
+    <li style="--i:1"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Efficiency</strong><span class="face-text">Consistent, predictable workflows that close the common gaps between hand-offs and give the team flexible capacity as the backlog grows.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">When efficiency is present&hellip;</span><span class="face-text">capacity grows faster than headcount. Routine steps run on their own, every hand-off runs the same way in every office, and skilled people spend their hours on billable work.</span><span class="back-return"><b>The return:</b> lower cost per job, and margin that holds as volume climbs.</span></span>
+      </span></button></li>
+    <li style="--i:2"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Access</strong><span class="face-text">People understand what's expected to succeed in their role, with procedures and status available wherever they work, including the field.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">When access is present&hellip;</span><span class="face-text">people reach full productivity sooner and stay longer. Procedures are on the phone in the field, expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="back-return"><b>The return:</b> shorter ramp-up, less rework, and a protected investment in every hire.</span></span>
+      </span></button></li>
   </ul>
 
   <p class="section-label">Skills</p>
@@ -75,12 +101,38 @@
        "revolving door" thumbnail: add or remove .slide blocks freely; the
        first slide shows if the script can't run. data-label is the page
        name shown on the little caption chip.
-       Inside <details>: challenge, build bubbles, business impact, tags,
-       and the full carousel (copy a <figure> to add a photo). -->
+       Inside <details>: challenge, a one-line "what became possible" summary,
+       the build bubbles (in a nested Details), business impact, tags, and the
+       full carousel (copy a <figure> to add a photo). Every image opens full
+       size when clicked.
+       data-lens on each card lists the audience views it appears in; each
+       view's order and description live on its button in the lens bar. -->
   <p class="section-label" id="work">Portfolio Work</p>
+  <div class="lens-bar" role="group" aria-label="Filter projects by what matters most to you">
+    <p class="lens-ask">See the work that matters most to you:</p>
+    <div class="lens-buttons">
+      <button type="button" class="lens" data-lens-id="all" aria-pressed="true"
+        data-note="All nine projects, in the order they were built.">All work</button>
+      <button type="button" class="lens" data-lens-id="growth" aria-pressed="false"
+        data-order="pm-reporting,pm-parts,follow-ups,dispatch,database,sops"
+        data-note="For leaders growing the service business: preventive maintenance kept on schedule, parts right the first time, and jobs closed quickly, so existing-building customers stay and renew.">Service growth</button>
+      <button type="button" class="lens" data-lens-id="operations" aria-pressed="false"
+        data-order="lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting"
+        data-note="For leaders running the division: consistent hand-offs across HR, IT, Safety, Fleet and the field, and capacity that grows without adding coordination overhead.">Division operations</button>
+      <button type="button" class="lens" data-lens-id="people" aria-pressed="false"
+        data-order="dispatch-onboarding,lifecycle,sops,migration"
+        data-note="For leaders investing in people: new hires productive sooner, clear expectations by role, and knowledge that stays when people move on.">People &amp; onboarding</button>
+      <button type="button" class="lens" data-lens-id="systems" aria-pressed="false"
+        data-order="lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database"
+        data-note="For anyone weighing design and analysis skills: research with the people who do the work, information architecture, data modeling, and automation that keeps a person in the loop.">Systems &amp; UX design</button>
+    </div>
+    <p class="lens-note" aria-live="polite"></p>
+    <button type="button" class="lens-share" hidden>Copy a link to this view</button>
+  </div>
+  <div class="work-list">
 
   <!-- 1. Employee Lifecycle -->
-  <article class="project" id="lifecycle">
+  <article class="project" id="lifecycle" data-lens="operations people systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -107,18 +159,22 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting and often the union hall. Each manager carried those steps in their own way, which made progress hard to see during a busy week. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Every hire, role change and departure now runs the same way for every manager, with each step owned, tracked and confirmed, so nothing waits on someone remembering.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle and more.</span></li>
           <li class="build-item"><strong>One owner per step</strong><span>Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</span></li>
           <li class="build-item"><strong>Automation with judgment</strong><span>Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</span></li>
           <li class="build-item"><strong>Docs for each audience</strong><span>A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Every hire, role change and departure follows the same steps, whichever manager owns it, which creates consistent workflows and smoother hand-offs between HR, IT, Safety, Fleet and Accounting. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
@@ -144,7 +200,7 @@
   </article>
 
   <!-- 2. Start-up tracking / dispatch board -->
-  <article class="project" id="dispatch">
+  <article class="project" id="dispatch" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -167,17 +223,21 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Start-up crew schedules and job status were tracked in a spreadsheet. Union holidays vary by local and by agreement, so checking a technician's availability meant cross-referencing by hand.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Supervisors can schedule the whole crew from one board and see a union holiday conflict before a job is booked, not after.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>Timeline and calendar views</strong><span>Every technician's jobs, training and time off in one place, with job tracking and a start-up checklist per job.</span></li>
           <li class="build-item"><strong>Union holidays added automatically</strong><span>Each tech gets their own local's paid holidays and off days, about 90 days ahead.</span></li>
           <li class="build-item"><strong>Warn, don't block</strong><span>If a job lands on someone's holiday, the bar is flagged and the warning clears when it moves. The supervisor keeps the final call.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Brings consistency and predictability to crew scheduling, and gives the department room to take on more work as it grows. Union holiday rules appear right where scheduling decisions are made: at launch, 132 entries for 16 union technicians, with new crew members added automatically.</p>
@@ -201,7 +261,7 @@
   </article>
 
   <!-- 3. SOP site -->
-  <article class="project" id="sops">
+  <article class="project" id="sops" data-lens="growth people systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -220,17 +280,21 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>The start-up procedures lived in a thorough 12-page document written for every role at once. On a job site, on a phone, finding the few steps that applied to you took time.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">A technician on a job site can find their own steps in seconds, on a phone, without calling the office.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>Role-based views</strong><span>Apprentices, technicians, lead technicians and supervisors each see their own procedures first.</span></li>
           <li class="build-item"><strong>Built to be scanned on site</strong><span>Large text that respects phone settings, collapsible sections, jump-to navigation and chunked checklists.</span></li>
           <li class="build-item"><strong>Maintainable without a developer</strong><span>Procedures are plain text files, and one settings file controls which roles see what.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Helps people understand what's expected of them to succeed in their role, right from the field. New hires learn the same procedures from day one, and the team can keep the content current without outside help.</p>
@@ -239,12 +303,13 @@
           <li>Information architecture</li><li>Content design</li><li>Mobile-first</li><li>Accessibility</li><li>Docs-as-code</li>
         </ul>
 
-        <div class="carousel carousel-phone" aria-label="Procedures site screenshots">
+        <div class="carousel" aria-label="Procedures site screenshots">
           <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/sops/roles.png" alt="Role picker: Apprentice, Technician, Lead Technician" loading="lazy"><figcaption>Each role gets its own link.</figcaption></figure>
-            <figure><img src="assets/img/sops/tech-hub.png" alt="Technician view listing the most relevant procedures first" loading="lazy"><figcaption>A technician's procedures, most relevant first.</figcaption></figure>
-            <figure><img src="assets/img/sops/startup.png" alt="Start-Up procedure steps in large, chunked text" loading="lazy"><figcaption>Steps in large, chunked text for reading on site.</figcaption></figure>
-            <figure><img src="assets/img/sops/best.png" alt="Best Practices page with collapsible sections" loading="lazy"><figcaption>Collapsible sections keep long pages scannable.</figcaption></figure>
+            <figure><img src="assets/img/sops/desktop-roles.png" alt="Start page where each person picks their role" loading="lazy"><figcaption>Each role gets its own link, on desktop or phone.</figcaption></figure>
+            <figure><img src="assets/img/sops/desktop-three-views.png" alt="Apprentice, Technician and Lead Technician views side by side, each with its own procedures listed first" loading="lazy"><figcaption>Apprentice, technician and lead views side by side: each role sees its own procedures first.</figcaption></figure>
+            <figure><img src="assets/img/sops/desktop-field-tasking.png" alt="Lead technician Field Tasking page with numbered pre-start steps and a With PM Team group" loading="lazy"><figcaption>Lead view, Field Tasking: numbered steps, grouped by who they're done with.</figcaption></figure>
+            <figure><img src="assets/img/sops/desktop-lifecycle.png" alt="Start-Up Lifecycle page showing the process overview as a sequence of steps" loading="lazy"><figcaption>Lead view, Start-Up Lifecycle: the whole process, step by step.</figcaption></figure>
+            <figure><img src="assets/img/sops/desktop-best-safety.png" alt="Best Practices page with the Safety section expanded" loading="lazy"><figcaption>Best Practices: sections expand on demand, shown here with Safety open.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -252,7 +317,7 @@
   </article>
 
   <!-- 4. Platform migration documentation -->
-  <article class="project" id="migration">
+  <article class="project" id="migration" data-lens="operations people">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -269,18 +334,22 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Shortly after I joined, the department began moving from COINS and ServiceTrade to ServiceTitan. For months, work ran across both systems, and processes kept changing as the rollout progressed.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">The team had one current reference to work from through the whole platform change, instead of relearning each process by word of mouth.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>Week-one SOPs for the Service Coordinator role</strong><span>I documented each workflow in the existing systems during my first week and shared it with the department manager.</span></li>
           <li class="build-item"><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team prefers its reference material, so others can add to them as systems change.</span></li>
           <li class="build-item"><strong>Updated through the ServiceTitan rollout</strong><span>At the manager's request, I kept the documentation current as each process moved to the new platform.</span></li>
           <li class="build-item"><strong>One consolidated ServiceTitan reference</strong><span>Revised and combined the ServiceTitan SOPs shared by the Texas team into one cohesive document that's easier to search and scan.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Gave the team a shared reference through a period of change, supporting consistent workflows across systems and offices. The department manager endorsed it in week one and asked that it continue through the rollout, and it became the foundation for the dispatch onboarding guide.</p>
@@ -300,7 +369,7 @@
   </article>
 
   <!-- 5. Dispatch onboarding guide & checklist -->
-  <article class="project" id="dispatch-onboarding">
+  <article class="project" id="dispatch-onboarding" data-lens="people systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -318,18 +387,22 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Dispatch reference material lived across OneNote pages written for people who already knew the work. Some pages were brief or still in progress, and the department was changing platforms at the same time.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">A new dispatcher can learn the role in the order the work happens and find answers on their own, so experienced staff stay on the work.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>Onboarding checklist</strong><span>High-level onboarding topics covered in a structured, workflow-first order.</span></li>
           <li class="build-item"><strong>Onboarding guide</strong><span>Process maps, escalation chains, policies, how-tos and troubleshooting, organized by job lifecycle stage and task. Internal links let it navigate like a knowledge center.</span></li>
           <li class="build-item"><strong>A reference folder</strong><span>This year's union holidays, labor rates, accounting codes and service forms, all in one place.</span></li>
           <li class="build-item"><strong>Next: a web version</strong><span>Being rebuilt as a site in the same style as the procedures and lifecycle guides.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Supports the goal of enhancing onboarding and ongoing support as new hires learn the NorCal Way. A new dispatcher starts with a structured path instead of piecing pages together, and every new hire gets the same foundation in both the tasks and the bigger picture.</p>
@@ -351,7 +424,7 @@
   </article>
 
   <!-- 6. Technician job follow-ups -->
-  <article class="project" id="follow-ups">
+  <article class="project" id="follow-ups" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -369,18 +442,22 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Open service jobs need to close quickly, and many things can hold one up: notes still to be written, a return visit to finish the work, or parts that have arrived and just need a time on the schedule. Following up job by job meant a lot of back-and-forth.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Technicians can clear a whole list of open jobs in one reply, so jobs close sooner and customer records stay current.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>One email per technician</strong><span>Open jobs grouped by status: missing notes or confirmation, return visits needed, parts, and customer scheduling.</span></li>
           <li class="build-item"><strong>A specific question on every line</strong><span>Each job shows its last visit and exactly what's needed to move it forward, so a reply can be one line.</span></li>
           <li class="build-item"><strong>Built from my records</strong><span>Excel macros assemble every email from my dispatch notes and job records. I start each run, review it and send.</span></li>
           <li class="build-item"><strong>Refined with use</strong><span>The first version was color-coded by status. The current version uses clean tables by category, based on how technicians replied.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Closes the common gaps between field work and the office. Technicians answer right in the email, often job by job, so jobs close sooner and customer records stay current. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
@@ -401,7 +478,7 @@
   </article>
 
   <!-- 7. PM reporting -->
-  <article class="project" id="pm-reporting">
+  <article class="project" id="pm-reporting" data-lens="growth operations">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -419,17 +496,21 @@
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Each technician's preventive maintenance (PM) work sat within the department's full schedule. Technicians, account managers and leadership each needed a different view of the same information.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Technicians, account managers and leadership all work from the same PM status, each in the view they need, so commitments to existing buildings stay visible.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
           <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
           <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager and parts status on one line.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Strengthens collaboration between technicians, sales and leadership around the same source of truth. Commitments on existing buildings stay visible, which supports reliable service and lasting customer relationships.</p>
@@ -450,37 +531,42 @@
   </article>
 
   <!-- 8. PM parts ordering -->
-  <article class="project" id="pm-parts">
+  <article class="project" id="pm-parts" data-lens="growth operations">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
-          <h3>PM Parts Ordering with Technician Review</h3>
+          <h3>PM Parts Auditing and Ordering</h3>
         </div>
         <p class="improves">Efficiency · Communication</p>
         <p class="status-row"><span class="status-pill live">In use</span></p>
         <p class="lede">Every customer's parts list standardized, then built into an automated ordering system with a technician review, so each order is checked by the person who knows the equipment before it's placed.</p>
       </div>
-      <div class="card-media rotator" role="group" aria-label="Parts lists before and after, the ordering sheet, and the technician audit">
+      <div class="card-media rotator" role="group" aria-label="Parts lists before and after, the ordering sheet, audit tracking and the technician audit email">
         <div class="slide" data-label="Before: per-customer Word doc"><img src="assets/img/parts/before-word-doc.png" alt="Original parts document mixing notes, vendors and quantities" loading="lazy"></div>
         <div class="slide" data-label="After: standardized doc"><img src="assets/img/parts/after-standardized-doc.png" alt="Rewritten parts document organized by service type and vendor" loading="lazy"></div>
         <div class="slide" data-label="PM parts list"><img src="assets/img/parts/pm-parts-list.png" alt="Excel parts list by customer, type, vendor and parts" loading="lazy"></div>
+        <div class="slide" data-label="Audit tracking"><img src="assets/img/parts/part-list-audit.png" alt="Part list audit sheet with each technician's monthly sign-off" loading="lazy"></div>
         <div class="slide" data-label="Technician audit"><img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email for technician review" loading="lazy"></div>
       </div>
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Each customer's PM parts lived in its own Word document, with vendors, quantities, part numbers and inventory notes mixed together, and every document laid out differently. Keeping them current took constant attention, and when one customer had several orders in a month, telling the orders apart took extra effort.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Any coordinator can order any customer's PM parts correctly, and the technician who knows the equipment verifies each order before money is spent.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>Every parts document rewritten to one standard</strong><span>I reorganized each customer's document by service type and vendor, matching how the team already worked, so any coordinator can read any list.</span></li>
           <li class="build-item"><strong>An ordering system on top</strong><span>An Excel parts list by customer, type and vendor, with macros that build each order and give it its own correct PO number, even when one customer has several orders in a month.</span></li>
           <li class="build-item"><strong>A parts audit before ordering</strong><span>Each technician gets the upcoming parts lists for their sites to confirm or edit. Their sign-off is tracked month by month before anything is ordered.</span></li>
           <li class="build-item"><strong>Order tracking through pickup</strong><span>Each order's status, from sent to received to will-call pickup, is visible at a glance.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. Standard lists make the work transferable, the technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
@@ -491,8 +577,7 @@
 
         <div class="carousel" aria-label="PM parts screenshots">
           <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/parts/before-word-doc.png" alt="Original parts document" loading="lazy"><figcaption>Before: one customer's parts document, with notes, vendors and quantities mixed together.</figcaption></figure>
-            <figure><img src="assets/img/parts/after-standardized-doc.png" alt="Standardized parts document" loading="lazy"><figcaption>After: the same customer, rewritten to the standard format by service type and vendor.</figcaption></figure>
+            <figure><img src="assets/img/parts/before-after.png" alt="The same customer's parts document before and after: mixed notes on the left, organized by service type and vendor on the right" loading="lazy"><figcaption>Before and after: the same customer's parts document, rewritten to one standard by service type and vendor.</figcaption></figure>
             <figure><img src="assets/img/parts/pm-parts-list.png" alt="Excel PM parts list" loading="lazy"><figcaption>The ordering system: every customer's parts by type and vendor.</figcaption></figure>
             <figure><img src="assets/img/parts/part-list-audit.png" alt="Part list audit sheet with monthly OK and Sent marks" loading="lazy"><figcaption>Audit tracking: each technician's sign-off, month by month.</figcaption></figure>
             <figure><img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email" loading="lazy"><figcaption>The audit email technicians review before anything is ordered.</figcaption></figure>
@@ -504,7 +589,7 @@
   </article>
 
   <!-- 9. Service coordination database -->
-  <article class="project" id="database">
+  <article class="project" id="database" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
@@ -514,22 +599,26 @@
         <p class="status-row"><span class="status-pill live">In use</span></p>
         <p class="lede">The workbook behind the emails: one set of records for service calls, PM visits and PM parts, with macros that turn those records into each report and follow-up.</p>
       </div>
-      <figure class="card-media">
-        <img src="assets/img/parts/part-list-audit.png" alt="Workbook with sheets for POs, part list audit, PM parts and vendor contacts" loading="lazy">
-      </figure>
+      <div class="card-media placeholder">
+        <div class="placeholder-inner"><strong>Screenshots coming</strong><span>Service calls, PM visits and vendor sheets</span></div>
+      </div>
     </div>
 
     <details class="case">
-      <summary>Challenge, build &amp; business impact</summary>
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
         <p>Dispatch notes, PM schedules and parts lists lived in separate places, so every report and follow-up started with gathering information by hand.</p>
 
         <h4>What I built</h4>
-        <ul class="build-list">
+        <p class="built-summary">Every report and follow-up starts from one set of records, so time once spent gathering information goes to technicians and customers.</p>
+        <details class="more">
+          <summary>Details</summary>
+          <ul class="build-list">
           <li class="build-item"><strong>One home for service records</strong><span>Service calls, PM visits, PM parts, POs and vendor contacts on linked sheets, with my notes on each job.</span></li>
           <li class="build-item"><strong>Records become emails</strong><span>Macros build each email from the records: job follow-ups, PM reports, parts audits and orders. I start each run, review it and send.</span></li>
         </ul>
+        </details>
 
         <h4>Business impact</h4>
         <p>A single source of truth for service coordination. Every audience gets consistent information from the same records, and time once spent re-typing goes to following up with technicians and customers.</p>
@@ -537,17 +626,10 @@
         <ul class="tags" aria-label="Skills used">
           <li>Data modeling</li><li>Excel VBA</li><li>Process automation</li>
         </ul>
-
-        <div class="carousel" aria-label="Database screenshots">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/parts/part-list-audit.png" alt="Part list audit sheet" loading="lazy"><figcaption>Linked sheets: POs, part list audit, PM parts and vendor contacts.</figcaption></figure>
-            <figure><img src="assets/img/parts/pm-parts-list.png" alt="PM parts sheet" loading="lazy"><figcaption>PM parts by customer, type and vendor.</figcaption></figure>
-            <figure><img src="assets/img/parts/parts-order-tracker.png" alt="Order tracker" loading="lazy"><figcaption>Order status tracking.</figcaption></figure>
-          </div>
-        </div>
       </div>
     </details>
   </article>
+  </div><!-- /work-list -->
 
   <!-- ===================== APPROACH ===================== -->
   <p class="section-label" id="approach">How I work</p>
@@ -570,6 +652,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=3" defer></script>
+<script src="assets/site.js?v=4" defer></script>
 </body>
 </html>

@@ -11,6 +11,8 @@
   --color-accent-off: #c9c9c9;   /* left edge of cards not in focus */
   --ink: #1a1a1a;                /* body text */
   --ink-dim: #6b6b6b;            /* text on cards not in focus (still AA contrast) */
+  --lede: #5e5e5e;               /* card description (6.5:1 on white) */
+  --lede-dim: #767676;           /* card description, card not in focus (4.5:1, AA) */
 }
 
 * { box-sizing: border-box; }
@@ -136,18 +138,75 @@ img { max-width: 100%; height: auto; }
 .btn-light { background: #fff; color: var(--color-black); border: 1px solid #c4c4c4; }
 .btn-light:hover { border-color: var(--color-orange); }
 
-/* ---------- What I focus on (3 pillars) ---------- */
+/* ---------- What I bring to the table ---------- */
+.bring {
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem 1.2rem;
+  margin: 0 0 1.5rem;
+}
+.bring-title { margin: 0 0 0.5rem; font-size: 1.35rem; }
+.bring-lead { margin: 0 0 1rem; max-width: 48rem; }
+.bring-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: 0.9rem 1.5rem; }
+@media (min-width: 700px) { .bring-list { grid-template-columns: 1fr 1fr; } }
+.bring-list li { border-left: 3px solid var(--color-orange); padding-left: 0.85rem; }
+.bring-list strong { display: block; color: var(--color-black); font-size: 1.05rem; margin-bottom: 0.15rem; }
+.bring-list span { display: block; color: var(--color-grey); font-size: 0.98rem; }
+.bring-close { margin: 1.1rem 0 0; font-weight: 700; color: var(--color-black); }
+
+/* ---------- My Focus: three flip cards ----------
+   Hover (mouse) or tap / Enter (touch, keyboard) turns a card over to its
+   business case. Both faces share one grid cell, so the card is always as
+   tall as its longer side. Reduced motion: a cross-fade, no rotation. */
+.flip-hint { margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--color-grey); }
+.flip-hint .hint-touch { display: none; }
+@media (hover: none) { .flip-hint .hint-hover { display: none; } .flip-hint .hint-touch { display: inline; } }
 .pillars { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
 @media (min-width: 640px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
-.pillars li {
-  background: var(--color-black);
-  color: #fff;
+.pillars li { display: flex; }
+.flip {
+  flex: 1;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  perspective: 1200px;
   border-radius: 12px;
-  border-bottom: 5px solid var(--color-orange);
-  padding: 1rem 1.1rem;
 }
-.pillars strong { display: block; font-size: 1.15rem; margin-bottom: 0.25rem; color: #fff; }
-.pillars span { font-size: 0.98rem; opacity: 0.9; }
+.flip-inner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.flip.flipped .flip-inner { transform: rotateY(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .flip:hover .flip-inner { transform: rotateY(180deg); }
+}
+.face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 12px;
+  padding: 1rem 1.1rem 1.15rem;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.face.front { background: var(--color-black); color: #fff; border-bottom: 5px solid var(--color-orange); }
+.face.back { background: var(--color-orange); color: var(--color-black); border-bottom: 5px solid var(--color-black); transform: rotateY(180deg); }
+.face strong { display: block; font-size: 1.15rem; margin-bottom: 0.25rem; color: #fff; }
+.face .face-text { display: block; font-size: 0.98rem; }
+.face.front .face-text { opacity: 0.9; }
+.flip-cue { position: absolute; right: 0.8rem; top: 0.65rem; color: var(--color-orange); font-size: 1.1rem; }
+.back-lead { display: block; font-weight: 800; font-size: 1.05rem; margin-bottom: 0.2rem; }
+.back-return { display: block; margin-top: 0.6rem; padding-top: 0.55rem; border-top: 1px solid rgba(22,22,22,0.3); font-size: 0.95rem; }
 
 /* ---------- Skill chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
@@ -174,8 +233,8 @@ img { max-width: 100%; height: auto; }
   border: 1px solid #e4e4e4;
   border-left: 6px solid var(--color-orange);
   border-radius: 14px;
-  padding: 1.25rem 1.3rem 1.3rem;
-  margin-bottom: 1.6rem;
+  padding: 1.1rem 1.2rem 1.15rem;
+  margin-bottom: 3.9rem;
   color: var(--card-ink);
   box-shadow: 0 4px 14px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
 }
@@ -195,12 +254,14 @@ img { max-width: 100%; height: auto; }
     color 0.35s ease;
 }
 .focus-ready .project:not(.is-active) {
+  --lede: var(--lede-dim);
   --card-ink: var(--ink-dim);
   --card-ink-strong: #4d4d4d;
 }
 /* Hovering or tabbing into a resting card brings its text back to full strength */
 .focus-ready .project:not(.is-active):hover,
 .focus-ready .project:not(.is-active):focus-within {
+  --lede: #5e5e5e;
   --card-ink: var(--ink);
   --card-ink-strong: var(--color-black);
 }
@@ -221,7 +282,7 @@ img { max-width: 100%; height: auto; }
 .card-text { min-width: 0; }
 
 .project-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
-.project h3 { font-size: 1.55rem; line-height: 1.2; margin: 0; color: var(--card-ink-strong); transition: color 0.35s ease; }
+.project h3 { font-size: 1.72rem; line-height: 1.2; margin: 0; color: var(--card-ink-strong); transition: color 0.35s ease; }
 .project .improves {
   margin: 0.3rem 0 0;
   font-size: 0.68rem;
@@ -231,11 +292,11 @@ img { max-width: 100%; height: auto; }
   color: #a6a6a6;
 }
 .project .lede {
-  font-size: 1.06rem;
+  font-size: 0.97rem;
   font-weight: 400;
-  line-height: 1.6;
-  color: var(--card-ink);
-  margin: 0.75rem 0 1.1rem;
+  line-height: 1.55;
+  color: var(--lede);
+  margin: 0.6rem 0 0.9rem;
   transition: color 0.35s ease;
 }
 .status-row { margin: 0.5rem 0 0; line-height: 1; }
@@ -280,6 +341,47 @@ img { max-width: 100%; height: auto; }
 }
 .status-pill.live { background: #eef7ee; border-color: #3c8d3c; color: #1f5a1f; }
 .status-pill.soon { background: var(--color-grey-light); border-color: #c4c4c4; color: var(--color-grey); }
+
+/* ---------- Audience views (lens bar) ----------
+   Shown only with the script; without it every card simply shows. */
+.lens-bar { display: none; margin: 0 0 1.75rem; }
+.js .lens-bar { display: block; }
+.lens-ask { margin: 0 0 0.55rem; font-weight: 700; color: var(--color-black); }
+.lens-buttons { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.lens {
+  min-height: 40px;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-black);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.lens:hover { border-color: var(--color-orange); }
+.lens[aria-pressed="true"] { background: var(--color-black); border-color: var(--color-black); color: #fff; }
+.lens-note { margin: 0.75rem 0 0; max-width: 46rem; font-size: 0.98rem; color: var(--color-grey); }
+.lens-note b { color: var(--color-black); }
+.lens-share {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #b34a00;
+  text-decoration: underline;
+  cursor: pointer;
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.work-list.swapped .project:not([hidden]) { animation: card-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 /* ---------- Revolving-door thumbnail (.rotator) ----------
    The front screenshot drifts left and behind; the next one comes forward
@@ -379,40 +481,69 @@ img { max-width: 100%; height: auto; }
   animation-delay: calc(var(--i, 0) * 0.16s);
 }
 
-/* ---------- Accordion ---------- */
-details.case {
-  margin: 1.1rem 0 0;
-  border: 1px solid var(--color-grey-light);
-  border-radius: 10px;
-  background: #fcfcfc;
-}
+/* ---------- Accordion: a pull tab that slides out from behind the card ----------
+   The summary hangs below the card's bottom edge, in the gap between cards.
+   With site.js it only slides out on the card in focus (or any open card);
+   the clip-path keeps its top edge at the card's edge while it moves, so it
+   reads as coming from behind. Without the script every tab is visible. */
+details.case { margin: 0; }
 details.case > summary {
+  position: absolute;
+  top: 100%;
+  left: 1.6rem;
+  z-index: 1;
   cursor: pointer;
   list-style: none;
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0.6rem 1rem;
+  gap: 0.6rem;
+  min-height: 42px;
+  padding: 0.45rem 1rem 0.5rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--card-ink-strong);
-  border-radius: 10px;
-  transition: background-color 0.15s ease;
+  font-size: 0.9rem;
+  color: var(--color-black);
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 18px -12px rgba(0,0,0,0.35);
+  clip-path: inset(0 -24px -24px -24px);
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), clip-path 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease, background-color 0.15s ease;
 }
 details.case > summary::-webkit-details-marker { display: none; }
 details.case > summary::after {
   content: "+";
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   line-height: 1;
   color: var(--color-orange);
-  margin-left: 0.75rem;
 }
 details.case[open] > summary::after { content: "\2013"; }
 details.case > summary:hover { background: var(--color-orange-tint); }
-details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light); border-radius: 10px 10px 0 0; }
+details.case .when-open { display: none; }
+details.case[open] .when-open { display: inline; }
+details.case[open] .when-closed { display: none; }
 
-.case-body { padding: 0.25rem 1rem 1rem; }
+/* Resting cards keep their tab tucked behind the card */
+.focus-ready .project:not(.is-active) details.case:not([open]) > summary {
+  transform: translateY(-100%);
+  clip-path: inset(100% -24px -24px -24px);
+  opacity: 0;
+  pointer-events: none;
+}
+.focus-ready .project:not(.is-active) details.case:not([open]) > summary:focus-visible {
+  transform: none; clip-path: inset(0 -24px -24px -24px); opacity: 1;
+}
+
+@keyframes drawer-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+.case-body {
+  margin-top: 1rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--color-grey-light);
+}
+details.case[open] > .case-body { animation: drawer-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 .case-body h4 {
   font-size: 0.75rem;
   font-weight: 700;
@@ -421,7 +552,30 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
   color: var(--color-orange);
   margin: 1.1rem 0 0.4rem;
 }
-.case-body p { margin: 0; font-size: 1.02rem; color: var(--card-ink); }
+.case-body p { margin: 0; font-size: 1rem; color: var(--card-ink); }
+.case-body p.built-summary { font-size: 1.06rem; font-weight: 600; color: var(--card-ink-strong); line-height: 1.5; }
+
+/* Nested "Details" under What I built */
+details.more { margin-top: 0.55rem; }
+details.more > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid #ffd2b0;
+  border-radius: 999px;
+  background: var(--color-orange-tint);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #8a3a00;
+}
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "\25BE"; font-size: 0.8rem; transition: transform 0.2s ease; }
+details.more[open] > summary::after { transform: rotate(180deg); }
+details.more[open] > .build-list { margin-top: 0.6rem; animation: drawer-in 0.3s ease both; }
 
 /* "What I built": each item is its own callout bubble, header on line one */
 .build-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
@@ -476,7 +630,6 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
   border: 1px solid #dedede;
   border-radius: 8px;
 }
-.carousel-phone .carousel-track img { aspect-ratio: 4 / 3; }
 .carousel-track figcaption { font-size: 0.88rem; color: var(--color-grey); margin-top: 0.4rem; }
 .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 0.6rem; }
 .carousel-btn {
@@ -502,6 +655,71 @@ details.case[open] > summary { border-bottom: 1px solid var(--color-grey-light);
   cursor: pointer;
 }
 .carousel-dot.active { background: var(--color-orange); }
+
+/* ---------- Click to enlarge ---------- */
+.zoomable { cursor: zoom-in; }
+.zoom-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(22,22,22,0.82);
+  color: #fff;
+  font-size: 1.05rem;
+  cursor: zoom-in;
+}
+.zoom-btn:hover { background: var(--color-orange); color: var(--color-black); }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3.5rem 1rem 1.25rem;
+  background: rgba(14,14,14,0.92);
+}
+.lightbox[hidden] { display: none; }
+.lightbox img {
+  max-width: min(1400px, 100%);
+  max-height: calc(100vh - 9rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  cursor: zoom-out;
+}
+.lightbox-caption { max-width: 60rem; margin: 0; color: #e6e6e6; font-size: 0.95rem; text-align: center; }
+.lightbox-close, .lightbox-nav {
+  position: absolute;
+  border: 0;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+.lightbox-close { top: 0.75rem; right: 0.75rem; }
+.lightbox-nav.prev { left: 0.75rem; top: 50%; }
+.lightbox-nav.next { right: 0.75rem; top: 50%; }
+.lightbox-close:hover, .lightbox-nav:hover { background: var(--color-orange); color: var(--color-black); }
+.lightbox-count { position: absolute; top: 1.1rem; left: 1rem; color: #b4b4b4; font-size: 0.85rem; }
+body.lightbox-open { overflow: hidden; }
 
 /* ---------- How I work ---------- */
 .principles { display: grid; grid-template-columns: 1fr; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
@@ -544,4 +762,13 @@ footer {
   .focus-ready .project.is-active,
   .build-item:hover { transform: none !important; }
   .anim-ready .pillars li { opacity: 1 !important; transform: none !important; }
+  .flip .flip-inner, .flip:hover .flip-inner, .flip.flipped .flip-inner { transform: none !important; }
+  .face.back { transform: none; opacity: 0; }
+  .flip.flipped .face.back { opacity: 1; }
+  .flip.flipped .face.front { opacity: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .flip:hover .face.back { opacity: 1; }
+    .flip:hover .face.front { opacity: 0; }
+  }
+  .focus-ready .project:not(.is-active) details.case:not([open]) > summary { transform: none; }
 }
