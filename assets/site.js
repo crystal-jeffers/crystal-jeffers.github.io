@@ -15,7 +15,8 @@
    4. MY FOCUS: fly-in, and flip cards (hover with a mouse; tap or Enter
       otherwise).
    5. CAROUSELS: arrow buttons and dots.
-   6. CLICK TO ENLARGE: every screenshot opens full size in a lightbox.
+   6. CLICK TO ENLARGE: gallery photos open full size in a lightbox. Card
+      thumbnails open the card's Gallery tab instead.
 
    Reduced motion: style.css removes movement for people whose device asks
    for less motion.
@@ -125,43 +126,113 @@
     pickStep();
   });
 
-  /* ---------- 2c. Challenge, build & impact toggle ----------
-     An orange button at the bottom right of each card's top section opens
-     and closes its details. While open on a wide screen it stays pinned in
-     view (CSS), so the card can always be closed. */
+  /* ---------- 2c. Project cards: the orange + toggle, tabs, and gallery ----------
+     An orange + beside each card's buttons opens and closes its details.
+     Inside, site.js turns each <section class="card-panel"> into a binder
+     tab (The Challenge, What I Built, Details, Business Impact, Gallery).
+     Clicking a card's thumbnail opens the card straight to its Gallery. */
+  var openGallery = function () {};
   each(".project details.case", function (det, n) {
     var card = det.closest(".project");
-    if (!det.id) det.id = (card && card.id ? card.id : "card-" + n) + "-details";
-    var row = document.createElement("div");
-    row.className = "case-toggle-row";
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "case-toggle";
-    btn.setAttribute("aria-controls", det.id);
-    row.appendChild(btn);
-    det.parentNode.insertBefore(row, det);
+    var base = card && card.id ? card.id : "card-" + n;
+    if (!det.id) det.id = base + "-details";
     det.classList.add("has-toggle");
 
+    // Tabs
+    var body = det.querySelector(".case-body");
+    var folder = det.querySelector(".card-folder");
+    var panels = Array.prototype.slice.call(det.querySelectorAll(".card-panel"));
+    var tabs = [];
+    if (folder && panels.length) {
+      var list = document.createElement("div");
+      list.className = "card-tabs";
+      list.setAttribute("role", "tablist");
+      list.setAttribute("aria-label", "Project details");
+      panels.forEach(function (pn, k) {
+        pn.id = base + "-panel-" + pn.getAttribute("data-tab");
+        pn.setAttribute("role", "tabpanel");
+        pn.setAttribute("tabindex", "0");
+        var t = document.createElement("button");
+        t.type = "button";
+        t.className = "card-tab";
+        t.id = base + "-tab-" + pn.getAttribute("data-tab");
+        t.setAttribute("role", "tab");
+        t.setAttribute("aria-controls", pn.id);
+        t.textContent = pn.getAttribute("data-label");
+        pn.setAttribute("aria-labelledby", t.id);
+        t.addEventListener("click", function () { pick(k, false); });
+        t.addEventListener("keydown", function (e) {
+          var m = panels.length, j = null;
+          if (e.key === "ArrowRight") j = (k + 1) % m;
+          else if (e.key === "ArrowLeft") j = (k - 1 + m) % m;
+          else if (e.key === "Home") j = 0;
+          else if (e.key === "End") j = m - 1;
+          if (j !== null) { e.preventDefault(); pick(j, true); }
+        });
+        list.appendChild(t);
+        tabs.push(t);
+      });
+      folder.parentNode.insertBefore(list, folder);
+      body.classList.add("tabs-on");
+    }
+    function pick(k, focus) {
+      tabs.forEach(function (t, j) {
+        var on = j === k;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus && tabs[k]) tabs[k].focus();
+    }
+    if (tabs.length) pick(0, false);
+
+    // The orange + beside the card's buttons
+    var text = card ? card.querySelector(".card-text") : null;
+    var links = text ? text.querySelector(".project-links") : null;
+    if (text && !links) {
+      links = document.createElement("div");
+      links.className = "project-links";
+      text.appendChild(links);
+    }
+    var plus = document.createElement("button");
+    plus.type = "button";
+    plus.className = "case-plus";
+    plus.setAttribute("aria-controls", det.id);
+    if (links) links.appendChild(plus);
     var sync = function () {
       var open = det.open;
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.innerHTML = open
-        ? 'Close <span class="case-toggle-icon" aria-hidden="true">&ndash;</span>'
-        : 'Challenge, build &amp; impact <span class="case-toggle-icon" aria-hidden="true">+</span>';
-      row.classList.toggle("is-open", open);
+      plus.setAttribute("aria-expanded", open ? "true" : "false");
+      plus.setAttribute("aria-label", open ? "Hide the challenge, build, and impact" : "Show the challenge, build, and impact");
+      plus.title = open ? "Hide details" : "The challenge, build, and impact";
+      plus.innerHTML = open ? "&ndash;" : "+";
+      if (card) card.classList.toggle("is-open", open);
     };
-    btn.addEventListener("click", function () {
-      var closing = det.open;
-      det.open = !det.open;
-      if (closing && card) {
-        // Bring the card's top back into view if the reader was far down it.
-        var top = card.getBoundingClientRect().top;
-        if (top < 0) window.scrollBy({ top: top - 90, behavior: calm ? "auto" : "smooth" });
-      }
-    });
+    plus.addEventListener("click", function () { det.open = !det.open; });
     det.addEventListener("toggle", sync);
     sync();
+
+    // Open straight to the Gallery, at the photo that matches the thumbnail
+    if (card) card.openGallery = function (src) {
+      det.open = true;
+      var g = -1;
+      panels.forEach(function (pn, k) { if (pn.getAttribute("data-tab") === "gallery") g = k; });
+      if (g < 0) return;
+      pick(g, false);
+      window.requestAnimationFrame(function () {
+        var track = panels[g].querySelector(".carousel-track");
+        if (track && src) {
+          var imgs = Array.prototype.slice.call(track.querySelectorAll("img"));
+          var file = src.split("/").pop();
+          var idx = -1;
+          imgs.forEach(function (im, j) { if (idx < 0 && (im.getAttribute("src") || "").split("/").pop() === file) idx = j; });
+          if (idx > 0) track.scrollLeft = idx * track.clientWidth;
+        }
+        var top = (tabs[g] || panels[g]).getBoundingClientRect().top;
+        window.scrollBy({ top: top - 100, behavior: calm ? "auto" : "smooth" });
+      });
+    };
   });
+  openGallery = function (card, src) { if (card && card.openGallery) card.openGallery(src); };
 
   /* ---------- 2d. About page: "The result" drops in when it scrolls into view ---------- */
   var result = document.querySelector(".ripple-result");
@@ -170,41 +241,6 @@
       if (entries[0].isIntersecting) { result.classList.add("flown"); rio.disconnect(); }
     }, { threshold: 0.6 });
     rio.observe(result);
-  }
-
-  /* ---------- 2e. Typed emphasis ----------
-     Each .tw phrase is split into words. The first time it scrolls into the
-     upper part of the screen, its words darken one at a time, hold, then
-     settle back. Skipped for reduced-motion users. */
-  var phrases = Array.prototype.slice.call(document.querySelectorAll(".tw"));
-  if (phrases.length && !calm && "IntersectionObserver" in window) {
-    phrases.forEach(function (ph) {
-      var words = ph.textContent.split(/(\s+)/);
-      ph.textContent = "";
-      words.forEach(function (w) {
-        if (/^\s+$/.test(w) || w === "") { ph.appendChild(document.createTextNode(w)); return; }
-        var span = document.createElement("span");
-        span.className = "tw-word";
-        span.textContent = w;
-        ph.appendChild(span);
-      });
-    });
-    var play = function (ph) {
-      var ws = ph.querySelectorAll(".tw-word");
-      var STEP = 130, HOLD = 900;
-      Array.prototype.forEach.call(ws, function (w, i) {
-        setTimeout(function () { w.classList.add("on"); }, i * STEP);
-      });
-      setTimeout(function () {
-        Array.prototype.forEach.call(ws, function (w) { w.classList.remove("on"); });
-      }, ws.length * STEP + HOLD);
-    };
-    var tio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { play(e.target); tio.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -35% 0px", threshold: 1 });
-    phrases.forEach(function (ph) { tio.observe(ph); });
   }
 
   /* ---------- 2f. About page side navigation ----------
@@ -233,6 +269,42 @@
     window.addEventListener("resize", spy);
     spy();
   }
+
+  /* ---------- 2g. About page: sideways version timeline ----------
+     Arrow buttons step one card at a time. The fade on each side shows only
+     while there's more to see in that direction. */
+  each(".ver-scroller", function (box) {
+    var track = box.querySelector(".versions");
+    if (!track) return;
+    var mk = function (dir, label) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "ver-nav ver-nav-" + dir;
+      b.setAttribute("aria-label", label);
+      box.appendChild(b);
+      return b;
+    };
+    var prev = mk("prev", "Previous version"), next = mk("next", "Next version");
+    var stepBy = function (d) {
+      var card = track.querySelector(".ver");
+      var w = card ? card.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
+      track.scrollBy({ left: d * w, behavior: calm ? "auto" : "smooth" });
+    };
+    prev.addEventListener("click", function () { stepBy(-1); });
+    next.addEventListener("click", function () { stepBy(1); });
+    var update = function () {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      var atStart = track.scrollLeft <= 2, atEnd = track.scrollLeft >= max;
+      box.classList.toggle("can-prev", !atStart);
+      box.classList.toggle("can-next", !atEnd);
+      prev.hidden = atStart;
+      next.hidden = atEnd;
+    };
+    track.addEventListener("scroll", function () { window.requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", update);
+    box.classList.add("is-live");
+    update();
+  });
 
   /* ---------- 1. Audience views ---------- */
   var list = document.querySelector(".work-list");
@@ -314,8 +386,8 @@
 
   /* ---------- 3. Revolving-door thumbnails ----------
      Advances only while its card is the one in focus and on screen, pauses
-     on hover, and never auto-plays for reduced-motion users (a click or
-     Enter still steps through). The ⤢ button opens the screens full size. */
+     on hover, and never auto-plays for reduced-motion users. A click (or
+     Enter) opens the card straight to its Gallery at the screen in front. */
   each(".rotator", function (rot) {
     var slides = Array.prototype.slice.call(rot.querySelectorAll(".slide"));
     var n = slides.length;
@@ -328,7 +400,8 @@
     label.setAttribute("aria-hidden", "true");
     rot.appendChild(label);
     rot.setAttribute("tabindex", "0");
-    rot.setAttribute("aria-label", (rot.getAttribute("aria-label") || "Screenshots") + ". Press Enter for the next screen.");
+    rot.setAttribute("role", "button");
+    rot.setAttribute("aria-label", (rot.getAttribute("aria-label") || "Screenshots") + ". Opens the gallery.");
     rot.classList.add("is-live");
 
     function place() {
@@ -356,10 +429,14 @@
 
     rot.addEventListener("mouseenter", function () { hovering = true; });
     rot.addEventListener("mouseleave", function () { hovering = false; });
-    rot.addEventListener("click", function (e) { if (!e.target.closest(".zoom-btn")) step(); });
+    var toGallery = function () {
+      var img = slides[i].querySelector("img");
+      openGallery(card, img ? img.getAttribute("src") : "");
+    };
+    rot.addEventListener("click", toGallery);
     rot.addEventListener("keydown", function (e) {
       if (e.target !== rot) return;
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); step(); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toGallery(); }
     });
 
     place();
@@ -541,27 +618,22 @@
       makeZoomable(img, function () { return { items: imgs.map(itemFrom), start: k }; });
     });
   });
-  // Single thumbnails (not rotators).
-  each(".card-media:not(.rotator) img", function (img) {
-    makeZoomable(img, function () { return { items: [itemFrom(img)], start: 0 }; });
+  // Version timeline pictures on the About page open full size, in order.
+  var vers = Array.prototype.slice.call(document.querySelectorAll("img.ver-shot"));
+  vers.forEach(function (img, k) {
+    makeZoomable(img, function () { return { items: vers.map(itemFrom), start: k }; });
   });
-  // Rotators: a small button opens the screen in front, with the rest to step through.
-  each(".rotator", function (rot) {
-    var imgs = Array.prototype.slice.call(rot.querySelectorAll(".slide img"));
-    if (!imgs.length) return;
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "zoom-btn";
-    btn.innerHTML = "&#10530;";
-    btn.setAttribute("aria-label", "Enlarge these screenshots");
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var items = imgs.map(function (img) {
-        var label = img.closest(".slide").getAttribute("data-label") || "";
-        return { src: img.currentSrc || img.src, alt: img.alt, caption: label ? label + ": " + img.alt : img.alt };
-      });
-      openBox(items, parseInt(rot.getAttribute("data-index") || "0", 10), btn);
+  // Single thumbnails (not rotators) open their card's Gallery.
+  each(".card-media:not(.rotator) img", function (img) {
+    var card = img.closest(".project");
+    img.classList.add("to-gallery");
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", "Open the gallery: " + (img.alt || "screenshots"));
+    var go = function () { openGallery(card, img.getAttribute("src")); };
+    img.addEventListener("click", go);
+    img.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
     });
-    rot.appendChild(btn);
   });
 })();

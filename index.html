@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=13">
+<link rel="stylesheet" href="assets/style.css?v=14">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -53,10 +53,12 @@
        "revolving door" thumbnail: add or remove .slide blocks freely; the
        first slide shows if the script can't run. data-label is the page
        name shown on the little caption chip.
-       Inside <details>: challenge, a one-line "what became possible" summary,
-       the build bubbles (in a nested Details), business impact, tags, and the
-       full carousel (copy a <figure> to add a photo). Every image opens full
-       size when clicked.
+       Inside <details>: a folder of tabbed panels (<section class="card-panel"
+       data-label="Tab name">): The Challenge, What I Built, Details (bubbles
+       and skill tags), Business Impact, and Gallery (the carousel, copy a
+       <figure> to add a photo). site.js builds the tabs and the orange +
+       toggle beside the card's buttons. Clicking a card's thumbnail opens it
+       straight to Gallery, where photos open full size.
        data-lens on each card lists the audience views it appears in; each
        view's order and description live on its button in the lens bar. -->
   <p class="section-label" id="work">Portfolio Work</p>
@@ -90,8 +92,7 @@
         <div class="project-head">
           <h3>Employee Lifecycle System</h3>
         </div>
-        <p class="improves">Cohesion · Efficiency</p>
-        <p class="status-row"><span class="status-pill">Built, pilot pending</span></p>
+        <p class="meta-row"><span class="status-pill">Pilot Pending</span><span class="improves">Cohesion · Efficiency</span></p>
         <p class="lede">A complete management interface designed to automate routine steps, track case progress, and support faster turnaround for every new hire, role change, and departure.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">View user guides ↗</a>
@@ -113,30 +114,34 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and sometimes the union hall. The steps were written down, but not who owned each one across teams. People relied on memory or assumption to know who handled what, which made it hard to follow up and work as a team to make sure every new hire was fully set up on day one. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">Every team can see which steps it owns, and every step is tracked through to confirmation, so new hires are fully set up on day one without relying on memory.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and sometimes the union hall. The steps were written down, but not who owned each one across teams. People relied on memory or assumption to know who handled what, which made it hard to follow up and work as a team to make sure every new hire was fully set up on day one. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Every team can see which steps it owns, and every step is tracked through to confirmation, so new hires are fully set up on day one without relying on memory.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change, and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle, and more.</span></li>
           <li class="build-item"><strong>One owner per step</strong><span>Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</span></li>
           <li class="build-item"><strong>Automation with judgment</strong><span>Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</span></li>
           <li class="build-item"><strong>Docs for each audience</strong><span>A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</span></li>
           </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Clear ownership turns the hand-offs between HR, IT, Safety, Fleet, and Accounting into one shared checklist that every team can see and follow up on, so a new hire's first day is spent getting started, not waiting on equipment or access. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Requirements from stakeholder docs</li><li>Data model</li><li>Rules engine</li><li>Human-in-the-loop</li><li>Role-based UX</li><li>Documentation</li>
         </ul>
-
-        <div class="carousel" aria-label="Employee Lifecycle screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Clear ownership turns the hand-offs between HR, IT, Safety, Fleet, and Accounting into one shared checklist that every team can see and follow up on, so a new hire's first day is spent getting started, not waiting on equipment or access. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Employee Lifecycle screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"><figcaption>HR home: every open case and what's overdue.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"><figcaption>Upcoming risk: hires starting soon whose steps are behind.</figcaption></figure>
@@ -147,6 +152,8 @@
             <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"><figcaption>Triage: the manager's own steps, with full detail one click away.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-draft.png" alt="A drafted request email open and ready to edit" loading="lazy"><figcaption>Draft queue: the request is pre-written and ready to review and send.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -159,8 +166,7 @@
         <div class="project-head">
           <h3>Start-Up Crew Tracking &amp; Dispatch</h3>
         </div>
-        <p class="improves">Cohesion · Access</p>
-        <p class="status-row"><span class="status-pill">Built, pilot pending</span></p>
+        <p class="meta-row"><span class="status-pill">Pilot Pending</span><span class="improves">Cohesion · Access</span></p>
         <p class="lede">A shared scheduling board for the Start-Up crew that tracks every job and accounts for each technician's union holidays, so scheduling stays consistent as the crew grows.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
@@ -178,13 +184,17 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Crew schedules and job status lived in a monthly spreadsheet. It was time-consuming to update, hard to view at a glance, difficult to search, visually overwhelming, and not viewable on mobile. It offered limited functions and awkward back-end upkeep, and union holidays, which vary by local and agreement, were all tracked by hand. Checking one technician's availability meant cross-referencing on the fly.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">The spreadsheet became a live board: supervisors plan, track, and adjust the whole crew in one place, and every technician sees their own schedule from a phone.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Crew schedules and job status lived in a monthly spreadsheet. It was time-consuming to update, hard to view at a glance, difficult to search, visually overwhelming, and not viewable on mobile. It offered limited functions and awkward back-end upkeep, and union holidays, which vary by local and agreement, were all tracked by hand. Checking one technician's availability meant cross-referencing on the fly.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">The spreadsheet became a live board: supervisors plan, track, and adjust the whole crew in one place, and every technician sees their own schedule from a phone.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>The whole crew at a glance</strong><span>Timeline view: one row per technician and one bar per assignment, color-coded by union. Gaps, overlaps, and open capacity show up before a date is committed.</span></li>
           <li class="build-item"><strong>Coverage by date</strong><span>Calendar view: filter to see who's out and when, so coverage for a holiday week or a long job is clear before it's booked.</span></li>
@@ -194,17 +204,17 @@
           <li class="build-item"><strong>A view-only board in every pocket</strong><span>Technicians open a read-only live feed on their phones that shows only their own assignments. They always see the current schedule, and the board stays accurate because only the supervisor edits it.</span></li>
           <li class="build-item"><strong>Next week, in their inbox every Friday</strong><span>An automated email every Friday afternoon lists each technician's jobs for the coming week, so Monday starts with a plan instead of a phone call.</span></li>
           </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Scheduling moved from manual upkeep to a board that maintains itself, so supervisor time goes to planning the work instead of updating cells. Technicians see their own schedule anytime and get next week's plan every Friday, which cuts the calls and texts that used to fill the gaps. Holiday conflicts are caught at booking instead of on the day, avoiding last-minute reschedules with customers. And the board grows with the crew: at launch, 132 holiday entries for 16 union technicians, with new crew members added automatically.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li><li>Mobile access</li><li>Automated email</li>
         </ul>
-
-        <div class="carousel" aria-label="Dispatch board screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Scheduling moved from manual upkeep to a board that maintains itself, so supervisor time goes to planning the work instead of updating cells. Technicians see their own schedule anytime and get next week's plan every Friday, which cuts the calls and texts that used to fill the gaps. Holiday conflicts are caught at booking instead of on the day, avoiding last-minute reschedules with customers. And the board grows with the crew: at launch, 132 holiday entries for 16 union technicians, with new crew members added automatically.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Dispatch board screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline" loading="lazy"><figcaption>Timeline: the whole crew at a glance.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-filter-out.png" alt="Dispatch calendar filtered to show who is out" loading="lazy"><figcaption>Calendar filtered to who's out, and when.</figcaption></figure>
@@ -214,6 +224,8 @@
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/holidays-list.png" alt="Holiday list by union local" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Every Friday, each technician gets next week's schedule by email.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -226,8 +238,7 @@
         <div class="project-head">
           <h3>Start-Up Procedures Site</h3>
         </div>
-        <p class="improves">Access</p>
-        <p class="status-row"><span class="status-pill live">Live</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Access</span></p>
         <p class="lede">Start-up procedures reorganized into a phone-friendly site, with a focused view for each role so technicians can find their steps right from the field.</p>
         <div class="project-links">
           <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener">Open the site ↗</a>
@@ -241,29 +252,33 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>The start-up procedures lived in a thorough 12-page document written for every role at once, and nobody was reading it. It wasn't easy to reach on a job site, copies drifted out of date, and dense paragraphs meant high cognitive load and low retention. Finding one detail took a time-consuming search, and the important steps didn't jump out. The team needed a way to relay these details that people would actually use and actually read.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">A technician on a job site can find their own steps in seconds, on a phone, without calling the office.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>The start-up procedures lived in a thorough 12-page document written for every role at once, and nobody was reading it. It wasn't easy to reach on a job site, copies drifted out of date, and dense paragraphs meant high cognitive load and low retention. Finding one detail took a time-consuming search, and the important steps didn't jump out. The team needed a way to relay these details that people would actually use and actually read.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">A technician on a job site can find their own steps in seconds, on a phone, without calling the office.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>Role-based views</strong><span>Apprentices, technicians, lead technicians, and supervisors each see their own procedures first.</span></li>
           <li class="build-item"><strong>Built to be scanned on site</strong><span>Large text that respects phone settings, collapsible sections, jump-to navigation, and chunked checklists.</span></li>
           <li class="build-item"><strong>One current version</strong><span>Procedures live online in one place, so everyone reads the same steps and every update reaches every role at once, instead of copies drifting apart.</span></li>
           </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Helps people understand what's expected of them to succeed in their role, right from the field. Procedures people actually read are procedures people actually follow: fewer missed steps, less time spent searching, and new hires learning the same current steps from day one.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Information architecture</li><li>Content design</li><li>Mobile-first</li><li>Accessibility</li><li>Docs-as-code</li>
         </ul>
-
-        <div class="carousel" aria-label="Procedures site screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Helps people understand what's expected of them to succeed in their role, right from the field. Procedures people actually read are procedures people actually follow: fewer missed steps, less time spent searching, and new hires learning the same current steps from day one.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Procedures site screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/sops/desktop-roles.png" alt="Start page where each person picks their role" loading="lazy"><figcaption>Each role gets its own link, on desktop or phone.</figcaption></figure>
             <figure><img src="assets/img/sops/desktop-three-views.png" alt="Apprentice, Technician and Lead Technician views side by side, each with its own procedures listed first" loading="lazy"><figcaption>Apprentice, technician, and lead views side by side: each role sees its own procedures first.</figcaption></figure>
@@ -271,6 +286,8 @@
             <figure><img src="assets/img/sops/desktop-lifecycle.png" alt="Start-Up Lifecycle page showing the process overview as a sequence of steps" loading="lazy"><figcaption>Lead view, Start-Up Lifecycle: the whole process, step by step.</figcaption></figure>
             <figure><img src="assets/img/sops/desktop-best-safety.png" alt="Best Practices page with the Safety section expanded" loading="lazy"><figcaption>Best Practices: sections expand on demand, shown here with Safety open.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -283,8 +300,7 @@
         <div class="project-head">
           <h3>Platform Migration Documentation</h3>
         </div>
-        <p class="improves">Cohesion · Access</p>
-        <p class="status-row"><span class="status-pill done">Complete: scoped to the rollout</span></p>
+        <p class="meta-row"><span class="status-pill done">Archived</span><span class="improves">Cohesion · Access</span></p>
         <p class="lede">One iterative, searchable reference for a department migrating from COINS and ServiceTrade to ServiceTitan: Active articles for how the work is done today, and an archive for context on older jobs.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the Director's reply">
@@ -296,12 +312,18 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Shortly after I joined, the department began migrating from COINS and ServiceTrade to ServiceTitan. For months, work ran across all three systems while processes changed month to month. Much of the know-how was tribal knowledge: it lived in experienced people's memory and traveled by word of mouth, so the answer depended on who you asked and when they'd last checked. When details didn't match, small misses carried real costs: a PO coded as material instead of subcontractor, an invoice never uploaded and billing held up, parts that arrived without the technician hearing about it, or a job tracked in the wrong system.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">The team gained one reference it could trust: current steps in one place, with the history kept for context.</p>
-        <ol class="timeline">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Shortly after I joined, the department began migrating from COINS and ServiceTrade to ServiceTitan. For months, work ran across all three systems while processes changed month to month. Much of the know-how was tribal knowledge: it lived in experienced people's memory and traveled by word of mouth, so the answer depended on who you asked and when they'd last checked. When details didn't match, small misses carried real costs: a PO coded as material instead of subcontractor, an invoice never uploaded and billing held up, parts that arrived without the technician hearing about it, or a job tracked in the wrong system.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">The team gained one reference it could trust: current steps in one place, with the history kept for context.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ol class="timeline">
           <li><strong>Week-one SOPs</strong><span>Documented each Service Coordinator workflow in the existing systems and shared it with the Director.</span></li>
           <li><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team keeps its reference material, so anyone could add to them.</span></li>
           <li><strong>Kept current through the rollout</strong><span>At the Director's request, updated each process as it moved to ServiceTitan, including a phased plan for which jobs closed out in ServiceTrade and which moved over.</span></li>
@@ -309,20 +331,23 @@
           <li><strong>Active and Archive</strong><span>Organized into one searchable knowledge base: Active articles show how the work is done today, and an archive keeps the COINS and ServiceTrade steps for older jobs.</span></li>
           <li class="is-end"><strong>Closeout</strong><span>As the last ServiceTrade jobs closed, legacy steps were archived and links pointed to the ServiceTitan articles. COINS steps stayed only where exception workflows still use it. My maintenance ended with the rollout.</span></li>
         </ol>
-
-        <h4>Business impact</h4>
-        <p>Replaced tribal knowledge with a reference people could trust through the whole transition: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and coordinators who worked with confidence while every process was changing. The Director endorsed it in week one and asked that it continue through the rollout.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Knowledge base design</li><li>Change management</li><li>Version control (Active / Archive)</li><li>Content consolidation</li>
         </ul>
-
-        <div class="carousel" aria-label="Migration documentation screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Replaced tribal knowledge with a reference people could trust through the whole transition: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and coordinators who worked with confidence while every process was changing. The Director endorsed it in week one and asked that it continue through the rollout.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Migration documentation screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/migration/week-one-sops-email.png" alt="Week-one SOP email" loading="lazy"><figcaption>End of week one: Service Coordinator SOPs shared, plus editable OneNote pages.</figcaption></figure>
             <figure><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply" loading="lazy"><figcaption>The Director asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -335,8 +360,7 @@
         <div class="project-head">
           <h3>Dispatch Onboarding Guide &amp; Checklist</h3>
         </div>
-        <p class="improves">Access · Cohesion</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Access · Cohesion</span></p>
         <p class="lede">A task-based onboarding guide and checklist for new dispatchers, organized by job lifecycle stage so new team members learn the tasks and the big picture together. A web version is in progress.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="Earlier dispatch reference pages, then the new guide and checklist">
@@ -349,35 +373,42 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Dispatch reference material lived across OneNote pages written for people who already knew the work. Some pages were brief or still in progress, and the department was changing platforms at the same time.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">A new dispatcher can learn the role in the order the work happens and find answers on their own, so experienced staff stay on the work.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Dispatch reference material lived across OneNote pages written for people who already knew the work. Some pages were brief or still in progress, and the department was changing platforms at the same time.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">A new dispatcher can learn the role in the order the work happens and find answers on their own, so experienced staff stay on the work.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>Onboarding checklist</strong><span>High-level onboarding topics covered in a structured, workflow-first order.</span></li>
           <li class="build-item"><strong>Onboarding guide</strong><span>Process maps, escalation chains, policies, how-tos, and troubleshooting, organized by job lifecycle stage and task. Internal links let it navigate like a knowledge center.</span></li>
           <li class="build-item"><strong>A reference folder</strong><span>This year's union holidays, labor rates, accounting codes, and service forms, all in one place.</span></li>
           <li class="build-item"><strong>Next: a web version</strong><span>Being rebuilt as a site in the same style as the procedures and lifecycle guides.</span></li>
         </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Supports the goal of enhancing onboarding and ongoing support as new hires learn the NorCal Way. A new dispatcher starts with a structured path instead of piecing pages together, and every new hire gets the same foundation in both the tasks and the bigger picture.</p>
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Learning experience design</li><li>Task-based scaffolding</li><li>Information architecture</li><li>Knowledge management</li>
         </ul>
-
-        <div class="carousel" aria-label="Dispatch onboarding screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Supports the goal of enhancing onboarding and ongoing support as new hires learn the NorCal Way. A new dispatcher starts with a structured path instead of piecing pages together, and every new hire gets the same foundation in both the tasks and the bigger picture.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Dispatch onboarding screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/dispatch-onboarding/before-dispatch-protocols.png" alt="Earlier dispatch protocols page" loading="lazy"><figcaption>Before: dispatch protocols in OneNote, written for experienced staff.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/before-pm-job-creation.png" alt="Earlier PM job creation page" loading="lazy"><figcaption>Before: some pages held only a line or two of guidance.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/before-open-so-list.png" alt="Earlier page still in progress" loading="lazy"><figcaption>Before: some pages were still in progress.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/guide-shared-email.png" alt="Email introducing the guide and checklist" loading="lazy"><figcaption>After: the guide, checklist, consolidated ServiceTitan SOPs, and reference folder, introduced to the team.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -390,8 +421,7 @@
         <div class="project-head">
           <h3>Technician Job Follow-Ups</h3>
         </div>
-        <p class="improves">Cohesion · Efficiency</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Efficiency</span></p>
         <p class="lede">Personalized emails that show each technician their open service jobs, grouped by what's needed to close them: notes, a return visit, parts, or scheduling.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="A follow-up email, a technician's reply, and a thank-you">
@@ -404,35 +434,41 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>With 200 open jobs, follow-up was grouped by hand where possible. Because it was all manual, technicians inevitably heard from dispatch several times, with different orders or follow-up questions each time, and every round trip held up closing the job.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">Every open question for a technician goes out in one message with one click, so technicians answer once and jobs move to billing sooner.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>With 200 open jobs, follow-up was grouped by hand where possible. Because it was all manual, technicians inevitably heard from dispatch several times, with different orders or follow-up questions each time, and every round trip held up closing the job.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Every open question for a technician goes out in one message with one click, so technicians answer once and jobs move to billing sooner.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>One email per technician</strong><span>Open jobs grouped by status: missing notes or confirmation, return visits needed, parts, and customer scheduling.</span></li>
           <li class="build-item"><strong>A specific question on every line</strong><span>Each job shows its last visit and exactly what's needed to move it forward, so a reply can be one line.</span></li>
           <li class="build-item"><strong>One click from note to send</strong><span>Dispatcher notes and clarification requests are linked to each job. Once a job has a note, a status, and an assigned technician, one click groups everything for that technician and sends it. No more manual consolidating.</span></li>
           <li class="build-item"><strong>Refined with use</strong><span>The first version was color-coded by status. I realized the colors helped me more than the technicians, so the current version breaks each list into separate tables by category: cleaner and easier to scan, especially for long lists.</span></li>
           </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Closing jobs is how service work becomes revenue. Consolidated follow-up shortens the time between finished work and a billable job, so more jobs reach billing, revenue comes in sooner, and the department stays on pace with its revenue goals. Technicians spend less time on scattered requests and more on billable work, customer records stay current, and a 200-job backlog becomes a list that moves. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Excel VBA</li><li>Email automation</li><li>Information design</li><li>Iterating from feedback</li>
         </ul>
-
-        <div class="carousel" aria-label="Follow-up email screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Closing jobs is how service work becomes revenue. Consolidated follow-up shortens the time between finished work and a billable job, so more jobs reach billing, revenue comes in sooner, and the department stays on pace with its revenue goals. Technicians spend less time on scattered requests and more on billable work, customer records stay current, and a 200-job backlog becomes a list that moves. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="Follow-up email screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/emails/followup-v2.png" alt="Current follow-up email" loading="lazy"><figcaption>Current version: clean tables by what each job needs.</figcaption></figure>
             <figure><img src="assets/img/emails/followup-tech-reply.png" alt="Technician's inline reply" loading="lazy"><figcaption>A technician answers job by job, right in the email.</figcaption></figure>
             <figure><img src="assets/img/emails/followup-feedback.png" alt="Technician thank-you reply above the first, color-coded version" loading="lazy"><figcaption>The first, color-coded version, and the technician's reply: "I appreciate this. Thank you!!!"</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -445,8 +481,7 @@
         <div class="project-head">
           <h3>Preventive Maintenance Reporting</h3>
         </div>
-        <p class="improves">Cohesion · Efficiency</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Efficiency</span></p>
         <p class="lede">Preventive maintenance status for every audience: each technician's own list, an all-staff summary, and a management view with parts and coverage.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="PM reports for staff, management and technicians">
@@ -459,34 +494,40 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Preventive maintenance is the work that's easiest to put off: the lowest margin and lowest priority, buried under quoted work. Visits get pushed down the road until the backlog is massive; in October 2026, some visits from August 2025 were still incomplete. That costs three ways. Revenue is lost, because past a certain point a missed visit can't be recouped. Trust breaks, when customers have to reach out themselves to get their maintenance scheduled. And risk grows, because PMs exist to catch problems early, and a missed one can become a costly failure. Lead technicians had no line of sight into which PMs had been started, stalled, or completed.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">Technicians, account managers, and leadership all see which PMs are started, stalled, or completed, so visits get scheduled, finished, and billed instead of buried.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Preventive maintenance is the work that's easiest to put off: the lowest margin and lowest priority, buried under quoted work. Visits get pushed down the road until the backlog is massive. In October 2026, some visits from August 2025 were still incomplete. That costs three ways. Revenue is lost, because past a certain point a missed visit can't be recouped. Trust breaks, when customers have to reach out themselves to get their maintenance scheduled. And risk grows, because PMs exist to catch problems early, and a missed one can become a costly failure. Lead technicians had no line of sight into which PMs had been started, stalled, or completed.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Technicians, account managers, and leadership all see which PMs are started, stalled, or completed, so visits get scheduled, finished, and billed instead of buried.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
           <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
           <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager, and parts status on one line.</span></li>
           </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>PMs are where customer trust is kept or lost. With one shared view of every visit, the backlog stays visible and shrinks instead of growing. Many stalled PMs only need notes or tasking to close, and each one closed is billable work that would otherwise be left on the table. Keeping visits on schedule protects recurring maintenance revenue, keeps customers from having to chase us, and catches equipment problems while they're still small.</p>
-
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Reporting by audience</li><li>Excel VBA</li><li>Email automation</li><li>Information design</li>
         </ul>
-
-        <div class="carousel" aria-label="PM report screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>PMs are where customer trust is kept or lost. With one shared view of every visit, the backlog stays visible and shrinks instead of growing. Many stalled PMs only need notes or tasking to close, and each one closed is billable work that would otherwise be left on the table. Keeping visits on schedule protects recurring maintenance revenue, keeps customers from having to chase us, and catches equipment problems while they're still small.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="PM report screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/emails/pm-all-staff.png" alt="All-staff outstanding PM summary" loading="lazy"><figcaption>All-staff summary: outstanding PMs by month, technician, and status.</figcaption></figure>
             <figure><img src="assets/img/emails/pm-management-status.png" alt="Management PM status table" loading="lazy"><figcaption>Management view: stage, coverage, and parts at a glance.</figcaption></figure>
             <figure><img src="assets/img/emails/pm-monthly-v1.png" alt="Technician monthly PM email" loading="lazy"><figcaption>First version of the monthly technician email.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -499,8 +540,7 @@
         <div class="project-head">
           <h3>PM Parts Auditing and Ordering</h3>
         </div>
-        <p class="improves">Efficiency · Cohesion</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Efficiency · Cohesion</span></p>
         <p class="lede">Every customer's parts list standardized, then built into an automated ordering system with a technician review, so each order is checked by the person who knows the equipment before it's placed.</p>
       </div>
       <div class="card-media rotator" role="group" aria-label="Parts lists before and after, the ordering sheet, audit tracking and the technician audit email">
@@ -515,29 +555,34 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Each customer's PM parts lived in its own Word document, with vendors, quantities, part numbers, and inventory notes mixed together, and every document laid out differently. Keeping them current took constant attention, and when one customer had several orders in a month, telling the orders apart took extra effort.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">Any coordinator can order any customer's PM parts correctly, and the technician who knows the equipment verifies each order before money is spent.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Each customer's PM parts lived in its own Word document, with vendors, quantities, part numbers, and inventory notes mixed together, and every document laid out differently. Keeping them current took constant attention, and when one customer had several orders in a month, telling the orders apart took extra effort.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Any coordinator can order any customer's PM parts correctly, and the technician who knows the equipment verifies each order before money is spent.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>Every parts document rewritten to one standard</strong><span>I reorganized each customer's document by service type and vendor, matching how the team already worked, so any coordinator can read any list.</span></li>
           <li class="build-item"><strong>An ordering system on top</strong><span>An Excel parts list by customer, type, and vendor, with macros that build each order and give it its own correct PO number, even when one customer has several orders in a month.</span></li>
           <li class="build-item"><strong>A parts audit before ordering</strong><span>Each technician gets the upcoming parts lists for their sites to confirm or edit. Their sign-off is tracked month by month before anything is ordered.</span></li>
           <li class="build-item"><strong>Order tracking through pickup</strong><span>Each order's status, from sent to received to will-call pickup, is visible at a glance.</span></li>
         </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. Standard lists make the work transferable, the technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Content standardization</li><li>Excel VBA</li><li>Quality control design</li><li>Human-in-the-loop</li>
         </ul>
-
-        <div class="carousel" aria-label="PM parts screenshots">
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Reflects a commitment to excellence, with no shortcuts on what goes to a customer's site. Standard lists make the work transferable, the technician who knows the equipment reviews each order, and clear PO numbers make every order easy to trace.</p>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Gallery">
+          <h4 class="panel-title">Gallery</h4>
+          <div class="carousel" aria-label="PM parts screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/parts/before-after.png" alt="The same customer's parts document before and after: mixed notes on the left, organized by service type and vendor on the right" loading="lazy"><figcaption>Before and after: the same customer's parts document, rewritten to one standard by service type and vendor.</figcaption></figure>
             <figure><img src="assets/img/parts/pm-parts-list.png" alt="Excel PM parts list" loading="lazy"><figcaption>The ordering system: every customer's parts by type and vendor.</figcaption></figure>
@@ -545,6 +590,8 @@
             <figure><img src="assets/img/emails/pm-parts-audit.png" alt="PM Part Audit email" loading="lazy"><figcaption>The audit email technicians review before anything is ordered.</figcaption></figure>
             <figure><img src="assets/img/parts/parts-order-tracker.png" alt="Order tracker color-coded by status" loading="lazy"><figcaption>Order tracking: sent, received, or ready for will-call pickup.</figcaption></figure>
           </div>
+        </div>
+        </section>
         </div>
       </div>
     </details>
@@ -557,8 +604,7 @@
         <div class="project-head">
           <h3>Service Coordination Database</h3>
         </div>
-        <p class="improves">Efficiency</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Efficiency</span></p>
         <p class="lede">The workbook behind the emails: one set of records for service calls, PM visits, and PM parts, with macros that turn those records into each report and follow-up.</p>
       </div>
       <div class="card-media placeholder">
@@ -569,25 +615,30 @@
     <details class="case">
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
-        <h4>The challenge</h4>
-        <p>Dispatch notes, PM schedules, and parts lists lived in separate places, so every report and follow-up started with gathering information by hand.</p>
-
-        <h4>What I built</h4>
-        <p class="built-summary">Every report and follow-up starts from one set of records, so time once spent gathering information goes to technicians and customers.</p>
-        <details class="more">
-          <summary>Details</summary>
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Dispatch notes, PM schedules, and parts lists lived in separate places, so every report and follow-up started with gathering information by hand.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Every report and follow-up starts from one set of records, so time once spent gathering information goes to technicians and customers.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
           <ul class="build-list">
           <li class="build-item"><strong>One home for service records</strong><span>Service calls, PM visits, PM parts, POs, and vendor contacts on linked sheets, with my notes on each job.</span></li>
           <li class="build-item"><strong>Records become emails</strong><span>Macros build each email from the records: job follow-ups, PM reports, parts audits, and orders. I start each run, review it, and send.</span></li>
         </ul>
-        </details>
-
-        <h4>Business impact</h4>
-        <p>A single source of truth for service coordination. Every audience gets consistent information from the same records, and time once spent re-typing goes to following up with technicians and customers.</p>
-
-        <ul class="tags" aria-label="Skills used">
+          <ul class="tags" aria-label="Skills used">
           <li>Data modeling</li><li>Excel VBA</li><li>Process automation</li>
         </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>A single source of truth for service coordination. Every audience gets consistent information from the same records, and time once spent re-typing goes to following up with technicians and customers.</p>
+        </section>
+        </div>
       </div>
     </details>
   </article>
@@ -599,6 +650,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=8" defer></script>
+<script src="assets/site.js?v=9" defer></script>
 </body>
 </html>
