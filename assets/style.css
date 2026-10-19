@@ -126,6 +126,8 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 560px) { .hero-inner { padding: 3rem 1rem 2.75rem; } }
 
 .section-intro { margin: -0.4rem 0 1rem; max-width: 46rem; color: var(--color-grey); font-size: 1.02rem; }
+.section-intro.intro-full { max-width: none; font-size: 0.98rem; }
+.page-section { scroll-margin-top: 80px; }
 
 .cta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
 .btn {
@@ -144,21 +146,16 @@ img { max-width: 100%; height: auto; }
 .btn-light:hover { border-color: var(--color-orange); }
 
 /* ---------- What I bring to the table: a ripple, top to bottom ----------
-   Each step sits a little further right than the one before (on wider
-   screens), joined by an elbow arrow, and lands on "The result". */
+   Titles sit in a left column, joined by straight down arrows. Each bubble
+   steps a little further right than the one before (wide screens), and
+   "The result" drops in when it scrolls into view. */
 .bring-intro { max-width: 48rem; color: var(--ink); }
-.ripple { list-style: none; margin: 1.1rem 0 0; padding: 0; max-width: 54rem; }
-.ripple > li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.3rem;
-  padding-bottom: 2rem;
-}
-.ripple > li::after {
+.ripple { list-style: none; margin: 1.1rem 0 0; padding: 0; max-width: 56rem; }
+.ripple > li { position: relative; display: grid; grid-template-columns: 1fr; gap: 0.3rem; padding-bottom: 2rem; }
+.ripple > li:not(.ripple-last)::after {
   content: "";
   position: absolute;
-  left: 1.1rem;
+  left: 0.3rem;
   bottom: 0.3rem;
   width: 14px;
   height: 1.45rem;
@@ -171,48 +168,46 @@ img { max-width: 100%; height: auto; }
   letter-spacing: 0.08em;
   color: var(--color-grey);
 }
+.ripple-last .ripple-tag { color: var(--color-black); }
 @media (min-width: 700px) {
-  .ripple > li {
-    grid-template-columns: 7.5rem 1fr;
-    gap: 1rem;
-    margin-left: calc(var(--step, 0) * 1.6rem);
+  .ripple > li { grid-template-columns: 8rem 1fr; gap: 0 1rem; padding-bottom: 0; }
+  .ripple > li:not(.ripple-last)::after { display: none; }
+  .ripple-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 1.05rem;
   }
-  .ripple-tag { text-align: right; padding-top: 1.05rem; }
-  /* elbow arrow: down from this bubble, then right into the next one */
-  .ripple > li::after {
-    left: calc(7.5rem + 1rem + 1rem);
-    width: 2.6rem;
-    height: 1.55rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 26'%3E%3Cpath d='M3 1v11a6 6 0 0 0 6 6h28M31 12l7 6-7 6' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  }
-}
-@media (min-width: 700px) {
-  /* the last step drops straight down into the result */
-  .ripple > li:last-child::after {
+  /* the arrow runs from under this title down to the next one */
+  .ripple > li:not(.ripple-last) .ripple-tag::after {
+    content: "";
+    flex: 1;
     width: 14px;
-    height: 1.45rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 24'%3E%3Cpath d='M7 1v20M2 16l5 6 5-6' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    min-height: 1.5rem;
+    margin: 0.45rem 0 0.35rem 0.3rem;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 9'%3E%3Cpath d='M2 2l5 5.5L12 2' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") bottom center / 14px 9px no-repeat,
+      linear-gradient(var(--color-orange), var(--color-orange)) top center / 2.4px calc(100% - 4px) no-repeat;
   }
+  .ripple > li > .bring-item,
+  .ripple > li > .ripple-result { margin: 0 0 1.4rem calc(var(--step, 0) * 1.6rem); }
 }
 .ripple-result {
   position: relative;
-  max-width: 54rem;
+  max-width: 35rem;
   background: var(--color-black);
   border-left: 8px solid var(--color-orange);
   border-radius: 14px;
-  padding: 1.2rem 1.4rem 1.3rem;
+  padding: 1rem 1.3rem 1.1rem;
   box-shadow: 0 18px 40px -18px rgba(0,0,0,0.45);
 }
-.ripple-result-label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-orange);
+.ripple-result p { margin: 0; color: #fff; font-size: clamp(1.2rem, 2.3vw, 1.4rem); font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; }
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-34px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
 }
-.ripple-result p { margin: 0; color: #fff; font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; }
+.anim-ready .ripple-result { opacity: 0; }
+.anim-ready .ripple-result.flown { opacity: 1; animation: drop-in 0.8s cubic-bezier(0.2, 0.75, 0.25, 1.05) both; }
 
 /* ---------- What I bring to the table: expanding bubbles ---------- */
 .bring-stack { display: grid; gap: 0.6rem; max-width: 46rem; }
@@ -324,11 +319,41 @@ img { max-width: 100%; height: auto; }
 }
 .flip-cue { position: absolute; right: 0.8rem; top: 0.65rem; color: var(--color-orange); font-size: 1.1rem; }
 .back-lead { display: block; font-weight: 800; font-size: 1.05rem; margin-bottom: 0.25rem; white-space: nowrap; }
-.back-return { display: block; margin-top: auto; padding: 0.7rem 0.85rem; border-radius: 10px; background: #fff; color: var(--color-black); font-size: 0.95rem; }
-.back-return b { color: var(--color-black); }
+.return-label {
+  display: block;
+  margin: auto 0 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #fff;
+}
+.return-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.return-chips > span {
+  display: inline-block;
+  background: #fff;
+  color: var(--color-black);
+  border-left: 4px solid var(--color-black);
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
 .face.back .face-text { margin-bottom: 0.8rem; }
 
 /* ---------- Skill chips ---------- */
+.chips-live li { transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; cursor: default; }
+@media (hover: hover) and (pointer: fine) {
+  .chips-live li:hover {
+    background: var(--color-black);
+    color: #fff;
+    border-color: var(--color-black);
+    border-left-color: var(--color-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.45);
+  }
+}
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
 .chips li {
   background: #fff;
@@ -788,6 +813,76 @@ details.more[open] > .build-list { margin-top: 0.4rem; animation: drawer-in 0.3s
 }
 .carousel-dot.active { background: var(--color-orange); }
 
+/* How I work: the signals I listen for */
+.signals { list-style: none; padding: 0; margin: 0.2rem 0 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.signals li {
+  background: var(--color-orange-tint);
+  border: 1px solid #ffd2b0;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.9rem;
+  color: #6b2e00;
+}
+
+/* ---------- Typed emphasis ----------
+   site.js wraps each word of a .tw phrase; as the phrase scrolls into view
+   the words darken and bolden one at a time, hold, then settle back. The
+   stroke adds weight without changing the text's width, so nothing shifts. */
+.tw-word { transition: color 0.18s ease, -webkit-text-stroke-width 0.18s ease; -webkit-text-stroke: 0 currentColor; }
+.tw-word.on { color: var(--color-black); -webkit-text-stroke: 0.6px currentColor; }
+
+/* ---------- Side navigation (About page, wide screens) ---------- */
+.side-nav { display: none; }
+@media (min-width: 1260px) {
+  .side-nav {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: max(0.75rem, calc((100vw - 960px) / 2 - 10.25rem));
+    width: 9.25rem;
+    z-index: 20;
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+  }
+  .side-nav.is-shown { opacity: 1; visibility: visible; }
+}
+.side-nav-title { margin: 0 0 0.5rem; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-grey); }
+.side-nav ol { list-style: none; margin: 0; padding: 0 0 0 0.75rem; border-left: 2px solid #e0e0e0; }
+.side-nav li { margin: 0; }
+.side-nav a {
+  position: relative;
+  display: block;
+  padding: 0.35rem 0;
+  color: var(--color-grey);
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.side-nav a::before {
+  content: "";
+  position: absolute;
+  left: calc(-0.75rem - 5px);
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d0d0d0;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.side-nav a:hover { color: var(--color-black); }
+.side-nav a[aria-current="location"] { color: var(--color-black); font-weight: 700; }
+.side-nav a[aria-current="location"]::before { background: var(--color-orange); transform: translateY(-50%) scale(1.35); }
+
+/* ---------- About me ---------- */
+.about-me { border-left: 5px solid var(--color-orange); padding: 0.2rem 0 0.2rem 1.15rem; max-width: 46rem; }
+.about-me p { margin: 0 0 0.85rem; }
+.about-me p:last-child { margin-bottom: 0; }
+.about-me-lead { font-size: 1.3rem; font-weight: 800; line-height: 1.35; color: var(--color-black); letter-spacing: -0.01em; }
+.about-sub { margin: 2.25rem 0 0.75rem; font-size: 1.15rem; color: var(--color-black); }
+
 /* ---------- Click to enlarge ---------- */
 .zoomable { cursor: zoom-in; }
 .zoom-btn {
@@ -1001,18 +1096,28 @@ body.lightbox-open { overflow: hidden; }
 }
 .proof-text { flex: 1; min-width: 0; padding: 0.6rem 0.85rem; }
 a.proof-link:hover { border-color: #e9a473; background: #fff; color: var(--color-grey); }
-/* #c45100 keeps white text and the arrow at 4.6:1 */
+/* Bright orange tab with black chevron and label (6.4:1). */
 .proof-go {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.75rem;
-  background: #c45100;
-  color: #fff;
+  padding: 0 0.8rem;
+  background: var(--color-orange);
+  color: var(--color-black);
   font-size: 0.85rem;
   font-weight: 700;
+  transition: background-color 0.2s ease;
 }
+a.proof-link:hover .proof-go { background: #ff8533; }
+.proof-chev {
+  display: inline-block;
+  width: 0.8rem;
+  height: 1.1rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 18'%3E%3Cpath d='M3 3l6 6-6 6' fill='none' stroke='%23161616' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.25s ease;
+}
+a.proof-link:hover .proof-chev { transform: translateX(2px); }
 .proof-arrow { font-size: 1.1rem; line-height: 1; transition: transform 0.25s ease; }
 .proof-go-label {
   max-width: 0;
@@ -1032,34 +1137,26 @@ a.proof-link:hover .proof-arrow { transform: translateX(2px); }
   .proof-go-label { display: none; }
 }
 
-/* The reference material's versions, left to right */
-.versions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem 1.1rem; margin-top: 0.55rem; }
-.ver {
-  position: relative;
-  display: block;
-  padding: 0.45rem 0.6rem;
-  border-radius: 8px;
+/* The reference material's versions: label above, then Platform, Pros, and
+   Cons in each card. Two columns on wide screens, one on phones. */
+.versions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem 1rem; margin-top: 0.7rem; }
+.ver { display: flex; flex-direction: column; min-width: 0; }
+.ver-name { display: block; margin-bottom: 0.3rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #8a3a00; }
+.ver-card {
+  flex: 1;
+  display: grid;
   background: #fff;
   border: 1px solid var(--color-grey-light);
-  font-size: 0.85rem;
-  line-height: 1.4;
+  border-radius: 8px;
+  overflow: hidden;
 }
-.ver b { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #8a3a00; }
-.ver-start { background: #f1f1f1; }
-.ver-now { background: var(--color-orange-tint); border-color: var(--color-orange); }
-.ver + .ver::before { content: "\2192"; position: absolute; left: -0.95rem; top: 50%; transform: translateY(-50%); color: #c45100; font-weight: 700; }
-@media (max-width: 640px) {
-  .versions { grid-template-columns: 1fr; gap: 1.1rem; }
-  .ver + .ver::before { content: "\2193"; left: 0.8rem; top: -1.05rem; transform: none; }
-}.signals { list-style: none; padding: 0; margin: 0.2rem 0 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.signals li {
-  background: var(--color-orange-tint);
-  border: 1px solid #ffd2b0;
-  border-radius: 999px;
-  padding: 0.2rem 0.7rem;
-  font-size: 0.9rem;
-  color: #6b2e00;
-}
+.ver-row { display: block; padding: 0.4rem 0.6rem; font-size: 0.85rem; line-height: 1.4; }
+.ver-row + .ver-row { border-top: 1px solid var(--color-grey-light); }
+.ver-row b { display: block; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--step-strong); }
+.ver-start .ver-card { background: #f4f4f4; }
+.ver-now .ver-name { color: #c45100; }
+.ver-now .ver-card { background: var(--color-orange-tint); border-color: var(--color-orange); }
+@media (max-width: 640px) { .versions { grid-template-columns: 1fr; } }
 .page-next { margin: 2.5rem 0 0; }
 
 /* ---------- How I work ---------- */
@@ -1123,4 +1220,6 @@ footer {
     .flip:hover .face.front { opacity: 0; }
   }
   .process.focus-on > li, .process.focus-on > li.is-active { transform: none !important; }
+  .anim-ready .ripple-result { opacity: 1 !important; }
+  .chips-live li:hover { transform: none !important; }
 }

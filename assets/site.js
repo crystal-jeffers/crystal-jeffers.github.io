@@ -163,6 +163,77 @@
     sync();
   });
 
+  /* ---------- 2d. About page: "The result" drops in when it scrolls into view ---------- */
+  var result = document.querySelector(".ripple-result");
+  if (result && document.documentElement.classList.contains("anim-ready")) {
+    var rio = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { result.classList.add("flown"); rio.disconnect(); }
+    }, { threshold: 0.6 });
+    rio.observe(result);
+  }
+
+  /* ---------- 2e. Typed emphasis ----------
+     Each .tw phrase is split into words. The first time it scrolls into the
+     upper part of the screen, its words darken one at a time, hold, then
+     settle back. Skipped for reduced-motion users. */
+  var phrases = Array.prototype.slice.call(document.querySelectorAll(".tw"));
+  if (phrases.length && !calm && "IntersectionObserver" in window) {
+    phrases.forEach(function (ph) {
+      var words = ph.textContent.split(/(\s+)/);
+      ph.textContent = "";
+      words.forEach(function (w) {
+        if (/^\s+$/.test(w) || w === "") { ph.appendChild(document.createTextNode(w)); return; }
+        var span = document.createElement("span");
+        span.className = "tw-word";
+        span.textContent = w;
+        ph.appendChild(span);
+      });
+    });
+    var play = function (ph) {
+      var ws = ph.querySelectorAll(".tw-word");
+      var STEP = 130, HOLD = 900;
+      Array.prototype.forEach.call(ws, function (w, i) {
+        setTimeout(function () { w.classList.add("on"); }, i * STEP);
+      });
+      setTimeout(function () {
+        Array.prototype.forEach.call(ws, function (w) { w.classList.remove("on"); });
+      }, ws.length * STEP + HOLD);
+    };
+    var tio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { play(e.target); tio.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -35% 0px", threshold: 1 });
+    phrases.forEach(function (ph) { tio.observe(ph); });
+  }
+
+  /* ---------- 2f. About page side navigation ----------
+     Appears once the hero has scrolled away, and marks the section in view. */
+  var side = document.querySelector(".side-nav");
+  if (side) {
+    var links = Array.prototype.slice.call(side.querySelectorAll("a"));
+    var secs = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    var hero = document.querySelector(".hero-banner");
+    var spy = function () {
+      if (hero) side.classList.toggle("is-shown", hero.getBoundingClientRect().bottom < 90);
+      var line = window.innerHeight * 0.35, cur = 0;
+      secs.forEach(function (sec, i) { if (sec && sec.getBoundingClientRect().top <= line) cur = i; });
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (atBottom) cur = secs.length - 1;
+      links.forEach(function (a, i) {
+        if (i === cur) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
+      });
+    };
+    var spyWait = false;
+    window.addEventListener("scroll", function () {
+      if (spyWait) return;
+      spyWait = true;
+      window.requestAnimationFrame(function () { spyWait = false; spy(); });
+    }, { passive: true });
+    window.addEventListener("resize", spy);
+    spy();
+  }
+
   /* ---------- 1. Audience views ---------- */
   var list = document.querySelector(".work-list");
   var lensButtons = Array.prototype.slice.call(document.querySelectorAll(".lens"));

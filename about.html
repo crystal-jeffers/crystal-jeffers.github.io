@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Crystal Jeffers</title>
 <meta name="description" content="Crystal Jeffers builds systems that clarify and empower: finding where time, information, and confidence slip, then developing and refining the fix.">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=13">
 <script>
   document.documentElement.classList.add("js");
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
@@ -15,7 +15,7 @@
     if (!("IntersectionObserver" in window) || calm) return;
     document.documentElement.classList.add("anim-ready");
     setTimeout(function () {
-      var items = document.querySelectorAll(".pillars li");
+      var items = document.querySelectorAll(".pillars li, .ripple-result");
       for (var i = 0; i < items.length; i++) items[i].classList.add("flown");
     }, 4000);
   })();
@@ -44,36 +44,52 @@
   </div>
 </section>
 
+<!-- ===================== SECTION NAV (wide screens) =====================
+     site.js marks the section in view with aria-current. -->
+<nav class="side-nav" aria-label="On this page">
+  <p class="side-nav-title">On this page</p>
+  <ol>
+    <li><a href="#focus">My Focus</a></li>
+    <li><a href="#bring">What I Bring</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#approach">How I Work</a></li>
+    <li><a href="#about">About Me</a></li>
+  </ol>
+</nav>
+
 <main>
 
   <!-- ===================== MY FOCUS: flip cards =====================
        Front: what the word means to me, with the second thought in an
-       orange bubble. Back: the business case. -->
-  <p class="section-label" id="focus">My Focus</p>
-  <p class="section-intro">Three outcomes behind every project, tied to NorCal's strategic focus on its people, workflow unity, and lasting customer relationships.</p>
+       orange bubble. Back: the business case, with the returns as chips. -->
+  <section class="page-section" id="focus" aria-labelledby="focus-label">
+  <p class="section-label" id="focus-label">My Focus</p>
+  <p class="section-intro intro-full">Three outcomes behind every project, tied to NorCal's focus on people, workflow unity, and lasting customer relationships.</p>
   <p class="flip-hint"><span class="hint-hover">Hover over each card for the business case.</span><span class="hint-touch">Tap each card for the business case.</span></p>
   <ul class="pillars">
     <li style="--i:0"><button type="button" class="flip" aria-pressed="false">
       <span class="flip-inner">
         <span class="face front"><strong>Cohesion</strong><span class="face-label">What it means to me</span><span class="face-text">Being in sync: each person self-sufficient, working from the same information with the same confidence.</span><span class="face-callout">Teams always have to work together. The systems that connect them decide whether that feels like friction or flow, and that shapes the culture we build.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good cohesion&hellip;</span><span class="face-text">hand-offs land the first time. Jobs close with less follow-up, people trust the information they're handed, and leaders see status without chasing it.</span><span class="back-return"><b>The return:</b> fewer repeat visits, faster close-out and billing, and teams that pull in the same direction.</span></span>
+        <span class="face back"><span class="back-lead">With good cohesion&hellip;</span><span class="face-text">hand-offs land the first time. Jobs close with less follow-up, people trust the information they're handed, and leaders see status without chasing it.</span><span class="return-label">The return</span><span class="return-chips"><span>Fewer repeat visits</span><span>Faster close-out and billing</span><span>Teams that pull in the same direction</span></span></span>
       </span></button></li>
     <li style="--i:1"><button type="button" class="flip" aria-pressed="false">
       <span class="flip-inner">
         <span class="face front"><strong>Efficiency</strong><span class="face-label">What it means to me</span><span class="face-text">Ease of doing business, every day. Nothing wears a team down like fighting through confusion, clunky systems, and rework.</span><span class="face-callout">Clear systems give that energy back, and people spend it on catching errors and doing things right.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good efficiency&hellip;</span><span class="face-text">people start the day with clear work instead of a search for it. The energy saved goes to spotting errors and fixing them when something looks off, before they turn into rework.</span><span class="back-return"><b>The return:</b> less rework, lower cost per job, and capacity that grows faster than headcount.</span></span>
+        <span class="face back"><span class="back-lead">With good efficiency&hellip;</span><span class="face-text">people start the day with clear work instead of a search for it. The energy saved goes to spotting errors and fixing them when something looks off, before they turn into rework.</span><span class="return-label">The return</span><span class="return-chips"><span>Less rework</span><span>Lower cost per job</span><span>Capacity that grows faster than headcount</span></span></span>
       </span></button></li>
     <li style="--i:2"><button type="button" class="flip" aria-pressed="false">
       <span class="flip-inner">
         <span class="face front"><strong>Access</strong><span class="face-label">What it means to me</span><span class="face-text">Information people can actually take in. Not only where it lives, but how it reads: edited, chunked, and shaped for where it's used, from a phone on a job site to a desk.</span><span class="face-callout">Information that's easy to grasp builds confidence, competence, and agency.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good access&hellip;</span><span class="face-text">people become self-sufficient sooner and stay longer. They know where to find the answers. Procedures and expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="back-return"><b>The return:</b> shorter ramp-up, less rework, and a protected investment in every hire.</span></span>
+        <span class="face back"><span class="back-lead">With good access&hellip;</span><span class="face-text">people become self-sufficient sooner and stay longer. They know where to find the answers. Procedures and expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="return-label">The return</span><span class="return-chips"><span>Shorter ramp-up</span><span>Less rework</span><span>A protected investment in every hire</span></span></span>
       </span></button></li>
   </ul>
+  </section>
 
   <!-- ===================== WHAT I BRING: a ripple, top to bottom =====================
-       Each change leads to the next, from one new hire out to the whole
-       department. Every line opens for detail. -->
-  <p class="section-label" id="bring">What I bring to the table</p>
+       Titles sit in a left column joined by straight arrows; the bubbles step
+       to the right. "The result" drops in when it scrolls into view. -->
+  <section class="page-section" id="bring" aria-labelledby="bring-label">
+  <p class="section-label" id="bring-label">What I bring to the table</p>
   <p class="section-intro bring-intro">When I build systems, the felt change is an everyday experience of ease when taking action, searching for key details, and tracking progress. It's less talk, more movement, and faster coordination for the whole team. Here are a few examples of how that shows up in real time.</p>
   <ol class="ripple">
     <li style="--step:0">
@@ -93,7 +109,7 @@
     <li style="--step:2">
       <span class="ripple-tag">Leaders</span>
       <details class="bring-item">
-        <summary><span>Leaders stop being the switchboard.</span></summary>
+        <summary><span>Leaders stop fielding every question.</span></summary>
         <p>Status, next steps, and answers reach people before they have to ask, so managers spend their time on decisions, customers, and growth instead of chasing updates.</p>
       </details>
     </li>
@@ -101,7 +117,7 @@
       <span class="ripple-tag">The department</span>
       <details class="bring-item">
         <summary><span>Change lands instead of piling up.</span></summary>
-        <p>When a platform or process shifts, the documentation and tools shift with it, so the team keeps its footing through a rollout.</p>
+        <p>When a platform or process shifts, the documentation and tools shift with it, so the team keeps its footing through rollouts, departures, and additions.</p>
       </details>
     </li>
     <li style="--step:4">
@@ -111,16 +127,39 @@
         <p>I don't hand off and walk away. Each system is watched in use and refined from what people actually do with it, so it improves as the team grows.</p>
       </details>
     </li>
+    <li class="ripple-last" style="--step:5">
+      <span class="ripple-tag">The result</span>
+      <div class="ripple-result">
+        <p>Departments can take on more work without being outpaced by coordination load.</p>
+      </div>
+    </li>
   </ol>
-  <div class="ripple-result">
-    <span class="ripple-result-label">The result</span>
-    <p>Departments can take on more work without being outpaced by coordination load.</p>
-  </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section class="page-section" id="skills" aria-labelledby="skills-label">
+  <p class="section-label" id="skills-label">Skills</p>
+  <ul class="chips chips-live" aria-label="Skills">
+    <li>Process &amp; workflow design</li>
+    <li>UX for internal tools</li>
+    <li>Stakeholder interviews &amp; requirements</li>
+    <li>Human-in-the-loop automation</li>
+    <li>Data modeling (Airtable, Excel)</li>
+    <li>Excel VBA &amp; email automation</li>
+    <li>Knowledge base &amp; documentation</li>
+    <li>Information architecture</li>
+    <li>Content editing &amp; formatting</li>
+    <li>AI-assisted building</li>
+  </ul>
+  </section>
 
   <!-- ===================== HOW I WORK: five steps, in focus as you scroll =====================
        An "In practice" link bubble: <a class="proof-link"> with the text in
-       a <span class="proof-text"> and the arrow tab in <span class="proof-go">. -->
-  <p class="section-label" id="approach">How I work</p>
+       a <span class="proof-text"> and the chevron tab in <span class="proof-go">.
+       Words in <span class="tw"> are emphasized one at a time, once, as they
+       scroll into view. -->
+  <section class="page-section" id="approach" aria-labelledby="approach-label">
+  <p class="section-label" id="approach-label">How I work</p>
   <p class="section-intro">The same five steps sit behind every project.</p>
   <ol class="process">
     <li>
@@ -135,9 +174,9 @@
       </ul>
       <p class="proof-label">In practice</p>
       <ul class="proofs">
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">After I showed another dispatcher my first draft of the training guide, she said, "I wish there were something like this when I started!"</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener"><span class="proof-text">The Service Manager pulled out 12 pages of paper SOPs with dense paragraphs of text and said, "Our techs don't really read this."</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener"><span class="proof-text">The Airtable manager dashboard started with a request from the Service Manager to "freshen up" the old New Hire Protocols.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">After I showed another dispatcher my first draft of the training guide, she said, "<span class="tw">I wish there were something like this when I started!</span>"</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener"><span class="proof-text">The Service Manager pulled out <span class="tw">12 pages of paper SOPs</span> with dense paragraphs of text and said, "<span class="tw">Our techs don't really read this.</span>"</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener"><span class="proof-text">The Airtable manager dashboard started with a request from the Service Manager to "freshen up" the old New Hire Protocols.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
       </ul>
     </li>
     <li>
@@ -145,8 +184,8 @@
       <p>When something slips, I look at the system before the person. I identify bottlenecks, redundancies, and communication breakdowns, then ask myself, "What would make the right action the easy one?"</p>
       <p class="proof-label">In practice</p>
       <ul class="proofs">
-        <li><a class="proof-link" href="index.html#pm-parts"><span class="proof-text">When a technician flagged incorrect PM parts, I built a monthly audit so each technician sees, and can correct, the parts to be ordered for their sites that month.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><div class="proof-link is-static"><span class="proof-text">When delayed POs were slowing job closure, I developed a way to request consolidated invoices from vendors, instead of waiting for system flags and in-the-moment delays to signal the need.</span></div></li>
+        <li><a class="proof-link" href="index.html#pm-parts"><span class="proof-text">When a technician flagged incorrect PM parts, I built a <span class="tw">monthly audit</span> so each technician sees, and can correct, the parts to be ordered for their sites that month.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="index.html#database"><span class="proof-text">When delayed POs were slowing job closure, I developed a way to request consolidated invoices from vendors, instead of waiting for system flags and in-the-moment delays to signal the need.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
       </ul>
     </li>
     <li>
@@ -154,53 +193,80 @@
       <p>I look at the end goal, the most efficient way to get there, and decide up front which decisions stay with whom. I simplify information, filter for relevance, and streamline steps for efficiency.</p>
       <p class="proof-label">In practice</p>
       <ul class="proofs">
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener"><span class="proof-text">The original New Hire Protocols named owners for some tasks, but gave no broader view of who is responsible for what. In the new system, every step has one owner, from request to confirmation.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener"><span class="proof-text">The original start-up procedures bundled every role's responsibilities into one document. The mobile site gives each role its own view, so people find the right information faster.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener"><span class="proof-text">Union holiday conflicts are flagged on the dispatch board, never blocked. The supervisor keeps the final call.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener"><span class="proof-text">The original New Hire Protocols named owners for some tasks, but gave no broader view of <span class="tw">who is responsible</span> for what. In the new system, <span class="tw">every step has one owner</span>, from request to confirmation.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener"><span class="proof-text">The original start-up procedures bundled every role's responsibilities into one document. The mobile site gives each role its own view, so people <span class="tw">find the right information faster</span>.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener"><span class="proof-text">Union holiday conflicts are flagged on the dispatch board, never blocked. The supervisor keeps the final call.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
       </ul>
     </li>
     <li>
       <span class="step-name">Design intuitive solutions with user-friendly interfaces</span>
       <p>I consider existing tools and habits, identify potential break points, and develop tools that improve access without adding complexity.</p>
-      <p class="step-proof"><b>In practice:</b> I'm comfortable with VBA and macros, but most people aren't, even when it's just pressing a button. Building the same function in Airtable made it less intimidating and more accessible.</p>
-    </li>
-    <li>
-      <span class="step-name">Iterate toward polish</span>
-      <p>Every system starts as a first version. Some refinements come from the people using it: a reply, a question, or a workaround. Many I catch on my own. I take pride in my work, and I like to chew on the pinch points until things have a proper polish. Each round makes the system a little easier to use.</p>
       <p class="proof-label">In practice</p>
       <ul class="proofs">
-        <li><a class="proof-link" href="index.html#follow-ups"><span class="proof-text">Technicians didn't complain about the color-coded follow-up lists. I recognized the colors helped me but could overwhelm them, so I broke each list into separate tables: cleaner and easier to scan, especially for long lists.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
-        <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">A few months after using the onboarding guide, a new hire shared that it was still useful as a reference, and that simplifying it further could make it even more accessible.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
+        <li><div class="proof-link is-static"><span class="proof-text">I'm comfortable with VBA and macros, but most people aren't, even when it's just pressing a button. Building the same function in Airtable made it less intimidating and more accessible.</span></div></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/start-up-procedures/" target="_blank" rel="noopener"><span class="proof-text">I built a mobile-friendly way for technicians to reach the SOPs from the field: no lost or crumpled pages, versioning issues, SharePoint access issues, or long searches through dense paragraphs in Word documents.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+      </ul>
+    </li>
+    <li>
+      <span class="step-name">Iterative refinement</span>
+      <p>Some refinements come from the people using it: a reply, a question, or a workaround. Many I catch on my own. I take pride in my work, and I like to chew on the pinch points until things have a proper polish. Each round makes the system a little easier to use.</p>
+      <p class="proof-label">In practice</p>
+      <ul class="proofs">
+        <li><a class="proof-link" href="index.html#follow-ups"><span class="proof-text">Technicians didn't complain about the color-coded follow-up lists. I recognized the colors helped me but could overwhelm them, so I broke each list into separate tables: <span class="tw">cleaner and easier to scan</span>, especially for long lists.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
+        <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">A few months after using the onboarding guide, a new hire shared that it was still useful as a reference, and that simplifying it further could make it even more accessible.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
         <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">The team's reference material, three versions in:
           <span class="versions">
-            <span class="ver ver-start"><b>Before</b>Scattered OneNote pages and shared-drive files: incomplete, uncategorized, and no single source of truth</span>
-            <span class="ver"><b>Version 1</b>One Word document, searchable with Ctrl&nbsp;+&nbsp;F</span>
-            <span class="ver"><b>Version 2</b>A PDF with linked navigation</span>
-            <span class="ver ver-now"><b>Version 3</b>The Dispatch Hub website</span>
-          </span></span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-arrow" aria-hidden="true">&rarr;</span></span></a></li>
+            <span class="ver ver-start">
+              <span class="ver-name">Before</span>
+              <span class="ver-card">
+                <span class="ver-row"><b>Platform</b>OneNote + shared drive</span>
+                <span class="ver-row"><b>Pros</b>Accessible to everyone on the company server</span>
+                <span class="ver-row"><b>Cons</b>Scattered pages, no clear owner, incomplete and uncategorized content, and no single source of truth</span>
+              </span>
+            </span>
+            <span class="ver">
+              <span class="ver-name">My version 1</span>
+              <span class="ver-card">
+                <span class="ver-row"><b>Platform</b>Word document</span>
+                <span class="ver-row"><b>Pros</b>Everything in one place, searchable with Ctrl&nbsp;+&nbsp;F, and easy for anyone to edit</span>
+                <span class="ver-row"><b>Cons</b>One long document to scroll, with no way to jump between related topics</span>
+              </span>
+            </span>
+            <span class="ver">
+              <span class="ver-name">My version 2</span>
+              <span class="ver-card">
+                <span class="ver-row"><b>Platform</b>PDF with linked navigation</span>
+                <span class="ver-row"><b>Pros</b>Click-through links between sections, so it works like a website</span>
+                <span class="ver-row"><b>Cons</b>Every edit means updating the source and exporting again</span>
+              </span>
+            </span>
+            <span class="ver ver-now">
+              <span class="ver-name">My version 3</span>
+              <span class="ver-card">
+                <span class="ver-row"><b>Platform</b>A GitHub website, the Dispatch Hub</span>
+                <span class="ver-row"><b>Pros</b>Cleaner presentation and formatting, easy navigation, and it works on any device</span>
+                <span class="ver-row"><b>Cons</b>Updates need me or another tech-savvy teammate, so long-term upkeep is less user-friendly</span>
+              </span>
+            </span>
+          </span></span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
       </ul>
     </li>
   </ol>
+  </section>
 
-  <!-- ===================== SKILLS ===================== -->
-  <p class="section-label" id="skills">Skills</p>
-  <ul class="chips" aria-label="Skills">
-    <li>Process &amp; workflow design</li>
-    <li>UX for internal tools</li>
-    <li>Stakeholder interviews &amp; requirements</li>
-    <li>Human-in-the-loop automation</li>
-    <li>Data modeling (Airtable, Excel)</li>
-    <li>Excel VBA &amp; email automation</li>
-    <li>Knowledge base &amp; documentation</li>
-    <li>Information architecture</li>
-    <li>Content editing &amp; formatting</li>
-    <li>AI-assisted building</li>
-  </ul>
+  <!-- ===================== ABOUT ME, then my work at Southland ===================== -->
+  <section class="page-section" id="about" aria-labelledby="about-label">
+  <p class="section-label" id="about-label">About me</p>
+  <div class="about-me">
+    <p class="about-me-lead">I'm Crystal, and I notice the small frictions most people have learned to work around.</p>
+    <p>The question that gets asked every week. The spreadsheet kept "just in case." The new hire who doesn't want to ask again. I can't leave those alone. I would rather spend an afternoon making something clear than watch a team lose an hour to confusion every day.</p>
+    <p>I start by listening, because the people doing the work already know where it hurts. I design for the person on the other end of the system, and I keep refining long after something is "good enough," because I take pride in a proper polish. I learn whatever the problem needs, whether that's a database, a macro, or a website, and I'm comfortable using AI tools to get there faster.</p>
+    <p>Underneath it all is a simple belief: clarity and certainty make work better. When people know what to do and where to find the answer, they move with confidence, make fewer mistakes, and have energy left for the parts of the job that matter. That's what I bring to a team: curiosity, care for the people using what I build, and the follow-through to take an idea all the way into everyday use.</p>
+  </div>
 
-  <!-- ===================== ABOUT ===================== -->
-  <p class="section-label" id="about">About</p>
+  <h3 class="about-sub">My work at Southland</h3>
   <div class="about about-strong">
-    <p class="about-lead">I'm Crystal. In Southland's Northern California Service Department, I've turned the way work gets done into systems the team can rely on.</p>
+    <p class="about-lead">In Southland's Northern California Service Department, I've turned the way work gets done into systems the team can rely on.</p>
     <ul class="about-built">
       <li>A knowledge base that carried dispatch through the move to ServiceTitan</li>
       <li>Onboarding that takes a new dispatcher from day one to self-sufficient</li>
@@ -221,6 +287,7 @@
       </div>
     </div>
   </div>
+  </section>
 
   <p class="page-next"><a class="btn btn-dark" href="index.html">View Portfolio &rarr;</a></p>
 
@@ -230,6 +297,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=6" defer></script>
+<script src="assets/site.js?v=8" defer></script>
 </body>
 </html>
