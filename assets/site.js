@@ -9,7 +9,8 @@
       systems).
    2. CARD FOCUS: as you scroll, the card nearest the focus line "stands up"
       (class .is-active) and the others settle back. The active card's
-      "Challenge, build & impact" tab slides out from behind it.
+      "Challenge, build & impact" tab slides out from behind it. The How I
+      work steps on the About page follow the same idea (2b).
    3. REVOLVING-DOOR THUMBNAILS.
    4. MY FOCUS: fly-in, and flip cards (hover with a mouse; tap or Enter
       otherwise).
@@ -86,6 +87,43 @@
     });
     pick();
   }
+
+  /* ---------- 2b. How I work: the step nearest the focus line comes forward ----------
+     Earlier steps are marked .is-past so the progression reads top to bottom. */
+  each(".process", function (list) {
+    var steps = Array.prototype.slice.call(list.children);
+    if (!steps.length) return;
+    list.classList.add("focus-on");
+    var cur = -1;
+    var mark = function (k) {
+      if (k === cur) return;
+      cur = k;
+      steps.forEach(function (s, j) {
+        s.classList.toggle("is-active", j === k);
+        s.classList.toggle("is-past", j < k);
+      });
+    };
+    var pickStep = function () {
+      var line = window.innerHeight * 0.45, best = 0, bestD = Infinity;
+      for (var j = 0; j < steps.length; j++) {
+        var r = steps[j].getBoundingClientRect();
+        if (r.top <= line && r.bottom >= line) { best = j; break; }
+        var d = Math.min(Math.abs(r.top - line), Math.abs(r.bottom - line));
+        if (d < bestD) { bestD = d; best = j; }
+      }
+      mark(best);
+    };
+    var waiting = false;
+    var onMove = function () {
+      if (waiting) return;
+      waiting = true;
+      window.requestAnimationFrame(function () { waiting = false; pickStep(); });
+    };
+    window.addEventListener("scroll", onMove, { passive: true });
+    window.addEventListener("resize", onMove);
+    steps.forEach(function (s, j) { s.addEventListener("focusin", function () { mark(j); }); });
+    pickStep();
+  });
 
   /* ---------- 1. Audience views ---------- */
   var list = document.querySelector(".work-list");

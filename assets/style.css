@@ -143,7 +143,78 @@ img { max-width: 100%; height: auto; }
 .btn-light { background: #fff; color: var(--color-black); border: 1px solid #c4c4c4; }
 .btn-light:hover { border-color: var(--color-orange); }
 
-/* ---------- What I bring to the table: one column of expanding bubbles ---------- */
+/* ---------- What I bring to the table: a ripple, top to bottom ----------
+   Each step sits a little further right than the one before (on wider
+   screens), joined by an elbow arrow, and lands on "The result". */
+.bring-intro { max-width: 48rem; color: var(--ink); }
+.ripple { list-style: none; margin: 1.1rem 0 0; padding: 0; max-width: 54rem; }
+.ripple > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+  padding-bottom: 2rem;
+}
+.ripple > li::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  bottom: 0.3rem;
+  width: 14px;
+  height: 1.45rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 24'%3E%3Cpath d='M7 1v20M2 16l5 6 5-6' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ripple-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-grey);
+}
+@media (min-width: 700px) {
+  .ripple > li {
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1rem;
+    margin-left: calc(var(--step, 0) * 1.6rem);
+  }
+  .ripple-tag { text-align: right; padding-top: 1.05rem; }
+  /* elbow arrow: down from this bubble, then right into the next one */
+  .ripple > li::after {
+    left: calc(7.5rem + 1rem + 1rem);
+    width: 2.6rem;
+    height: 1.55rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 26'%3E%3Cpath d='M3 1v11a6 6 0 0 0 6 6h28M31 12l7 6-7 6' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+@media (min-width: 700px) {
+  /* the last step drops straight down into the result */
+  .ripple > li:last-child::after {
+    width: 14px;
+    height: 1.45rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 24'%3E%3Cpath d='M7 1v20M2 16l5 6 5-6' fill='none' stroke='%23ff6a00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+.ripple-result {
+  position: relative;
+  max-width: 54rem;
+  background: var(--color-black);
+  border-left: 8px solid var(--color-orange);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem 1.3rem;
+  box-shadow: 0 18px 40px -18px rgba(0,0,0,0.45);
+}
+.ripple-result-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-orange);
+}
+.ripple-result p { margin: 0; color: #fff; font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; }
+
+/* ---------- What I bring to the table: expanding bubbles ---------- */
 .bring-stack { display: grid; gap: 0.6rem; max-width: 46rem; }
 .bring-item {
   background: var(--color-orange-tint);
@@ -226,10 +297,22 @@ img { max-width: 100%; height: auto; }
   backface-visibility: hidden;
 }
 .face.front { background: var(--color-black); color: #fff; border-bottom: 5px solid var(--color-orange); }
-.face.back { background: #fff; color: var(--color-black); border: 1px solid #e4e4e4; border-bottom: 5px solid var(--color-orange); transform: rotateY(180deg); }
+/* Back: #c45100 keeps white text at 4.6:1 (AA); brand orange would be 2.9:1 */
+.face.back { background: #c45100; color: #fff; border-bottom: 5px solid var(--color-black); transform: rotateY(180deg); }
 .face strong { display: block; font-size: 1.15rem; margin-bottom: 0.25rem; color: #fff; }
 .face .face-text { display: block; font-size: 0.98rem; }
-.face.front .face-text { opacity: 0.9; }
+.face.front .face-text { opacity: 0.9; margin-bottom: 0.8rem; }
+.face-callout {
+  display: block;
+  margin-top: auto;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  background: var(--color-orange);
+  color: var(--color-black);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
 .face-label {
   display: block;
   margin: 0 0 0.45rem;
@@ -241,9 +324,8 @@ img { max-width: 100%; height: auto; }
 }
 .flip-cue { position: absolute; right: 0.8rem; top: 0.65rem; color: var(--color-orange); font-size: 1.1rem; }
 .back-lead { display: block; font-weight: 800; font-size: 1.05rem; margin-bottom: 0.25rem; white-space: nowrap; }
-/* #c45100 keeps white text at 4.6:1 (AA); brand orange would be 2.9:1 */
-.back-return { display: block; margin-top: auto; padding: 0.7rem 0.85rem; border-radius: 10px; background: #c45100; color: #fff; font-size: 0.95rem; }
-.back-return b { color: #fff; }
+.back-return { display: block; margin-top: auto; padding: 0.7rem 0.85rem; border-radius: 10px; background: #fff; color: var(--color-black); font-size: 0.95rem; }
+.back-return b { color: var(--color-black); }
 .face.back .face-text { margin-bottom: 0.8rem; }
 
 /* ---------- Skill chips ---------- */
@@ -798,18 +880,32 @@ body.lightbox-open { overflow: hidden; }
   vertical-align: middle;
 }
 
-/* ---------- How I work: a numbered progression ---------- */
-.process { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 0; }
+/* ---------- How I work: steps come into focus as you scroll ----------
+   Like the portfolio cards: site.js marks the step nearest the focus line
+   .is-active (raised, full strength) and earlier steps .is-past (their
+   number and connector turn orange). Others rest back in grey, still AA.
+   Without the script every step shows at full strength. */
+.process { list-style: none; counter-reset: step; margin: 0; padding: 0; }
 .process > li {
+  --step-ink: var(--ink);
+  --step-strong: var(--color-black);
+  --step-sub: var(--color-grey);
   counter-increment: step;
   position: relative;
-  padding: 0 0 1.4rem 3.6rem;
+  margin: 0 0 1.4rem 3.6rem;
+  padding: 1rem 1.15rem 1.1rem;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 14px;
+  color: var(--step-ink);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.35s ease, border-color 0.35s ease;
 }
 .process > li::before {
   content: counter(step);
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -3.6rem;
+  top: 0.8rem;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -821,28 +917,141 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 800;
   font-size: 1.05rem;
   border: 3px solid var(--color-orange);
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 }
 .process > li:not(:last-child)::after {
   content: "";
   position: absolute;
-  left: 1.2rem;
-  top: 2.6rem;
-  bottom: 0.2rem;
+  left: calc(-3.6rem + 1.2rem);
+  top: 3.5rem;
+  bottom: -1.4rem;
   width: 2px;
   background: #d9d9d9;
+  transition: background-color 0.35s ease;
 }
-.process .step-name { display: block; font-size: 1.2rem; font-weight: 800; color: var(--color-black); margin: 0.35rem 0 0.25rem; }
-.process p { margin: 0 0 0.5rem; max-width: 46rem; }
+.process .step-name { display: block; font-size: 1.25rem; font-weight: 800; color: var(--step-strong); margin: 0.1rem 0 0.3rem; transition: color 0.35s ease; }
+.process p { margin: 0 0 0.6rem; max-width: 48rem; color: var(--step-ink); }
 .process .step-proof {
+  margin: 0.4rem 0 0;
   font-size: 0.95rem;
-  color: var(--color-grey);
+  color: var(--step-sub);
+  background: #fafafa;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+}
+.process .step-proof b { color: var(--step-strong); }
+
+/* Focus mode */
+.process.focus-on > li:not(.is-active) {
+  --step-ink: var(--ink-dim);
+  --step-strong: #4d4d4d;
+  --step-sub: #6b6b6b;
+  border-color: #ececec;
+  box-shadow: none;
+  transform: scale(0.985);
+}
+.process.focus-on > li:not(.is-active)::before { background: #fff; color: #6b6b6b; border-color: #c9c9c9; }
+.process.focus-on > li.is-past::before { background: #fff; color: #8a3a00; border-color: var(--color-orange); }
+.process.focus-on > li.is-past::after,
+.process.focus-on > li.is-active:not(:last-child)::after { background: linear-gradient(var(--color-orange), #d9d9d9); }
+.process.focus-on > li.is-past::after { background: var(--color-orange); }
+.process.focus-on > li.is-active {
+  border-color: #ffd2b0;
+  border-left: 6px solid var(--color-orange);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -18px rgba(0,0,0,0.28), 0 6px 16px rgba(0,0,0,0.06);
+}
+.process.focus-on > li:not(.is-active):hover,
+.process.focus-on > li:not(.is-active):focus-within {
+  --step-ink: var(--ink);
+  --step-strong: var(--color-black);
+  --step-sub: var(--color-grey);
+}
+@media (max-width: 520px) {
+  .process > li { margin-left: 2.9rem; }
+  .process > li::before { left: -2.9rem; width: 2.2rem; height: 2.2rem; font-size: 0.95rem; }
+  .process > li:not(:last-child)::after { left: calc(-2.9rem + 1.05rem); top: 3.2rem; }
+}
+
+/* "In practice" bubbles. One example: label inside the bubble.
+   Several: label above, and each bubble links to the full details with an
+   orange tab on its right that widens to read "Full Details". */
+.proof-label {
+  margin: 0.9rem 0 0.4rem !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--step-strong) !important;
+}
+.proofs { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.proof-link {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 10px;
+  color: var(--step-sub);
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.35s ease;
+}
+.proof-text { flex: 1; min-width: 0; padding: 0.6rem 0.85rem; }
+a.proof-link:hover { border-color: #e9a473; background: #fff; color: var(--color-grey); }
+/* #c45100 keeps white text and the arrow at 4.6:1 */
+.proof-go {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  background: #c45100;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.proof-arrow { font-size: 1.1rem; line-height: 1; transition: transform 0.25s ease; }
+.proof-go-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.25s ease, margin 0.35s ease;
+}
+a.proof-link:hover .proof-go-label,
+a.proof-link:focus-visible .proof-go-label { max-width: 7rem; opacity: 1; margin-right: 0.45rem; }
+a.proof-link:hover .proof-arrow { transform: translateX(2px); }
+@media (hover: none) {
+  .proof-go-label { max-width: 7rem; opacity: 1; margin-right: 0.4rem; }
+}
+@media (max-width: 520px) {
+  .proof-go { padding: 0 0.6rem; }
+  .proof-go-label { display: none; }
+}
+
+/* The reference material's versions, left to right */
+.versions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem 1.1rem; margin-top: 0.55rem; }
+.ver {
+  position: relative;
+  display: block;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
   background: #fff;
   border: 1px solid var(--color-grey-light);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
-.process .step-proof b { color: var(--color-black); }
-.signals { list-style: none; padding: 0; margin: 0.2rem 0 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ver b { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #8a3a00; }
+.ver-start { background: #f1f1f1; }
+.ver-now { background: var(--color-orange-tint); border-color: var(--color-orange); }
+.ver + .ver::before { content: "\2192"; position: absolute; left: -0.95rem; top: 50%; transform: translateY(-50%); color: #c45100; font-weight: 700; }
+@media (max-width: 640px) {
+  .versions { grid-template-columns: 1fr; gap: 1.1rem; }
+  .ver + .ver::before { content: "\2193"; left: 0.8rem; top: -1.05rem; transform: none; }
+}.signals { list-style: none; padding: 0; margin: 0.2rem 0 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .signals li {
   background: var(--color-orange-tint);
   border: 1px solid #ffd2b0;
@@ -873,6 +1082,17 @@ body.lightbox-open { overflow: hidden; }
   padding: 1rem 1.15rem;
 }
 .about p { margin: 0 0 0.6rem; }
+.about-strong { padding: 1.3rem 1.4rem 1.2rem; }
+.about-lead { font-size: 1.2rem; font-weight: 700; color: var(--color-black); line-height: 1.45; }
+.about-built { list-style: none; margin: 0.4rem 0 1rem; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0.45rem 1.5rem; }
+@media (min-width: 700px) { .about-built { grid-template-columns: 1fr 1fr; } }
+.about-built li { position: relative; padding-left: 1.5rem; font-size: 1rem; }
+.about-built li::before { content: ""; position: absolute; left: 0; top: 0.45rem; width: 0.7rem; height: 0.7rem; border-radius: 3px; background: var(--color-orange); }
+.about-why { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+@media (min-width: 700px) { .about-why { grid-template-columns: 1fr 1fr; } }
+.about-why > div { background: #fff; border-radius: 10px; padding: 0.8rem 0.95rem; border: 1px solid #ffd2b0; }
+.about-why h3 { margin: 0 0 0.3rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.07em; color: #8a3a00; }
+.about-why p { margin: 0; font-size: 0.98rem; }
 .about p:last-child { margin-bottom: 0; }
 
 footer {
@@ -903,4 +1123,5 @@ footer {
     .flip:hover .face.front { opacity: 0; }
   }
   .focus-ready .project:not(.is-active) details.case:not([open]) > summary { transform: none; }
+  .process.focus-on > li, .process.focus-on > li.is-active { transform: none !important; }
 }
