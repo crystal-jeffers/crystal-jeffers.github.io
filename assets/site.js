@@ -125,6 +125,44 @@
     pickStep();
   });
 
+  /* ---------- 2c. Challenge, build & impact toggle ----------
+     An orange button at the bottom right of each card's top section opens
+     and closes its details. While open on a wide screen it stays pinned in
+     view (CSS), so the card can always be closed. */
+  each(".project details.case", function (det, n) {
+    var card = det.closest(".project");
+    if (!det.id) det.id = (card && card.id ? card.id : "card-" + n) + "-details";
+    var row = document.createElement("div");
+    row.className = "case-toggle-row";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "case-toggle";
+    btn.setAttribute("aria-controls", det.id);
+    row.appendChild(btn);
+    det.parentNode.insertBefore(row, det);
+    det.classList.add("has-toggle");
+
+    var sync = function () {
+      var open = det.open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.innerHTML = open
+        ? 'Close <span class="case-toggle-icon" aria-hidden="true">&ndash;</span>'
+        : 'Challenge, build &amp; impact <span class="case-toggle-icon" aria-hidden="true">+</span>';
+      row.classList.toggle("is-open", open);
+    };
+    btn.addEventListener("click", function () {
+      var closing = det.open;
+      det.open = !det.open;
+      if (closing && card) {
+        // Bring the card's top back into view if the reader was far down it.
+        var top = card.getBoundingClientRect().top;
+        if (top < 0) window.scrollBy({ top: top - 90, behavior: calm ? "auto" : "smooth" });
+      }
+    });
+    det.addEventListener("toggle", sync);
+    sync();
+  });
+
   /* ---------- 1. Audience views ---------- */
   var list = document.querySelector(".work-list");
   var lensButtons = Array.prototype.slice.call(document.querySelectorAll(".lens"));

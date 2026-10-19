@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -94,7 +94,7 @@
         <p class="status-row"><span class="status-pill">Built, pilot pending</span></p>
         <p class="lede">A complete management interface designed to automate routine steps, track case progress, and support faster turnaround for every new hire, role change, and departure.</p>
         <div class="project-links">
-          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">Open the guide site ↗</a>
+          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">View user guides ↗</a>
           <a class="btn btn-light" href="https://crystal-jeffers.github.io/onboarding/guide.html?role=hr&amp;file=guides%2Fhow-it-works.md" target="_blank" rel="noopener">How it works ↗</a>
         </div>
       </div>
@@ -114,22 +114,23 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and often the union hall. Each manager carried those steps in their own way, which made progress hard to see during a busy week. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
+        <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and sometimes the union hall. The steps were written down, but not who owned each one across teams. People relied on memory or assumption to know who handled what, which made it hard to follow up and work as a team to make sure every new hire was fully set up on day one. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
 
         <h4>What I built</h4>
-        <p class="built-summary">Every hire, role change, and departure now runs the same way for every manager, with each step owned, tracked, and confirmed, so nothing waits on someone remembering.</p>
+        <p class="built-summary">Every team can see which steps it owns, and every step is tracked through to confirmation, so new hires are fully set up on day one without relying on memory.</p>
         <details class="more">
           <summary>Details</summary>
           <ul class="build-list">
-          <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle, and more.</span></li>
+          <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change, and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle, and more.</span></li>
           <li class="build-item"><strong>One owner per step</strong><span>Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</span></li>
           <li class="build-item"><strong>Automation with judgment</strong><span>Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</span></li>
           <li class="build-item"><strong>Docs for each audience</strong><span>A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</span></li>
-        </ul>
+          </ul>
         </details>
 
         <h4>Business impact</h4>
-        <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Every hire, role change, and departure follows the same steps, whichever manager owns it, which creates consistent workflows and smoother hand-offs between HR, IT, Safety, Fleet, and Accounting. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
+        <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Clear ownership turns the hand-offs between HR, IT, Safety, Fleet, and Accounting into one shared checklist that every team can see and follow up on, so a new hire's first day is spent getting started, not waiting on equipment or access. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
+
 
         <ul class="tags" aria-label="Skills used">
           <li>Requirements from stakeholder docs</li><li>Data model</li><li>Rules engine</li><li>Human-in-the-loop</li><li>Role-based UX</li><li>Documentation</li>
@@ -178,34 +179,40 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Start-up crew schedules and job status were tracked in a spreadsheet. Union holidays vary by local and by agreement, so checking a technician's availability meant cross-referencing by hand.</p>
+        <p>Crew schedules and job status lived in a monthly spreadsheet. It was time-consuming to update, hard to view at a glance, difficult to search, visually overwhelming, and not viewable on mobile. It offered limited functions and awkward back-end upkeep, and union holidays, which vary by local and agreement, were all tracked by hand. Checking one technician's availability meant cross-referencing on the fly.</p>
 
         <h4>What I built</h4>
-        <p class="built-summary">Supervisors can schedule the whole crew from one board and see a union holiday conflict before a job is booked, not after.</p>
+        <p class="built-summary">The spreadsheet became a live board: supervisors plan, track, and adjust the whole crew in one place, and every technician sees their own schedule from a phone.</p>
         <details class="more">
           <summary>Details</summary>
           <ul class="build-list">
-          <li class="build-item"><strong>Timeline and calendar views</strong><span>Every technician's jobs, training, and time off in one place, with job tracking and a start-up checklist per job.</span></li>
-          <li class="build-item"><strong>Union holidays added automatically</strong><span>Each tech gets their own local's paid holidays and off days, about 90 days ahead.</span></li>
-          <li class="build-item"><strong>Warn, don't block</strong><span>If a job lands on someone's holiday, the bar is flagged and the warning clears when it moves. The supervisor keeps the final call.</span></li>
-        </ul>
+          <li class="build-item"><strong>The whole crew at a glance</strong><span>Timeline view: one row per technician and one bar per assignment, color-coded by union. Gaps, overlaps, and open capacity show up before a date is committed.</span></li>
+          <li class="build-item"><strong>Coverage by date</strong><span>Calendar view: filter to see who's out and when, so coverage for a holiday week or a long job is clear before it's booked.</span></li>
+          <li class="build-item"><strong>Every job's progress, without a phone call</strong><span>Job tracker: phase, schedule status, deadline, and contacts on every job, each with its own start-up checklist, so progress is visible without asking for an update.</span></li>
+          <li class="build-item"><strong>Holidays that fill themselves in</strong><span>Each technician's own local's paid holidays and off days are added automatically, about 90 days ahead. New crew members get theirs the moment they're added.</span></li>
+          <li class="build-item"><strong>Conflicts caught at booking</strong><span>If a job lands on someone's holiday, a warning appears right on the assignment and clears when the job moves. The supervisor still makes the final call.</span></li>
+          <li class="build-item"><strong>A view-only board in every pocket</strong><span>Technicians open a read-only live feed on their phones that shows only their own assignments. They always see the current schedule, and the board stays accurate because only the supervisor edits it.</span></li>
+          <li class="build-item"><strong>Next week, in their inbox every Friday</strong><span>An automated email every Friday afternoon lists each technician's jobs for the coming week, so Monday starts with a plan instead of a phone call.</span></li>
+          </ul>
         </details>
 
         <h4>Business impact</h4>
-        <p>Brings consistency and predictability to crew scheduling, and gives the department room to take on more work as it grows. Union holiday rules appear right where scheduling decisions are made: at launch, 132 entries for 16 union technicians, with new crew members added automatically.</p>
+        <p>Scheduling moved from manual upkeep to a board that maintains itself, so supervisor time goes to planning the work instead of updating cells. Technicians see their own schedule anytime and get next week's plan every Friday, which cuts the calls and texts that used to fill the gaps. Holiday conflicts are caught at booking instead of on the day, avoiding last-minute reschedules with customers. And the board grows with the crew: at launch, 132 holiday entries for 16 union technicians, with new crew members added automatically.</p>
+
 
         <ul class="tags" aria-label="Skills used">
-          <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li>
+          <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li><li>Mobile access</li><li>Automated email</li>
         </ul>
 
         <div class="carousel" aria-label="Dispatch board screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline" loading="lazy"><figcaption>Timeline: the whole crew at a glance.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-filter-out.png" alt="Dispatch calendar filtered to show who is out" loading="lazy"><figcaption>Calendar filtered to who's out, and when.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Dispatch calendar with a holiday conflict warning" loading="lazy"><figcaption>A job that overlaps a union holiday is flagged right on the assignment.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker gallery" loading="lazy"><figcaption>Job tracker: phase and schedule status for every job.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Job checklist" loading="lazy"><figcaption>Each job carries its own start-up checklist.</figcaption></figure>
             <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/holidays-list.png" alt="Holiday list by union local" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Each technician gets next week's schedule by email.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Every Friday, each technician gets next week's schedule by email.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -235,7 +242,7 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>The start-up procedures lived in a thorough 12-page document written for every role at once. On a job site, on a phone, finding the few steps that applied to you took time.</p>
+        <p>The start-up procedures lived in a thorough 12-page document written for every role at once, and nobody was reading it. It wasn't easy to reach on a job site, copies drifted out of date, and dense paragraphs meant high cognitive load and low retention. Finding one detail took a time-consuming search, and the important steps didn't jump out. The team needed a way to relay these details that people would actually use and actually read.</p>
 
         <h4>What I built</h4>
         <p class="built-summary">A technician on a job site can find their own steps in seconds, on a phone, without calling the office.</p>
@@ -244,12 +251,13 @@
           <ul class="build-list">
           <li class="build-item"><strong>Role-based views</strong><span>Apprentices, technicians, lead technicians, and supervisors each see their own procedures first.</span></li>
           <li class="build-item"><strong>Built to be scanned on site</strong><span>Large text that respects phone settings, collapsible sections, jump-to navigation, and chunked checklists.</span></li>
-          <li class="build-item"><strong>Maintainable without a developer</strong><span>Procedures are plain text files, and one settings file controls which roles see what.</span></li>
-        </ul>
+          <li class="build-item"><strong>One current version</strong><span>Procedures live online in one place, so everyone reads the same steps and every update reaches every role at once, instead of copies drifting apart.</span></li>
+          </ul>
         </details>
 
         <h4>Business impact</h4>
-        <p>Helps people understand what's expected of them to succeed in their role, right from the field. New hires learn the same procedures from day one, and the team can keep the content current without outside help.</p>
+        <p>Helps people understand what's expected of them to succeed in their role, right from the field. Procedures people actually read are procedures people actually follow: fewer missed steps, less time spent searching, and new hires learning the same current steps from day one.</p>
+
 
         <ul class="tags" aria-label="Skills used">
           <li>Information architecture</li><li>Content design</li><li>Mobile-first</li><li>Accessibility</li><li>Docs-as-code</li>
@@ -276,12 +284,12 @@
           <h3>Platform Migration Documentation</h3>
         </div>
         <p class="improves">Cohesion · Access</p>
-        <p class="status-row"><span class="status-pill live">In use</span></p>
-        <p class="lede">One iterative, searchable reference for a department moving from COINS and ServiceTrade to ServiceTitan: Active articles for how the work is done today, and an archive for context on older jobs.</p>
+        <p class="status-row"><span class="status-pill done">Complete: scoped to the rollout</span></p>
+        <p class="lede">One iterative, searchable reference for a department migrating from COINS and ServiceTrade to ServiceTitan: Active articles for how the work is done today, and an archive for context on older jobs.</p>
       </div>
-      <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the department manager's reply">
+      <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the Director's reply">
         <div class="slide" data-label="Week one: SOPs shared"><img src="assets/img/migration/week-one-sops-email.png" alt="Email sharing the first week of Service Coordinator SOPs, also converted to editable OneNote pages" loading="lazy"></div>
-        <div class="slide" data-label="Manager's reply"><img src="assets/img/migration/manager-endorsement.png" alt="Department manager's reply: Wow, this is great! Can you update this through the ServiceTitan rollout?" loading="lazy"></div>
+        <div class="slide" data-label="Director's reply"><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply: Wow, this is great! Can you update this through the ServiceTitan rollout?" loading="lazy"></div>
       </div>
     </div>
 
@@ -289,21 +297,22 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Shortly after I joined, the department began moving from COINS and ServiceTrade to ServiceTitan. Much of the know-how lived in experienced people's memory and traveled by word of mouth. With work running across three systems and processes changing month to month, it was hard to know which answer was current.</p>
+        <p>Shortly after I joined, the department began migrating from COINS and ServiceTrade to ServiceTitan. For months, work ran across all three systems while processes changed month to month. Much of the know-how was tribal knowledge: it lived in experienced people's memory and traveled by word of mouth, so the answer depended on who you asked and when they'd last checked. When details didn't match, small misses carried real costs: a PO coded as material instead of subcontractor, an invoice never uploaded and billing held up, parts that arrived without the technician hearing about it, or a job tracked in the wrong system.</p>
 
         <h4>What I built</h4>
         <p class="built-summary">The team gained one reference it could trust: current steps in one place, with the history kept for context.</p>
         <ol class="timeline">
-          <li><strong>Week-one SOPs</strong><span>Documented each Service Coordinator workflow in the existing systems and shared it with the department manager.</span></li>
+          <li><strong>Week-one SOPs</strong><span>Documented each Service Coordinator workflow in the existing systems and shared it with the Director.</span></li>
           <li><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team keeps its reference material, so anyone could add to them.</span></li>
-          <li><strong>Kept current through the rollout</strong><span>At the manager's request, updated each process as it moved to ServiceTitan, including a phased overview of how work moved between systems.</span></li>
+          <li><strong>Kept current through the rollout</strong><span>At the Director's request, updated each process as it moved to ServiceTitan, including a phased plan for which jobs closed out in ServiceTrade and which moved over.</span></li>
           <li><strong>One consolidated ServiceTitan reference</strong><span>Revised and combined the SOPs shared by the Texas team into one cohesive document that's easier to search and scan.</span></li>
           <li><strong>Active and Archive</strong><span>Organized into one searchable knowledge base: Active articles show how the work is done today, and an archive keeps the COINS and ServiceTrade steps for older jobs.</span></li>
-          <li class="is-latest"><strong>The Dispatch Hub</strong><span>The knowledge base becomes a website for new dispatchers: every article organized by job lifecycle, with the onboarding checklist and growth plan in one place.</span></li>
+          <li class="is-end"><strong>Closeout</strong><span>As the last ServiceTrade jobs closed, legacy steps were archived and links pointed to the ServiceTitan articles. COINS steps stayed only where exception workflows still use it. My maintenance ended with the rollout.</span></li>
         </ol>
 
         <h4>Business impact</h4>
-        <p>Replaces memory and word of mouth with a reference people can trust: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and new coordinators who work with confidence. The department manager endorsed it in week one and asked that it continue through the rollout. It became the foundation for the dispatch onboarding guide and the Dispatch Hub.</p>
+        <p>Replaced tribal knowledge with a reference people could trust through the whole transition: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and coordinators who worked with confidence while every process was changing. The Director endorsed it in week one and asked that it continue through the rollout.</p>
+
 
         <ul class="tags" aria-label="Skills used">
           <li>Knowledge base design</li><li>Change management</li><li>Version control (Active / Archive)</li><li>Content consolidation</li>
@@ -312,7 +321,7 @@
         <div class="carousel" aria-label="Migration documentation screenshots">
           <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/migration/week-one-sops-email.png" alt="Week-one SOP email" loading="lazy"><figcaption>End of week one: Service Coordinator SOPs shared, plus editable OneNote pages.</figcaption></figure>
-            <figure><img src="assets/img/migration/manager-endorsement.png" alt="Manager's reply" loading="lazy"><figcaption>The department manager asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
+            <figure><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply" loading="lazy"><figcaption>The Director asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -396,22 +405,23 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Open service jobs need to close quickly, and many things can hold one up: notes still to be written, a return visit to finish the work, or parts that have arrived and just need a time on the schedule. Following up job by job meant a lot of back-and-forth.</p>
+        <p>With 200 open jobs, follow-up was grouped by hand where possible. Because it was all manual, technicians inevitably heard from dispatch several times, with different orders or follow-up questions each time, and every round trip held up closing the job.</p>
 
         <h4>What I built</h4>
-        <p class="built-summary">Technicians can clear a whole list of open jobs in one reply, so jobs close sooner and customer records stay current.</p>
+        <p class="built-summary">Every open question for a technician goes out in one message with one click, so technicians answer once and jobs move to billing sooner.</p>
         <details class="more">
           <summary>Details</summary>
           <ul class="build-list">
           <li class="build-item"><strong>One email per technician</strong><span>Open jobs grouped by status: missing notes or confirmation, return visits needed, parts, and customer scheduling.</span></li>
           <li class="build-item"><strong>A specific question on every line</strong><span>Each job shows its last visit and exactly what's needed to move it forward, so a reply can be one line.</span></li>
-          <li class="build-item"><strong>Built from my records</strong><span>Excel macros assemble every email from my dispatch notes and job records. I start each run, review it, and send.</span></li>
+          <li class="build-item"><strong>One click from note to send</strong><span>Dispatcher notes and clarification requests are linked to each job. Once a job has a note, a status, and an assigned technician, one click groups everything for that technician and sends it. No more manual consolidating.</span></li>
           <li class="build-item"><strong>Refined with use</strong><span>The first version was color-coded by status. I realized the colors helped me more than the technicians, so the current version breaks each list into separate tables by category: cleaner and easier to scan, especially for long lists.</span></li>
-        </ul>
+          </ul>
         </details>
 
         <h4>Business impact</h4>
-        <p>Closes the common gaps between field work and the office. Technicians answer right in the email, often job by job, so jobs close sooner and customer records stay current. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
+        <p>Closing jobs is how service work becomes revenue. Consolidated follow-up shortens the time between finished work and a billable job, so more jobs reach billing, revenue comes in sooner, and the department stays on pace with its revenue goals. Technicians spend less time on scattered requests and more on billable work, customer records stay current, and a 200-job backlog becomes a list that moves. Technicians have thanked me for the lists, a sign the format works for the people using it.</p>
+
 
         <ul class="tags" aria-label="Skills used">
           <li>Excel VBA</li><li>Email automation</li><li>Information design</li><li>Iterating from feedback</li>
@@ -450,21 +460,22 @@
       <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
       <div class="case-body">
         <h4>The challenge</h4>
-        <p>Each technician's preventive maintenance (PM) work sat within the department's full schedule. Technicians, account managers, and leadership each needed a different view of the same information.</p>
+        <p>Preventive maintenance is the work that's easiest to put off: the lowest margin and lowest priority, buried under quoted work. Visits get pushed down the road until the backlog is massive; in October 2026, some visits from August 2025 were still incomplete. That costs three ways. Revenue is lost, because past a certain point a missed visit can't be recouped. Trust breaks, when customers have to reach out themselves to get their maintenance scheduled. And risk grows, because PMs exist to catch problems early, and a missed one can become a costly failure. Lead technicians had no line of sight into which PMs had been started, stalled, or completed.</p>
 
         <h4>What I built</h4>
-        <p class="built-summary">Technicians, account managers, and leadership all work from the same PM status, each in the view they need, so commitments to existing buildings stay visible.</p>
+        <p class="built-summary">Technicians, account managers, and leadership all see which PMs are started, stalled, or completed, so visits get scheduled, finished, and billed instead of buried.</p>
         <details class="more">
           <summary>Details</summary>
           <ul class="build-list">
           <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
           <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
           <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager, and parts status on one line.</span></li>
-        </ul>
+          </ul>
         </details>
 
         <h4>Business impact</h4>
-        <p>Strengthens collaboration between technicians, sales, and leadership around the same source of truth. Commitments on existing buildings stay visible, which supports reliable service and lasting customer relationships.</p>
+        <p>PMs are where customer trust is kept or lost. With one shared view of every visit, the backlog stays visible and shrinks instead of growing. Many stalled PMs only need notes or tasking to close, and each one closed is billable work that would otherwise be left on the table. Keeping visits on schedule protects recurring maintenance revenue, keeps customers from having to chase us, and catches equipment problems while they're still small.</p>
+
 
         <ul class="tags" aria-label="Skills used">
           <li>Reporting by audience</li><li>Excel VBA</li><li>Email automation</li><li>Information design</li>
@@ -588,6 +599,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=6" defer></script>
+<script src="assets/site.js?v=7" defer></script>
 </body>
 </html>
