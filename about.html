@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Crystal Jeffers</title>
 <meta name="description" content="Crystal Jeffers builds systems that clarify and empower: finding where time, information, and confidence slip, then developing and refining the fix.">
-<link rel="stylesheet" href="assets/style.css?v=14">
+<link rel="stylesheet" href="assets/style.css?v=15">
 <script>
   document.documentElement.classList.add("js");
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
@@ -213,7 +213,7 @@
       <ul class="proofs">
         <li><a class="proof-link" href="index.html#follow-ups"><span class="proof-text">Technicians didn't complain about the color-coded follow-up lists. I recognized the colors helped me but could overwhelm them, so I broke each list into separate tables: <span class="tw">cleaner and easier to scan</span>, especially for long lists.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
         <li><a class="proof-link" href="https://crystal-jeffers.github.io/dispatch-hub/" target="_blank" rel="noopener"><span class="proof-text">A few months after using the onboarding guide, a new hire shared that it was still useful as a reference, and that simplifying it further could make it even more accessible.</span><span class="proof-go"><span class="proof-go-label">Full Details</span><span class="proof-chev" aria-hidden="true"></span></span></a></li>
-        <li><div class="proof-link is-static versions-block"><div class="proof-text">The team's reference material, three versions in. Scroll sideways to see each one.
+        <li><div class="proof-link is-static versions-block"><div class="proof-text">The team's reference material, three versions in. Use the arrows to step through each one.
           <div class="ver-scroller">
           <ol class="versions" tabindex="0" aria-label="Versions of the team's reference material">
             <li class="ver ver-start">
@@ -246,10 +246,10 @@
             <li class="ver ver-now">
               <span class="ver-name">My version 3</span>
               <span class="ver-card">
-                <span class="ver-shot ver-placeholder" role="img" aria-label="Screenshot coming soon"><span>Screenshot coming soon</span></span>
+                <img class="ver-shot" src="assets/img/dispatch-onboarding/01a-search-menu-open.png" alt="The Dispatch Hub home page with a search for cost code" loading="lazy">
                 <span class="ver-row"><b>Platform</b>A GitHub website, the Dispatch Hub</span>
-                <span class="ver-row"><b>Pros</b>Cleaner presentation and formatting, easy navigation, and it works on any device</span>
-                <span class="ver-row"><b>Cons</b>Updates need me or another tech-savvy teammate, so long-term upkeep is less user-friendly</span>
+                <span class="ver-row"><b>Pros</b>Search, checklists, a self-check quiz, and easy navigation on any device. Anyone can edit a page in plain text, with a built-in writing guide.</span>
+                <span class="ver-row"><b>Cons</b>Because the site is public, sensitive details live in SharePoint, one click away behind a Southland login</span>
               </span>
             </li>
           </ol>
@@ -262,22 +262,34 @@
   <!-- ===================== ABOUT ME, then my work at Southland ===================== -->
   <section class="page-section" id="about" aria-labelledby="about-label">
   <p class="section-label" id="about-label">About me</p>
-  <div class="about-me">
-    <p class="about-me-lead">I notice the small frictions most people have learned to work around.</p>
-    <p>The question that gets asked every week. The spreadsheet kept "just in case." The new hire who doesn't want to ask again. I can't leave those alone. I would rather spend an afternoon making something clear than watch a team lose an hour to confusion every day.</p>
-    <p>I start by listening, because the people doing the work already know where it hurts. I design for the person on the other end of the system, and I keep refining long after something is "good enough," because I take pride in a proper polish. I learn whatever the problem needs, whether that's a database, a macro, or a website, and I'm comfortable using AI tools to get there faster.</p>
-    <p>Underneath it all is a simple belief: clarity and certainty make work better. When people know what to do and where to find the answer, they move with confidence, make fewer mistakes, and have energy left for the parts of the job that matter. That's what I bring to a team: curiosity, care for the people using what I build, and the follow-through to take an idea from "would be nice" all the way into everyday use.</p>
+  <div class="about-me about-deck">
+    <div class="deck-cards">
+      <div class="deck-card">
+        <p class="deck-kicker">What I notice</p>
+        <p class="about-me-lead">I notice the small frictions most people have learned to work around.</p>
+        <p>The question that gets asked every week. The spreadsheet kept "just in case." The new hire who doesn't want to ask again. I can't leave those alone. I would rather spend an afternoon making something clear than watch a team lose an hour to confusion every day.</p>
+      </div>
+      <div class="deck-card">
+        <p class="deck-kicker">How I work</p>
+        <p class="about-me-lead">I start by listening, because the people doing the work already know where it hurts.</p>
+        <p>I design for the person on the other end of the system, and I keep refining long after something is "good enough," because I take pride in a proper polish. I learn whatever the problem needs, whether that's a database, a macro, or a website, and I'm comfortable using AI tools to get there faster.</p>
+      </div>
+      <div class="deck-card">
+        <p class="deck-kicker">What I believe</p>
+        <p class="about-me-lead">Clarity and certainty make work better.</p>
+        <p>When people know what to do and where to find the answer, they move with confidence, make fewer mistakes, and have energy left for the parts of the job that matter. That's what I bring to a team: curiosity, care for the people using what I build, and the follow-through to take an idea from "would be nice" all the way into everyday use.</p>
+      </div>
+    </div>
   </div>
 
   <h3 class="about-sub">A Year in Review</h3>
   <div class="about about-strong">
     <p class="about-lead">Improvements I've brought to Southland's Service team:</p>
     <ul class="about-built">
-      <li>A knowledge base that carried dispatch through the move to ServiceTitan</li>
-      <li>Onboarding that takes a new dispatcher from day one to self-sufficient</li>
-      <li>Start-up procedures technicians can pull up on a job site</li>
-      <li>A crew dispatch board that accounts for every technician's union holidays</li>
-      <li>A lifecycle system, ready for pilot, built to run every new hire, role change, and departure the same way</li>
+      <li>A knowledge base to support the team's platform transition</li>
+      <li>Structured onboarding that speeds up ramp time: our newest dispatcher felt confident and supported after three weeks, against an expected three months</li>
+      <li>Start-up procedures technicians can easily access and navigate from the field</li>
+      <li>A shareable dispatch board with built-in union holiday reminders</li>
       <li>PM reporting, parts audits, and job follow-ups that keep technicians, sales, and leadership on the same page</li>
     </ul>
     <div class="about-why">
@@ -305,6 +317,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=9" defer></script>
+<script src="assets/site.js?v=10" defer></script>
 </body>
 </html>

@@ -204,7 +204,7 @@
       plus.setAttribute("aria-expanded", open ? "true" : "false");
       plus.setAttribute("aria-label", open ? "Hide the challenge, build, and impact" : "Show the challenge, build, and impact");
       plus.title = open ? "Hide details" : "The challenge, build, and impact";
-      plus.innerHTML = open ? "&ndash;" : "+";
+      if (!plus.firstChild) plus.innerHTML = '<span class="plus-icon" aria-hidden="true"></span>';
       if (card) card.classList.toggle("is-open", open);
     };
     plus.addEventListener("click", function () { det.open = !det.open; });
@@ -285,10 +285,26 @@
       return b;
     };
     var prev = mk("prev", "Previous version"), next = mk("next", "Next version");
+    // One click moves a whole view: two cards on wider screens, one on phones.
+    var cards = Array.prototype.slice.call(track.querySelectorAll(".ver"));
+    var perView = function () {
+      var c = cards[0];
+      if (!c) return 1;
+      return Math.max(1, Math.round((track.clientWidth + 16) / (c.getBoundingClientRect().width + 16)));
+    };
+    var page = function () {
+      var c = cards[0];
+      var w = c ? c.getBoundingClientRect().width + 16 : track.clientWidth;
+      return Math.round(track.scrollLeft / (w * perView()));
+    };
+    var count = document.createElement("span");
+    count.className = "ver-count";
+    count.setAttribute("aria-live", "polite");
+    box.parentNode.insertBefore(count, box.nextSibling);
     var stepBy = function (d) {
-      var card = track.querySelector(".ver");
-      var w = card ? card.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
-      track.scrollBy({ left: d * w, behavior: calm ? "auto" : "smooth" });
+      var c = cards[0];
+      var w = (c ? c.getBoundingClientRect().width + 16 : track.clientWidth) * perView();
+      track.scrollTo({ left: (page() + d) * w, behavior: calm ? "auto" : "smooth" });
     };
     prev.addEventListener("click", function () { stepBy(-1); });
     next.addEventListener("click", function () { stepBy(1); });
@@ -299,11 +315,81 @@
       box.classList.toggle("can-next", !atEnd);
       prev.hidden = atStart;
       next.hidden = atEnd;
+      var pages = Math.ceil(cards.length / perView());
+      count.textContent = pages > 1 ? (Math.min(page(), pages - 1) + 1) + " of " + pages : "";
     };
     track.addEventListener("scroll", function () { window.requestAnimationFrame(update); }, { passive: true });
     window.addEventListener("resize", update);
     box.classList.add("is-live");
     update();
+  });
+
+  /* ---------- 2h. About page, What I bring: the orange bar over each title
+     slides right as its row scrolls into view, then the arrow drops down. */
+  var ripple = document.querySelector(".ripple");
+  if (ripple && "IntersectionObserver" in window && !calm) {
+    var rows = Array.prototype.slice.call(ripple.children);
+    rows.forEach(function (li) {
+      var tag = li.querySelector(".ripple-tag");
+      if (!tag) return;
+      var cover = document.createElement("span");
+      cover.className = "ripple-cover";
+      cover.setAttribute("aria-hidden", "true");
+      tag.appendChild(cover);
+    });
+    ripple.classList.add("drop-ready");
+    var rowIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("revealed"); rowIO.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -28% 0px", threshold: 0 });
+    rows.forEach(function (li) { rowIO.observe(li); });
+  }
+
+  /* ---------- 2i. About me: a deck of three cards ----------
+     The white arrow sends the front card to the back. */
+  each(".about-deck", function (deck) {
+    var stack = deck.querySelector(".deck-cards");
+    var cards = stack ? Array.prototype.slice.call(stack.querySelectorAll(".deck-card")) : [];
+    if (cards.length < 2) return;
+    deck.classList.add("deck-live");
+    var order = cards.map(function (_, k) { return k; }); // order[0] is the front card
+    var nav = document.createElement("div");
+    nav.className = "deck-nav";
+    var count = document.createElement("span");
+    count.className = "deck-count";
+    count.setAttribute("aria-live", "polite");
+    var next = document.createElement("button");
+    next.type = "button";
+    next.className = "deck-next";
+    next.setAttribute("aria-label", "Next card");
+    nav.appendChild(count);
+    nav.appendChild(next);
+    deck.appendChild(nav);
+    var lay = function () {
+      order.forEach(function (cardIndex, pos) {
+        var c = cards[cardIndex];
+        c.setAttribute("data-pos", String(pos));
+        c.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
+      });
+      count.textContent = (order[0] + 1) + " of " + cards.length;
+    };
+    var busy = false;
+    next.addEventListener("click", function () {
+      if (busy) return;
+      var front = cards[order[0]];
+      var advance = function () {
+        front.classList.remove("is-leaving");
+        order.push(order.shift());
+        lay();
+        busy = false;
+      };
+      if (calm) return advance();
+      busy = true;
+      front.classList.add("is-leaving");
+      setTimeout(advance, 320);
+    });
+    lay();
   });
 
   /* ---------- 1. Audience views ---------- */
