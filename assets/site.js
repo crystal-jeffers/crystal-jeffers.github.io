@@ -214,8 +214,15 @@
     // Open straight to the Gallery, at the photo that matches the thumbnail
     if (card) card.openGallery = function (src) {
       det.open = true;
-      var g = -1;
-      panels.forEach(function (pn, k) { if (pn.getAttribute("data-tab") === "gallery") g = k; });
+      // The panel whose carousel holds this photo (Early Iterations or Final Product),
+      // or the Gallery panel if none does.
+      var g = -1, file = src ? src.split("/").pop() : "";
+      panels.forEach(function (pn, k) {
+        if (g >= 0 || !file) return;
+        var hit = Array.prototype.slice.call(pn.querySelectorAll(".carousel-track img")).some(function (im) { return (im.getAttribute("src") || "").split("/").pop() === file; });
+        if (hit) g = k;
+      });
+      if (g < 0) panels.forEach(function (pn, k) { if (pn.getAttribute("data-tab") === "gallery") g = k; });
       if (g < 0) return;
       pick(g, false);
       window.requestAnimationFrame(function () {
@@ -587,6 +594,14 @@
       })(k);
     }
 
+    // Long carousels show "3 of 24" instead of a wall of dots.
+    var count = null;
+    if (slides.length > 12) {
+      count = document.createElement("span");
+      count.className = "carousel-count";
+      count.setAttribute("aria-live", "polite");
+      dots = count;
+    }
     controls.appendChild(prev); controls.appendChild(dots); controls.appendChild(next);
     car.appendChild(controls);
 
@@ -599,6 +614,7 @@
       var c = current();
       prev.disabled = c <= 0;
       next.disabled = c >= slides.length - 1;
+      if (count) count.textContent = (c + 1) + " of " + slides.length;
       dotEls.forEach(function (d, j) {
         d.classList.toggle("active", j === c);
         if (j === c) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
@@ -700,6 +716,13 @@
   // Carousel photos: step through the whole carousel in the lightbox.
   each(".carousel-track", function (track) {
     var imgs = Array.prototype.slice.call(track.querySelectorAll("img"));
+    imgs.forEach(function (img, k) {
+      makeZoomable(img, function () { return { items: imgs.map(itemFrom), start: k }; });
+    });
+  });
+  // Side-by-side comparisons ("How it evolved") open full size, in order.
+  each(".evolve", function (box) {
+    var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
     imgs.forEach(function (img, k) {
       makeZoomable(img, function () { return { items: imgs.map(itemFrom), start: k }; });
     });

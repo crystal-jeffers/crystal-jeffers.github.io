@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -63,7 +63,7 @@
        view's order and description live on its button in the lens bar. -->
   <p class="section-label" id="work">Portfolio Work</p>
   <div class="lens-bar" role="group" aria-label="Filter projects by what matters most to you">
-    <p class="lens-ask">See the work that matters most to you:</p>
+    <p class="lens-ask">See the work that matters most to you. Filter with the buttons below:</p>
     <div class="lens-buttons">
       <button type="button" class="lens" data-lens-id="all" aria-pressed="true"
         data-note="All nine projects, in the order they were built.">All work</button>
@@ -358,7 +358,7 @@
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
-          <h3>Dispatch Onboarding Guide</h3>
+          <h3>Dispatch Onboarding Hub</h3>
         </div>
         <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Access · Cohesion</span></p>
         <p class="lede">A task-based onboarding path and knowledge base for new dispatchers, organized by job lifecycle stage so new team members learn the tasks and the big picture together. Now a searchable website, the Dispatch Hub.</p>
@@ -372,7 +372,7 @@
         <div class="slide" data-label="Check Yourself"><img src="assets/img/dispatch-onboarding/04-check-yourself.png" alt="Self-check quiz with the right answer and the reasoning shown" loading="lazy"></div>
         <div class="slide" data-label="Completion Checklist"><img src="assets/img/dispatch-onboarding/05-job-completion-checklist.png" alt="Job completion checklist with items ticked" loading="lazy"></div>
         <div class="slide" data-label="Email Templates"><img src="assets/img/dispatch-onboarding/08-email-templates-copied.png" alt="Email templates with a Copy button" loading="lazy"></div>
-        <div class="slide" data-label="Before: OneNote"><img src="assets/img/dispatch-onboarding/before-dispatch-protocols.png" alt="Earlier OneNote page of dispatch protocols" loading="lazy"></div>
+        <div class="slide" data-label="Before: OneNote"><img src="assets/img/dispatch-onboarding/early/onenote-collage.png" alt="Three earlier OneNote pages layered on top of one another" loading="lazy"></div>
       </div>
     </div>
 
@@ -405,20 +405,48 @@
           <h4 class="panel-title">Business impact</h4>
           <p>Supports the goal of enhancing onboarding and ongoing support as new hires learn the NorCal Way. The Service Business Supervisor expected onboarding a new dispatcher to take three months. After three weeks with this guide, our newest dispatcher was feeling confident and supported. A structured path replaces piecing pages together, every new hire gets the same foundation in both the tasks and the bigger picture, and experienced staff get their time back.</p>
         </section>
-        <section class="card-panel" data-tab="gallery" data-label="Gallery">
-          <h4 class="panel-title">Gallery</h4>
-          <div class="carousel" aria-label="Dispatch onboarding screenshots">
+        <section class="card-panel" data-tab="early" data-label="Early Iterations">
+          <h4 class="panel-title">Early Iterations</h4>
+          <div class="carousel" aria-label="Early versions: OneNote, the Word guide, and the linked PDF">
           <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/dispatch-onboarding/before-dispatch-protocols.png" alt="Earlier dispatch protocols page" loading="lazy"><figcaption>Before: dispatch protocols in OneNote, written for experienced staff.</figcaption></figure>
-            <figure><img src="assets/img/dispatch-onboarding/before-pm-job-creation.png" alt="Earlier PM job creation page" loading="lazy"><figcaption>Before: some pages held only a line or two of guidance.</figcaption></figure>
-            <figure><img src="assets/img/dispatch-onboarding/before-open-so-list.png" alt="Earlier page still in progress" loading="lazy"><figcaption>Before: some pages were still in progress.</figcaption></figure>
-            <figure><img src="assets/img/dispatch-onboarding/guide-shared-email.png" alt="Email introducing the guide and checklist" loading="lazy"><figcaption>Version 1: the guide, checklist, consolidated ServiceTitan SOPs, and reference folder, introduced to the team.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/onenote-collage.png" alt="Three OneNote pages layered together" loading="lazy"><figcaption>Before: dispatch protocols in OneNote, written for experienced staff. Some pages held a line or two of guidance, and some were still in progress.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/v1-word-toc.png" alt="Version 1 table of contents" loading="lazy"><figcaption>V1, a Word guide: every task in one document, organized by job lifecycle stage.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/guide-shared-email.png" alt="Email introducing the guide and checklist" loading="lazy"><figcaption>V1: the guide, checklist, consolidated ServiceTitan SOPs, and reference folder, introduced to the team.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-job-lifecycle-overview.png" alt="Job Lifecycle Overview page in the Word guide" loading="lazy"><figcaption>V1: the five ways a request comes in, and what happens next.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-cross-platform-overview.png" alt="Cross-Platform Workflow Overview page" loading="lazy"><figcaption>V1: a phased plan for moving work from ServiceTrade and COINS to ServiceTitan.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-requests.png" alt="Task Execution page" loading="lazy"><figcaption>V1: request handling by channel, as one long task list.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-direct-line.png" alt="Processing Direct Line requests page" loading="lazy"><figcaption>V1: overnight Direct Line calls, as nested if-then steps.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-add-customer.png" alt="Adding customers to locations page" loading="lazy"><figcaption>V1: field-by-field setup for adding a customer to a location.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-add-location.png" alt="Adding a new location page" loading="lazy"><figcaption>V1: adding a new location, tab by tab.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-email-templates.png" alt="Email templates page" loading="lazy"><figcaption>V1: email templates, ready to copy into Outlook.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-sharepoint-links.png" alt="SharePoint links page" loading="lazy"><figcaption>V1: where each shared file lives in SharePoint.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-submitting-timecards.png" alt="Submitting timecards page" loading="lazy"><figcaption>V1: the payroll export, step by step.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v1-technician-timecards.png" alt="Technician timecards page" loading="lazy"><figcaption>V1: what to check on technician timecards, and the deadlines.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/v2-pdf-linked.png" alt="Version 2 linked PDF" loading="lazy"><figcaption>V2, a linked PDF: a clickable menu, and every article on its own page.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-pm-workflow.png" alt="PM Workflow page" loading="lazy"><figcaption>V2: the PM process as a visual, stage-by-stage workflow.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-pm-checklist.png" alt="PM Workflow Checklist page" loading="lazy"><figcaption>V2: a matching checklist for each stage of PM work.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-job-prioritization.png" alt="Job Prioritization page" loading="lazy"><figcaption>V2: priority levels with examples and scheduling rules.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-job-tagging.png" alt="Job Tagging page" loading="lazy"><figcaption>V2: what each job tag means.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-job-completion-checklist.png" alt="Job Completion Checklist page" loading="lazy"><figcaption>V2: the Job Completion Checklist, grouped by section.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-billing-readiness.png" alt="Billing Readiness Requirements page" loading="lazy"><figcaption>V2: what to confirm before a job is tagged Ready to Review.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-technician-documentation.png" alt="Technician Documentation Standards page" loading="lazy"><figcaption>V2: documentation standards for technicians.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-start-up-notes.png" alt="Technician Notes for Construction page" loading="lazy"><figcaption>V2: how start-up job notes reach the right job.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-reconciling-pcards.png" alt="Reconciling PCards page" loading="lazy"><figcaption>V2: annotated screenshots for reconciling PCard receipts.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/early/v2-technician-incentives.png" alt="Applying Technician Incentives page" loading="lazy"><figcaption>V2: applying technician incentives, with an annotated screenshot.</figcaption></figure>
+          </div>
+        </div>
+        </section>
+        <section class="card-panel" data-tab="gallery" data-label="Final Product">
+          <h4 class="panel-title">Final Product</h4>
+          <div class="carousel" aria-label="The Dispatch Hub">
+          <div class="carousel-track" tabindex="0">
             <figure><img src="assets/img/dispatch-onboarding/01a-search-menu-open.png" alt="Dispatch Hub home page with a live search" loading="lazy"><figcaption>The Dispatch Hub: search across every article, with active pages ranked first.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/01b-search-menu-collapsed.png" alt="Dispatch Hub with the menu collapsed" loading="lazy"><figcaption>Collapsible menu groups keep 58 articles easy to scan.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/02-first-month-progress.png" alt="Your First Month checklist with progress bar" loading="lazy"><figcaption>Your First Month: a week-by-week path with checklists that save as you go.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/03-workflow-overview.png" alt="Job lifecycle workflow diagram" loading="lazy"><figcaption>The job lifecycle at a glance, by job type.</figcaption></figure>
-            <figure><img src="assets/img/dispatch-onboarding/04-check-yourself.png" alt="Self-check quiz" loading="lazy"><figcaption>Check Yourself: scenario questions that explain the right answer.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/04-check-yourself.png" alt="Self-check quiz" loading="lazy"><figcaption>Test Your Knowledge: scenario questions that explain the right answer.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/05-job-completion-checklist.png" alt="Job completion checklist" loading="lazy"><figcaption>The Job Completion Checklist, ticked off before a job goes to review.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/12-direct-line.png" alt="Direct Line page with a decision tree" loading="lazy"><figcaption>Direct Line: a decision tree you can read at a glance.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/06-jst-safety-forms.png" alt="Resolving incomplete JST safety forms" loading="lazy"><figcaption>Every article follows one pattern: when it's used, numbered steps, and screenshots.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/07-abbreviations.png" alt="Abbreviations reference" loading="lazy"><figcaption>Reference pages for the shorthand used in jobs, POs, and emails.</figcaption></figure>
             <figure><img src="assets/img/dispatch-onboarding/08-email-templates-copied.png" alt="Email templates with copy buttons" loading="lazy"><figcaption>Email templates copy with one click.</figcaption></figure>
@@ -426,6 +454,41 @@
             <figure><img src="assets/img/dispatch-onboarding/10-archived-cost-code-structure.png" alt="An archived COINS article" loading="lazy"><figcaption>Legacy COINS and ServiceTrade steps move to the archive on their own.</figcaption></figure>
           </div>
         </div>
+          <div class="evolve">
+            <h5 class="evolve-title">How it evolved</h5>
+            <figure class="compare">
+              <div class="compare-pair">
+                <div class="compare-side"><span class="compare-tag">OneNote</span><img src="assets/img/dispatch-onboarding/early/onenote-collage.png" alt="OneNote dispatch protocols" loading="lazy"></div>
+                <span class="compare-arrow" aria-hidden="true">→</span>
+                <div class="compare-side is-after"><span class="compare-tag">V1 · Word</span><img src="assets/img/dispatch-onboarding/early/v1-job-lifecycle-overview.png" alt="Word guide job lifecycle page" loading="lazy"></div>
+              </div>
+              <figcaption><strong>OneNote to V1.</strong> The same request intake, rewritten with a "When this is used" intro and numbered steps a new hire can follow.</figcaption>
+            </figure>
+            <figure class="compare">
+              <div class="compare-pair">
+                <div class="compare-side"><span class="compare-tag">V1 · Word</span><img src="assets/img/dispatch-onboarding/early/v1-requests.png" alt="Word guide task list" loading="lazy"></div>
+                <span class="compare-arrow" aria-hidden="true">→</span>
+                <div class="compare-side is-after"><span class="compare-tag">V2 · PDF</span><img src="assets/img/dispatch-onboarding/early/v2-pm-workflow.png" alt="PDF visual workflow" loading="lazy"></div>
+              </div>
+              <figcaption><strong>V1 to V2.</strong> Long task lists became visual, stage-by-stage workflows, each with its own checklist.</figcaption>
+            </figure>
+            <figure class="compare">
+              <div class="compare-pair">
+                <div class="compare-side"><span class="compare-tag">V2 · PDF</span><img src="assets/img/dispatch-onboarding/early/v2-billing-readiness.png" alt="PDF billing readiness list" loading="lazy"></div>
+                <span class="compare-arrow" aria-hidden="true">→</span>
+                <div class="compare-side is-after"><span class="compare-tag">V3 · Hub</span><img src="assets/img/dispatch-onboarding/11-billing-readiness-article.png" alt="Hub billing readiness checklist" loading="lazy"></div>
+              </div>
+              <figcaption><strong>V2 to V3.</strong> A numbered list became a checklist that saves your progress, with links to related articles.</figcaption>
+            </figure>
+            <figure class="compare">
+              <div class="compare-pair">
+                <div class="compare-side"><span class="compare-tag">V1 · Word</span><img src="assets/img/dispatch-onboarding/early/v1-direct-line.png" alt="Word guide Direct Line steps" loading="lazy"></div>
+                <span class="compare-arrow" aria-hidden="true">→</span>
+                <div class="compare-side is-after"><span class="compare-tag">V3 · Hub</span><img src="assets/img/dispatch-onboarding/12-direct-line-article.png" alt="Hub Direct Line decision tree" loading="lazy"></div>
+              </div>
+              <figcaption><strong>V1 to V3.</strong> Nested if-then steps became a decision tree, with the steps every case shares in one box.</figcaption>
+            </figure>
+          </div>
         </section>
         </div>
       </div>
@@ -668,6 +731,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=10" defer></script>
+<script src="assets/site.js?v=11" defer></script>
 </body>
 </html>
