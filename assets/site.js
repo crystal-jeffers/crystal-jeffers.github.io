@@ -138,6 +138,39 @@
     if (!det.id) det.id = base + "-details";
     det.classList.add("has-toggle");
 
+    // Media: a row of story pills inside the Media tab (Video, Starting Cases, ...)
+    Array.prototype.forEach.call(det.querySelectorAll(".media-set"), function (set) {
+      var panes = Array.prototype.slice.call(set.querySelectorAll(":scope > .media-pane"));
+      if (!panes.length) return;
+      var row = document.createElement("div");
+      row.className = "media-pills";
+      row.setAttribute("role", "tablist");
+      row.setAttribute("aria-label", "Media");
+      var pills = panes.map(function (pn, k) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "media-pill";
+        b.setAttribute("role", "tab");
+        b.textContent = pn.getAttribute("data-label");
+        b.addEventListener("click", function () { set.pickPane(k); });
+        row.appendChild(b);
+        return b;
+      });
+      set.insertBefore(row, set.firstChild);
+      set.classList.add("pills-on");
+      set.pickPane = function (k) {
+        panes.forEach(function (pn, j) {
+          pn.hidden = j !== k;
+          pills[j].setAttribute("aria-selected", j === k ? "true" : "false");
+        });
+      };
+      set.panes = panes;
+      // Open on the first story with pictures, not the video placeholder
+      var first = 0;
+      panes.forEach(function (pn, j) { if (!first && pn.getAttribute("data-pane") !== "video") first = j; });
+      set.pickPane(first);
+    });
+
     // Tabs
     var body = det.querySelector(".case-body");
     var folder = det.querySelector(".card-folder");
@@ -199,6 +232,28 @@
     plus.className = "case-plus";
     plus.setAttribute("aria-controls", det.id);
     if (links) links.appendChild(plus);
+    // The play button beside the + opens Media at the video
+    var mediaIdx = -1;
+    panels.forEach(function (pn, k) { if (pn.getAttribute("data-tab") === "media") mediaIdx = k; });
+    if (mediaIdx >= 0 && links) {
+      var play = document.createElement("button");
+      play.type = "button";
+      play.className = "case-play";
+      play.setAttribute("aria-label", "Watch the video (coming soon)");
+      play.title = "Video coming soon";
+      play.innerHTML = '<span class="play-icon" aria-hidden="true"></span>';
+      play.addEventListener("click", function () {
+        det.open = true;
+        pick(mediaIdx, false);
+        var set = panels[mediaIdx].querySelector(".media-set");
+        if (set && set.pickPane) set.panes.forEach(function (pn, j) { if (pn.getAttribute("data-pane") === "video") set.pickPane(j); });
+        window.requestAnimationFrame(function () {
+          var top = (tabs[mediaIdx] || panels[mediaIdx]).getBoundingClientRect().top;
+          window.scrollBy({ top: top - 100, behavior: calm ? "auto" : "smooth" });
+        });
+      });
+      links.appendChild(play);
+    }
     var sync = function () {
       var open = det.open;
       plus.setAttribute("aria-expanded", open ? "true" : "false");
@@ -214,25 +269,30 @@
     // Open straight to the Gallery, at the photo that matches the thumbnail
     if (card) card.openGallery = function (src) {
       det.open = true;
-      // The panel whose carousel holds this photo (Early Iterations or Final Product),
-      // or the Gallery panel if none does.
-      var g = -1, file = src ? src.split("/").pop() : "";
+      var file = src ? src.split("/").pop() : "";
+      var g = -1, paneIdx = -1, set = null;
       panels.forEach(function (pn, k) {
-        if (g >= 0 || !file) return;
-        var hit = Array.prototype.slice.call(pn.querySelectorAll(".carousel-track img")).some(function (im) { return (im.getAttribute("src") || "").split("/").pop() === file; });
-        if (hit) g = k;
+        if (pn.getAttribute("data-tab") !== "media") return;
+        g = k;
+        set = pn.querySelector(".media-set");
+        if (set && set.panes && file) set.panes.forEach(function (pane, j) {
+          if (paneIdx >= 0) return;
+          var hit = Array.prototype.slice.call(pane.querySelectorAll(".carousel-track img")).some(function (im) { return (im.getAttribute("src") || "").split("/").pop() === file; });
+          if (hit) paneIdx = j;
+        });
       });
-      if (g < 0) panels.forEach(function (pn, k) { if (pn.getAttribute("data-tab") === "gallery") g = k; });
       if (g < 0) return;
       pick(g, false);
+      if (set && set.pickPane && paneIdx >= 0) set.pickPane(paneIdx);
       window.requestAnimationFrame(function () {
-        var track = panels[g].querySelector(".carousel-track");
-        if (track && src) {
-          var imgs = Array.prototype.slice.call(track.querySelectorAll("img"));
-          var file = src.split("/").pop();
-          var idx = -1;
-          imgs.forEach(function (im, j) { if (idx < 0 && (im.getAttribute("src") || "").split("/").pop() === file) idx = j; });
-          if (idx > 0) track.scrollLeft = idx * track.clientWidth;
+        var pane = set && paneIdx >= 0 ? set.panes[paneIdx] : panels[g];
+        var track = pane.querySelector(".carousel-track");
+        if (track && file) {
+          var imgs = Array.prototype.slice.call(track.children);
+          imgs.forEach(function (fg, j) {
+            var im = fg.querySelector("img");
+            if (im && (im.getAttribute("src") || "").split("/").pop() === file) track.scrollLeft = j * track.clientWidth;
+          });
         }
         var top = (tabs[g] || panels[g]).getBoundingClientRect().top;
         window.scrollBy({ top: top - 100, behavior: calm ? "auto" : "smooth" });
@@ -338,7 +398,7 @@
     var rows = Array.prototype.slice.call(ripple.children);
     rows.forEach(function (li) {
       var tag = li.querySelector(".ripple-tag");
-      if (!tag) return;
+      if (!tag || li.classList.contains("ripple-last")) return;
       var cover = document.createElement("span");
       cover.className = "ripple-cover";
       cover.setAttribute("aria-hidden", "true");
@@ -397,6 +457,86 @@
       setTimeout(advance, 320);
     });
     lay();
+  });
+
+  /* ---------- 2j. Year in Review: a vertical deck that cycles every 6 seconds ---------- */
+  each(".why-deck", function (deck) {
+    var cards = Array.prototype.slice.call(deck.children);
+    if (cards.length < 2) return;
+    deck.classList.add("why-live");
+    var at = 0, last = 0, hover = false;
+    var nav = document.createElement("div");
+    nav.className = "why-nav";
+    var mk = function (cls, label) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "why-btn " + cls; b.setAttribute("aria-label", label);
+      nav.appendChild(b); return b;
+    };
+    var prev = mk("why-prev", "Previous card");
+    var count = document.createElement("span");
+    count.className = "why-count"; count.setAttribute("aria-live", "polite");
+    nav.appendChild(count);
+    var next = mk("why-next", "Next card");
+    deck.parentNode.insertBefore(nav, deck.nextSibling);
+    var lay = function () {
+      cards.forEach(function (c, k) {
+        var pos = (k - at + cards.length) % cards.length;
+        c.setAttribute("data-pos", String(pos));
+        c.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
+      });
+      count.textContent = (at + 1) + " of " + cards.length;
+    };
+    var go = function (d) {
+      var front = cards[at];
+      if (calm || d < 0) { at = (at + d + cards.length) % cards.length; lay(); return; }
+      front.classList.add("is-dropping");
+      setTimeout(function () { front.classList.remove("is-dropping"); at = (at + 1) % cards.length; lay(); }, 380);
+    };
+    prev.addEventListener("click", function () { last = Date.now(); go(-1); });
+    next.addEventListener("click", function () { last = Date.now(); go(1); });
+    deck.addEventListener("mouseenter", function () { hover = true; });
+    deck.addEventListener("mouseleave", function () { hover = false; });
+    lay();
+    setInterval(function () {
+      if (calm || hover || document.hidden || Date.now() - last < 6000) return;
+      var r = deck.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      go(1);
+    }, 6000);
+  });
+
+  /* ---------- 2k. Year in Review: the message thread plays itself ---------- */
+  each(".thread", function (box) {
+    var list = box.querySelector(".thread-list");
+    var items = list ? Array.prototype.slice.call(list.children) : [];
+    if (!items.length || calm) return;
+    box.classList.add("thread-live");
+    var n = 0, started = false;
+    var show = function () {
+      if (document.hidden) return setTimeout(show, 1000);
+      if (n >= items.length) {
+        return setTimeout(function () {
+          box.classList.add("thread-reset");
+          setTimeout(function () {
+            items.forEach(function (it) { it.classList.remove("in"); });
+            box.classList.remove("thread-reset");
+            list.style.transform = "";
+            n = 0; show();
+          }, 600);
+        }, 4500);
+      }
+      var it = items[n++];
+      it.classList.add("in");
+      // keep the newest message at the bottom of the window
+      var over = it.offsetTop + it.offsetHeight - box.clientHeight + 16;
+      list.style.transform = over > 0 ? "translateY(" + (-over) + "px)" : "";
+      var wait = it.classList.contains("msg-topic") ? 900 : 1500 + Math.min(it.textContent.length * 18, 1600);
+      setTimeout(show, wait);
+    };
+    var tio = new IntersectionObserver(function (en) {
+      if (!started && en[0].isIntersecting) { started = true; show(); tio.disconnect(); }
+    }, { threshold: 0.3 });
+    tio.observe(box);
   });
 
   /* ---------- 1. Audience views ---------- */
@@ -629,6 +769,23 @@
     });
     car.classList.add("has-controls");
     update();
+
+    // Auto-advance at the same pace as the card thumbnails. Waits while the
+    // pointer is over it, after a manual step, or when it isn't on screen.
+    var hover = false, lastTouch = 0;
+    car.addEventListener("mouseenter", function () { hover = true; });
+    car.addEventListener("mouseleave", function () { hover = false; });
+    ["click", "keydown", "touchstart", "wheel"].forEach(function (ev) {
+      car.addEventListener(ev, function () { lastTouch = Date.now(); }, { passive: true });
+    });
+    setInterval(function () {
+      if (calm || hover || document.hidden || Date.now() - lastTouch < 9000) return;
+      if (!track.clientWidth) return;
+      var r = car.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      var c = current();
+      track.scrollTo({ left: (c >= slides.length - 1 ? 0 : c + 1) * track.clientWidth, behavior: "smooth" });
+    }, 3400);
   });
 
   /* ---------- 6. Click to enlarge ---------- */

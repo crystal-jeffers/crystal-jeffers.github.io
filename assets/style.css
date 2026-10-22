@@ -1565,3 +1565,125 @@ footer {
 .about-why h3 { color: #a84300; }
 .about-why p { color: var(--color-black); }
 .carousel-count { min-width: 5.5rem; text-align: center; font-size: 0.88rem; font-weight: 600; color: var(--color-grey); }
+
+/* =========================================================================
+   ROUND 3 (Oct 22)
+   ========================================================================= */
+:root { --color-orange-deep: #b5470b; }
+
+/* Bigger card titles */
+.project h3 { font-size: clamp(1.75rem, 2.6vw, 2.15rem); }
+
+/* Inner tabs: grey when resting, deep orange with white text when chosen.
+   The folder drops its orange edge, since the card already has one. */
+.card-tab { border-color: #dcdcdc; }
+.card-tab[aria-selected="true"] { background: var(--color-orange-deep); color: #fff; border-color: var(--color-orange-deep); box-shadow: none; }
+.card-tab[aria-selected="true"]:hover { background: #9f3e09; color: #fff; }
+.tabs-on .card-folder { background: #f7f7f5; border-color: #e1e1df; }
+
+/* Play button beside the + */
+.case-play {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0; border: 0; border-radius: 10px;
+  background: var(--color-black); cursor: pointer;
+  box-shadow: 0 4px 10px -5px rgba(0,0,0,0.45);
+  transition: background-color 0.15s ease, transform 0.2s ease;
+}
+.case-play:hover { background: var(--color-orange-deep); transform: scale(1.06); }
+.case-play:focus-visible, .case-plus:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
+.play-icon { width: 0; height: 0; margin-left: 3px; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent #fff; }
+
+/* Media: story pills inside the Media tab */
+.media-set .pane-title { margin: 1.25rem 0 0.5rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-grey); }
+.media-set.pills-on .pane-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.media-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1rem; }
+.media-pill {
+  min-height: 36px; padding: 0.35rem 0.9rem; border: 0; border-radius: 999px;
+  background: #e6e6e4; color: var(--color-black); font: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.media-pill:hover { background: #d9d9d7; }
+.media-pill[aria-selected="true"] { background: var(--color-orange-deep); color: #fff; }
+.media-pill:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 2px; }
+.pane-intro { margin: 0 0 0.75rem; color: var(--ink); font-size: 0.95rem; }
+.video-soon {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;
+  aspect-ratio: 16 / 9; border-radius: 10px; background: var(--color-black); color: #d9d9d9; text-align: center; padding: 1rem;
+}
+.video-soon strong { color: #fff; font-size: 1.15rem; }
+.video-soon span:last-child { max-width: 28rem; font-size: 0.9rem; }
+.video-soon-icon {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--color-orange-deep); position: relative; margin-bottom: 0.4rem;
+}
+.video-soon-icon::after { content: ""; position: absolute; left: 26px; top: 20px; border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent #fff; }
+
+/* Before-and-after pairs as a one-at-a-time carousel */
+.compare-carousel .carousel-track > figure.compare { margin: 0; padding: 0.25rem 0.1rem 0; }
+.compare-carousel .compare + .compare { border-top: 0; padding-top: 0.25rem; }
+.compare-carousel .compare-side img { aspect-ratio: 4 / 3; }
+
+/* What I bring: the result slides out from behind THE RESULT */
+.result-slot { overflow: hidden; padding: 0 0.5rem 1.6rem; margin: 0 -0.5rem; }
+.anim-ready .ripple-result, .anim-ready .ripple-result.flown { opacity: 1; animation: none; }
+.ripple.drop-ready .ripple-last .ripple-result { transform: translateX(-110%); transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.25, 1) 0.15s; }
+.ripple.drop-ready .ripple-last.revealed .ripple-result { transform: none; }
+@media (min-width: 700px) {
+  .ripple > li > .result-slot { position: relative; z-index: 1; display: flex; justify-content: flex-end; margin: 0 0 0 -0.5rem; padding: 0 0.5rem 1.4rem; }
+  .ripple > li > .result-slot > .ripple-result { margin: 0; }
+}
+
+/* About me: the third card in a deeper orange */
+.deck-card:nth-child(3), .deck-live .deck-card:nth-child(3)[data-pos] { background: var(--color-orange-deep); }
+
+/* Year in Review: message thread */
+.thread {
+  position: relative; max-width: 40rem; margin: 0.75rem 0 1.5rem;
+  background: #fff; border: 1px solid #e4e4e4; border-radius: 16px; padding: 1rem;
+}
+.thread-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.msg { max-width: 80%; padding: 0.55rem 0.85rem 0.6rem; border-radius: 16px; font-size: 0.95rem; line-height: 1.4; }
+.msg-who { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem; opacity: 0.8; }
+.msg-in { align-self: flex-start; background: #ececea; color: var(--color-black); border-bottom-left-radius: 4px; }
+.msg-out { align-self: flex-end; background: var(--color-orange-deep); color: #fff; border-bottom-right-radius: 4px; }
+.msg-topic { align-self: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-grey); padding: 0.4rem 0 0.1rem; }
+.thread-live { height: 26rem; overflow: hidden; }
+.thread-live .thread-list > li { display: none; }
+.thread-live .thread-list > li.in { display: block; animation: msg-in 0.35s ease both; }
+.thread-live .thread-list > li.msg-topic.in { display: block; }
+@keyframes msg-in { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: none; } }
+.thread-live::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2.5rem; z-index: 1; border-radius: 16px 16px 0 0; background: linear-gradient(#fff, rgba(255,255,255,0)); pointer-events: none; }
+.thread-reset .thread-list { opacity: 0; transition: opacity 0.5s ease; }
+@media (max-width: 560px) { .thread-live { height: 30rem; } .msg { max-width: 88%; } }
+
+/* Year in Review: a vertical deck of three cards that cycles top-down */
+.why-deck > div:nth-child(1) { background: var(--color-black); }
+.why-deck > div:nth-child(1) h3 { color: var(--color-orange); }
+.why-deck > div:nth-child(1) p { color: #f0f0f0; }
+.why-deck > div:nth-child(2) { background: #dcdcda; }
+.why-deck > div:nth-child(3) { background: var(--color-orange-deep); border-top-color: var(--color-black); }
+.why-deck > div:nth-child(3) h3 { color: #fff; }
+.why-deck > div:nth-child(3) p { color: #fff; }
+.why-live { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; max-width: 34rem; padding-bottom: 2.4rem; }
+.why-live > div {
+  grid-area: 1 / 1; padding: 1.4rem 1.5rem 1.5rem; border-radius: 14px;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
+}
+.why-live > div h3 { font-size: 0.85rem; }
+.why-live > div p { font-size: 1.1rem; }
+.why-live > div[data-pos="0"] { z-index: 3; transform: none; }
+.why-live > div[data-pos="1"] { z-index: 2; transform: translateY(16px) scale(0.96); }
+.why-live > div[data-pos="2"] { z-index: 1; transform: translateY(32px) scale(0.92); }
+.why-live > div[data-pos="1"] > *, .why-live > div[data-pos="2"] > * { visibility: hidden; }
+.why-live > div.is-dropping { transform: translateY(60px) scale(0.96); opacity: 0; }
+.why-nav { display: flex; align-items: center; gap: 0.75rem; margin: 0.25rem 0 0; }
+.why-btn {
+  width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--color-black); cursor: pointer; position: relative;
+}
+.why-btn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; border: solid #fff; border-width: 0 3px 3px 0; }
+.why-prev::after { transform: translate(-50%, -30%) rotate(-135deg); }
+.why-next::after { transform: translate(-50%, -70%) rotate(45deg); }
+.why-btn:hover { background: var(--color-orange-deep); }
+.why-btn:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; }
+.why-count { font-size: 0.85rem; font-weight: 600; color: var(--color-grey); min-width: 3.5rem; text-align: center; }
+@media (prefers-reduced-motion: reduce) {
+  .ripple.drop-ready .ripple-last .ripple-result { transform: none; transition: none; }
+}
