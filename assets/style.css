@@ -1521,24 +1521,47 @@ footer {
   .compare-arrow { justify-self: center; transform: rotate(90deg); }
 }
 
-/* ---------- What I bring: dark orange titles joined to light orange bubbles ----------
-   On wider screens each row is one orange band. The title sits on the band,
-   and the light bubble sits on top of the band's right end, so they read as
-   one connected piece. A black bar swipes away to reveal it. The result row
-   is black. */
-.ripple-tag { background: var(--color-orange); color: var(--color-black); }
+/* ---------- What I bring: grey title bands, black result row ----------
+   Each title sits on a light grey band that runs under its bubble, so title
+   and bubble read as one connected piece. The orange cover reaches all the
+   way under the bubble before it slides away. Only the result row is black. */
 .ripple-last .ripple-tag { background: var(--color-black); color: #fff; font-size: 1.05rem; }
-.bring-item > summary { font-size: 1.1rem; }
-.ripple-cover { background: var(--color-black); }
 @media (min-width: 700px) {
-  .ripple-tag { background: none; color: var(--color-black); }
   .ripple-last .ripple-tag { background: none; color: #fff; font-size: 1.15rem; padding-top: 1rem; }
-  .ripple > li::before { background: var(--color-orange); }
   .ripple > li.ripple-last::before { background: var(--color-black); }
-  .ripple > li > .bring-item { border-left: 1px solid #ffd2b0; }
-  .ripple > li > .bring-item > summary { min-height: 52px; }
-  .ripple .ripple-tag .ripple-cover { background: var(--color-black); }
+  .ripple > li::before { height: 54px; }
+  .ripple .ripple-tag .ripple-cover { width: calc(100% + 1rem + var(--step, 0) * 1.6rem + 14px); height: 54px; }
   .ripple-last .ripple-tag .ripple-cover { background: var(--color-orange); }
-  .ripple-result { border-left-color: var(--color-orange); box-shadow: 0 18px 40px -18px rgba(0,0,0,0.55); }
+  .ripple > li > .bring-item { border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+  .ripple-result { box-shadow: 0 18px 40px -18px rgba(0,0,0,0.55); }
 }
+
+/* ---------- Card spacing, round 2 (Oct 21): more air at the top and after the description ---------- */
+.project { padding-top: 2rem; }
+.project .lede { margin: 1rem 0 2rem; }
+@media (max-width: 560px) {
+  .project { padding-top: 1.5rem; }
+  .project .lede { margin: 0.75rem 0 1.5rem; }
+}
+
+/* ---------- How it evolved: a divider between each comparison ---------- */
+.compare + .compare { border-top: 1px solid #e4e4e4; padding-top: 1.75rem; }
+
+/* ---------- About me deck: black, grey, and orange cards ---------- */
+.deck-card:nth-child(1) { background: var(--color-black); color: #e9e9e9; }
+.deck-card:nth-child(2) { background: #dcdcda; color: var(--color-black); }
+.deck-card:nth-child(2) p, .deck-card:nth-child(2) .about-me-lead { color: var(--color-black); }
+.deck-card:nth-child(2) .deck-kicker { color: #a84300 !important; }
+.deck-card:nth-child(3) { background: var(--color-orange); color: #fff; border-left-color: var(--color-black); }
+.deck-card:nth-child(3) p, .deck-card:nth-child(3) .about-me-lead { color: #fff; }
+.deck-card:nth-child(3) .deck-kicker { color: var(--color-black) !important; }
+.deck-live .deck-card:nth-child(1)[data-pos] { background: var(--color-black); }
+.deck-live .deck-card:nth-child(2)[data-pos] { background: #dcdcda; }
+.deck-live .deck-card:nth-child(3)[data-pos] { background: var(--color-orange); }
+.deck-count { background: rgba(22,22,22,0.82); color: #fff; padding: 0.25rem 0.6rem; border-radius: 999px; }
+
+/* ---------- A Year in Review: grey cards instead of black ---------- */
+.about-why > div { background: #ebebea; box-shadow: 0 10px 24px -18px rgba(0,0,0,0.35); }
+.about-why h3 { color: #a84300; }
+.about-why p { color: var(--color-black); }
 .carousel-count { min-width: 5.5rem; text-align: center; font-size: 0.88rem; font-weight: 600; color: var(--color-grey); }
