@@ -67,18 +67,18 @@
     <p class="lens-ask">See the work that matters most to you. Filter with the buttons below:</p>
     <div class="lens-buttons">
       <button type="button" class="lens" data-lens-id="all" aria-pressed="true"
-        data-note="All nine projects, in the order they were built.">All work</button>
+        data-note="All ten projects, in the order they were built.">All work</button>
       <button type="button" class="lens" data-lens-id="growth" aria-pressed="false"
-        data-order="lifecycle,dispatch,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding"
+        data-order="lifecycle,dispatch,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding,site-security"
         data-note="For leaders whose departments are growing: systems that let a team take on more people, more work and more customers without the coordination load growing at the same rate.">Managing growth</button>
       <button type="button" class="lens" data-lens-id="operations" aria-pressed="false"
-        data-order="lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting"
+        data-order="lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting,site-security"
         data-note="For leaders running the division: consistent hand-offs across HR, IT, Safety, Fleet and the field, and capacity that grows without adding coordination overhead.">Division operations</button>
       <button type="button" class="lens" data-lens-id="people" aria-pressed="false"
         data-order="dispatch-onboarding,lifecycle,sops,migration"
         data-note="For leaders investing in people: new hires productive sooner, clear expectations by role, and knowledge that stays when people move on.">People &amp; onboarding</button>
       <button type="button" class="lens" data-lens-id="systems" aria-pressed="false"
-        data-order="lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database"
+        data-order="lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database,site-security"
         data-note="For anyone weighing design and analysis skills: research with the people who do the work, information architecture, data modeling, and automation that keeps a person in the loop.">Systems &amp; UX design</button>
     </div>
     <p class="lens-note" aria-live="polite"></p>
@@ -874,6 +874,77 @@
             <figure><img src="assets/img/database/pm-parts-lists.png" alt="PM parts list by customer, vendor, and order type" loading="lazy"><figcaption>PM parts: what each visit needs, from which vendor, and whether it orders automatically or the technician sources it. Parts orders and audits run from this list.</figcaption></figure>
             <figure><img src="assets/img/database/consolidated-invoice-request-data.png" alt="Open purchase orders by vendor with the date each request was sent" loading="lazy"><figcaption>Invoice requests: open purchase orders grouped by vendor, with the date each request went out, so missing invoices are chased in one pass, not one PO at a time.</figcaption></figure>
             <figure><img src="assets/img/database/consolidated-invoice-request-email.png" alt="Email to a vendor listing every PO that needs an invoice" loading="lazy"><figcaption>One macro run turns those rows into a single request to each vendor, listing every PO that needs an invoice.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 10. Site Security -->
+  <article class="project" id="site-security" data-lens="growth operations systems">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Security &amp; Reliability Hardening</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Security · Reliability</span></p>
+        <p class="lede">The safeguards behind the Dispatch Hub, Start-Up SOPs, and Employee Lifecycle sites: every control mapped to a type of risk, an IT-style security review, and a costed plan for private hosting as the team grows.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="Risk framework, IT security review, and page history">
+        <div class="slide" data-label="Risk framework"><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"></div>
+        <div class="slide" data-label="IT review"><img src="assets/img/security/security-it-review.png" alt="IT security review: 19 checks in place, 3 that need GitHub Enterprise, 1 that needs private hosting" loading="lazy"></div>
+        <div class="slide" data-label="Audit trail"><img src="assets/img/security/security-audit-trail.png" alt="Page history showing a blocked save, the corrected save, a before-and-after edit, and restore buttons" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>The dispatch and start-up sites had become daily tools, and more supervisors were starting to edit them. The question changed from whether the sites worked to whether IT would sign off on them. They needed enterprise-level safeguards on a free plan, and a clear path for when the company is ready to fund private hosting.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">I treated the sites like any internal system an IT team would review, and built each control around a type of risk instead of a checklist alone. If one control misses, another catches it.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ul class="build-list">
+          <li class="build-item"><strong>Integrity</strong><span>Every save is signed by the editor, checked automatically, and reversible in one click. Broken or unsafe changes never go live.</span></li>
+          <li class="build-item"><strong>Confidentiality</strong><span>A classification rule decides what belongs on a page and what stays on SharePoint. Screenshots use anonymized sample data, and the publish check blocks phone numbers and emails.</span></li>
+          <li class="build-item"><strong>Identity and access</strong><span>A company-owned organization, required two-step sign-in, edit-only rights, same-day removal, and a quarterly access review.</span></li>
+          <li class="build-item"><strong>Supply chain</strong><span>Outside code is pinned, integrity-checked, and served from the site itself, with alerts for known vulnerabilities.</span></li>
+          <li class="build-item"><strong>People and process</strong><span>Plain-language error messages and an editor guide, so a blocked save tells the editor exactly how to fix it.</span></li>
+          <li class="build-item"><strong>Continuity and scale</strong><span>Ownership sits with the company, with two owners and written guides. Capacity math and four costed hosting options show what changes as the team grows.</span></li>
+        </ul>
+          <ul class="tags" aria-label="Skills used">
+          <li>Risk assessment</li><li>Security controls</li><li>Access management</li><li>Change control</li><li>Vendor evaluation</li><li>Cost modeling</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>19 of 23 IT security checks are met on the free plan, at $0. The other four are mapped to paid hosting, with a funding plan that compares four options. The cheapest gives company sign-in for $0, against about $3,500 a year for GitHub Enterprise at the same team size. Capacity math puts plan limits in plain terms: a 14-person team could publish about 1,000 edits a month on the free private tier.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a blocked save, the fix, and a one-click restore.</span></div>
+        </div>
+        <div class="media-pane" data-pane="gallery" data-label="Gallery">
+          <h5 class="pane-title">Gallery</h5>
+          <div class="carousel" aria-label="Security plan visuals">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
+            <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
+            <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
           </div>
           </div>
         </div>
