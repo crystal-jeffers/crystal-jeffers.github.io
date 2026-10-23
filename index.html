@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=18">
+<link rel="stylesheet" href="assets/style.css?v=19">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -67,18 +67,18 @@
     <p class="lens-ask">See the work that matters most to you. Filter with the buttons below:</p>
     <div class="lens-buttons">
       <button type="button" class="lens" data-lens-id="all" aria-pressed="true"
-        data-note="All ten projects, in the order they were built.">All work</button>
+        data-note="All ten projects.">All work</button>
       <button type="button" class="lens" data-lens-id="growth" aria-pressed="false"
-        data-order="lifecycle,dispatch,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding,site-security"
+        data-order="site-security,lifecycle,dispatch,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding"
         data-note="For leaders whose departments are growing: systems that let a team take on more people, more work and more customers without the coordination load growing at the same rate.">Managing growth</button>
       <button type="button" class="lens" data-lens-id="operations" aria-pressed="false"
-        data-order="lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting,site-security"
+        data-order="site-security,lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting"
         data-note="For leaders running the division: consistent hand-offs across HR, IT, Safety, Fleet and the field, and capacity that grows without adding coordination overhead.">Division operations</button>
       <button type="button" class="lens" data-lens-id="people" aria-pressed="false"
         data-order="dispatch-onboarding,lifecycle,sops,migration"
         data-note="For leaders investing in people: new hires productive sooner, clear expectations by role, and knowledge that stays when people move on.">People &amp; onboarding</button>
       <button type="button" class="lens" data-lens-id="systems" aria-pressed="false"
-        data-order="lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database,site-security"
+        data-order="site-security,lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database"
         data-note="For anyone weighing design and analysis skills: research with the people who do the work, information architecture, data modeling, and automation that keeps a person in the loop.">Systems &amp; UX design</button>
     </div>
     <p class="lens-note" aria-live="polite"></p>
@@ -86,7 +86,81 @@
   </div>
   <div class="work-list">
 
-  <!-- 1. Employee Lifecycle -->
+  <!-- 1. Security & Reliability Hardening -->
+  <article class="project" id="site-security" data-lens="growth operations systems">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Security &amp; Reliability Hardening</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Access · Cohesion</span></p>
+        <p class="lede">The safeguards behind the Dispatch Hub, Start-Up SOPs, and Employee Lifecycle sites: every control mapped to a type of risk, an IT-style security review, and a costed plan for private hosting as the team grows.</p>
+        <div class="project-links">
+          <a class="btn btn-dark" href="assets/docs/internal-sites-security-plan.pdf" target="_blank" rel="noopener">View the security plan ↗</a>
+        </div>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="Risk framework, IT security review, and page history">
+        <div class="slide" data-label="Risk framework"><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"></div>
+        <div class="slide" data-label="IT review"><img src="assets/img/security/security-it-review.png" alt="IT security review: 19 checks in place, 3 that need GitHub Enterprise, 1 that needs private hosting" loading="lazy"></div>
+        <div class="slide" data-label="Audit trail"><img src="assets/img/security/security-audit-trail.png" alt="Page history showing a blocked save, the corrected save, a before-and-after edit, and restore buttons" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>The sites debuted in a private demo with the service manager and field supervisors. They loved them right away and wanted to put them into use. Before the first day of official use, I proactively worked through what an IT team would want to see: who can edit, what belongs on a public page, and what happens when something goes wrong. The goal was quality and integrity from day one, on a free plan, with a clear path for when the company is ready to fund private hosting.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">I treated the sites like any internal system an IT team would review, and built each control around a type of risk instead of a checklist alone. If one control misses, another catches it.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ul class="build-list">
+          <li class="build-item"><strong>Integrity</strong><span>Every save is signed by the editor, checked automatically, and reversible in one click. Broken or unsafe changes never go live.</span></li>
+          <li class="build-item"><strong>Confidentiality</strong><span>A classification rule decides what belongs on a page and what stays on SharePoint. Screenshots use anonymized sample data, and the publish check blocks phone numbers and emails.</span></li>
+          <li class="build-item"><strong>Identity and access</strong><span>A company-owned organization, required two-step sign-in, edit-only rights, same-day removal, and a quarterly access review.</span></li>
+          <li class="build-item"><strong>Supply chain</strong><span>Outside code is pinned, integrity-checked, and served from the site itself, with alerts for known vulnerabilities.</span></li>
+          <li class="build-item"><strong>People and process</strong><span>Plain-language error messages and an editor guide, so a blocked save tells the editor exactly how to fix it.</span></li>
+          <li class="build-item"><strong>Continuity and scale</strong><span>Ownership sits with the company, with two owners and written guides. Capacity math and four costed hosting options show what changes as the team grows.</span></li>
+        </ul>
+          <ul class="tags" aria-label="Skills used">
+          <li>Risk assessment</li><li>Security controls</li><li>Access management</li><li>Change control</li><li>Vendor evaluation</li><li>Cost modeling</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>19 of 23 IT security checks are met on the free plan, at $0. The other four are mapped to paid hosting, with a funding plan that compares four options. The cheapest gives company sign-in for $0, against about $3,500 a year for GitHub Enterprise at the same team size. Capacity math puts plan limits in plain terms: a 14-person team could publish about 1,000 edits a month on the free private tier.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a blocked save, the fix, and a one-click restore.</span></div>
+        </div>
+        <div class="media-pane" data-pane="gallery" data-label="Gallery">
+          <h5 class="pane-title">Gallery</h5>
+          <div class="carousel" aria-label="Security plan visuals">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
+            <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
+            <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 2. Employee Lifecycle System -->
   <article class="project" id="lifecycle" data-lens="growth operations people systems">
     <div class="card-top">
       <div class="card-text">
@@ -195,7 +269,7 @@
     </details>
   </article>
 
-  <!-- 2. Start-up tracking / dispatch board -->
+  <!-- 3. Start-Up Tracking & Dispatch -->
   <article class="project" id="dispatch" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
@@ -276,7 +350,7 @@
     </details>
   </article>
 
-  <!-- 3. SOP site -->
+  <!-- 4. Start-Up Procedures Site -->
   <article class="project" id="sops" data-lens="people systems">
     <div class="card-top">
       <div class="card-text">
@@ -395,81 +469,7 @@
     </details>
   </article>
 
-  <!-- 4. Platform migration documentation -->
-  <article class="project" id="migration" data-lens="operations people">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Migration Documentation</h3>
-        </div>
-        <p class="meta-row"><span class="status-pill done">Archived</span><span class="improves">Cohesion · Access</span></p>
-        <p class="lede">Documentation that carries a team through a platform change. Here, a department moving from COINS and ServiceTrade to ServiceTitan got one iterative, searchable reference: Active articles for how the work is done today, and an archive for context on older jobs.</p>
-      </div>
-      <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the Director's reply">
-        <div class="slide" data-label="Week one: SOPs shared"><img src="assets/img/migration/week-one-sops-email.png" alt="Email sharing the first week of Service Coordinator SOPs, also converted to editable OneNote pages" loading="lazy"></div>
-        <div class="slide" data-label="Director's reply"><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply: Wow, this is great! Can you update this through the ServiceTitan rollout?" loading="lazy"></div>
-        <div class="slide fit" data-label="Migration plan"><img src="assets/img/dispatch-onboarding/combined/cross-platform-v2-v3.png" alt="Cross-Platform Workflow Overview in the PDF guide and in the Hub Archive" loading="lazy"></div>
-      </div>
-    </div>
-
-    <details class="case">
-      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
-      <div class="case-body">
-        <div class="card-folder">
-        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
-          <h4 class="panel-title">The challenge</h4>
-          <p>Shortly after I joined, the department began migrating from COINS and ServiceTrade to ServiceTitan. For months, work ran across all three systems while processes changed month to month. Much of the know-how was tribal knowledge: it lived in experienced people's memory and traveled by word of mouth, so the answer depended on who you asked and when they'd last checked. When details didn't match, small misses carried real costs: a PO coded as material instead of subcontractor, an invoice never uploaded and billing held up, parts that arrived without the technician hearing about it, or a job tracked in the wrong system.</p>
-        </section>
-        <section class="card-panel" data-tab="built" data-label="What I Built">
-          <h4 class="panel-title">What I built</h4>
-          <p class="built-summary">The team gained one reference it could trust: current steps in one place, with the history kept for context.</p>
-        </section>
-        <section class="card-panel" data-tab="details" data-label="Details">
-          <h4 class="panel-title">Details</h4>
-          <ol class="timeline">
-          <li><strong>Week-one SOPs</strong><span>Documented each Service Coordinator workflow in the existing systems and shared it with the Director.</span></li>
-          <li><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team keeps its reference material, so anyone could add to them.</span></li>
-          <li><strong>Kept current through the rollout</strong><span>At the Director's request, updated each process as it moved to ServiceTitan, including a phased plan for which jobs closed out in ServiceTrade and which moved over.</span></li>
-          <li><strong>One consolidated ServiceTitan reference</strong><span>Revised and combined the SOPs shared by the Texas team into one cohesive document that's easier to search and scan.</span></li>
-          <li><strong>Active and Archive</strong><span>Organized into one searchable knowledge base: Active articles show how the work is done today, and an archive keeps the COINS and ServiceTrade steps for older jobs.</span></li>
-          <li class="is-end"><strong>Closeout</strong><span>As the last ServiceTrade jobs closed, legacy steps were archived and links pointed to the ServiceTitan articles. COINS steps stayed only where exception workflows still use it. My maintenance ended with the rollout.</span></li>
-        </ol>
-          <ul class="tags" aria-label="Skills used">
-          <li>Knowledge base design</li><li>Change management</li><li>Version control (Active / Archive)</li><li>Content consolidation</li>
-        </ul>
-        </section>
-        <section class="card-panel" data-tab="impact" data-label="Business Impact">
-          <h4 class="panel-title">Business impact</h4>
-          <p>Replaced tribal knowledge with a reference people could trust through the whole transition: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and coordinators who worked with confidence while every process was changing. The Director endorsed it in week one and asked that it continue through the rollout.</p>
-        </section>
-        <section class="card-panel" data-tab="media" data-label="Media">
-          <h4 class="panel-title">Media</h4>
-          <div class="media-set">
-        <div class="media-pane" data-pane="video" data-label="Video">
-          <h5 class="pane-title">Video</h5>
-          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of how the reference moved from one platform to the next.</span></div>
-        </div>
-        <div class="media-pane" data-pane="gallery" data-label="Gallery">
-          <h5 class="pane-title">Gallery</h5>
-          <div class="carousel" aria-label="Migration documentation screenshots">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/dispatch-onboarding/combined/cross-platform-v2-v3.png" alt="Cross-Platform Workflow Overview in the PDF guide and in the Hub Archive" loading="lazy"><figcaption>The phased plan for moving work from ServiceTrade and COINS to ServiceTitan, first in the PDF guide and now in the Hub's Archive.</figcaption></figure>
-            <figure><img src="assets/img/migration/archive-coins-overview.png" alt="Archived COINS Workflow Overview in the Hub" loading="lazy"><figcaption>Legacy COINS steps live in the Archive, marked so no one follows them on a new job.</figcaption></figure>
-            <figure><img src="assets/img/migration/archive-servicetrade-jobs.png" alt="Archived Creating Jobs in ServiceTrade article in the Hub" loading="lazy"><figcaption>ServiceTrade job steps, kept for older jobs that started before the migration.</figcaption></figure>
-            <figure><img src="assets/img/dispatch-onboarding/10-archived-cost-code-structure.png" alt="Archived COINS cost code structure article" loading="lazy"><figcaption>COINS cost codes, kept for reading older jobs.</figcaption></figure>
-            <figure><img src="assets/img/migration/week-one-sops-email.png" alt="Week-one SOP email" loading="lazy"><figcaption>End of week one: Service Coordinator SOPs shared, plus editable OneNote pages.</figcaption></figure>
-            <figure><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply" loading="lazy"><figcaption>The Director asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-          </div>
-        </section>
-        </div>
-      </div>
-    </details>
-  </article>
-
-  <!-- 5. Dispatch onboarding guide & checklist -->
+  <!-- 5. Dispatch Onboarding Hub -->
   <article class="project" id="dispatch-onboarding" data-lens="growth people systems">
     <div class="card-top">
       <div class="card-text">
@@ -603,12 +603,154 @@
     </details>
   </article>
 
-  <!-- 6. Technician job follow-ups -->
+  <!-- 6. Migration Documentation -->
+  <article class="project" id="migration" data-lens="operations people">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Migration Documentation</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill done">Archived</span><span class="improves">Cohesion · Access</span></p>
+        <p class="lede">Documentation that carries a team through a platform change. Here, a department moving from COINS and ServiceTrade to ServiceTitan got one iterative, searchable reference: Active articles for how the work is done today, and an archive for context on older jobs.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="Week-one documentation email and the Director's reply">
+        <div class="slide" data-label="Week one: SOPs shared"><img src="assets/img/migration/week-one-sops-email.png" alt="Email sharing the first week of Service Coordinator SOPs, also converted to editable OneNote pages" loading="lazy"></div>
+        <div class="slide" data-label="Director's reply"><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply: Wow, this is great! Can you update this through the ServiceTitan rollout?" loading="lazy"></div>
+        <div class="slide fit" data-label="Migration plan"><img src="assets/img/dispatch-onboarding/combined/cross-platform-v2-v3.png" alt="Cross-Platform Workflow Overview in the PDF guide and in the Hub Archive" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Shortly after I joined, the department began migrating from COINS and ServiceTrade to ServiceTitan. For months, work ran across all three systems while processes changed month to month. Much of the know-how was tribal knowledge: it lived in experienced people's memory and traveled by word of mouth, so the answer depended on who you asked and when they'd last checked. When details didn't match, small misses carried real costs: a PO coded as material instead of subcontractor, an invoice never uploaded and billing held up, parts that arrived without the technician hearing about it, or a job tracked in the wrong system.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">The team gained one reference it could trust: current steps in one place, with the history kept for context.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ol class="timeline">
+          <li><strong>Week-one SOPs</strong><span>Documented each Service Coordinator workflow in the existing systems and shared it with the Director.</span></li>
+          <li><strong>Living pages in the team's tools</strong><span>Converted into editable OneNote pages, where the team keeps its reference material, so anyone could add to them.</span></li>
+          <li><strong>Kept current through the rollout</strong><span>At the Director's request, updated each process as it moved to ServiceTitan, including a phased plan for which jobs closed out in ServiceTrade and which moved over.</span></li>
+          <li><strong>One consolidated ServiceTitan reference</strong><span>Revised and combined the SOPs shared by the Texas team into one cohesive document that's easier to search and scan.</span></li>
+          <li><strong>Active and Archive</strong><span>Organized into one searchable knowledge base: Active articles show how the work is done today, and an archive keeps the COINS and ServiceTrade steps for older jobs.</span></li>
+          <li class="is-end"><strong>Closeout</strong><span>As the last ServiceTrade jobs closed, legacy steps were archived and links pointed to the ServiceTitan articles. COINS steps stayed only where exception workflows still use it. My maintenance ended with the rollout.</span></li>
+        </ol>
+          <ul class="tags" aria-label="Skills used">
+          <li>Knowledge base design</li><li>Change management</li><li>Version control (Active / Archive)</li><li>Content consolidation</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>Replaced tribal knowledge with a reference people could trust through the whole transition: fewer check-ins and less waiting for answers, fewer tasks redone because a small detail was forgotten, and coordinators who worked with confidence while every process was changing. The Director endorsed it in week one and asked that it continue through the rollout.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of how the reference moved from one platform to the next.</span></div>
+        </div>
+        <div class="media-pane" data-pane="gallery" data-label="Gallery">
+          <h5 class="pane-title">Gallery</h5>
+          <div class="carousel" aria-label="Migration documentation screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/dispatch-onboarding/combined/cross-platform-v2-v3.png" alt="Cross-Platform Workflow Overview in the PDF guide and in the Hub Archive" loading="lazy"><figcaption>The phased plan for moving work from ServiceTrade and COINS to ServiceTitan, first in the PDF guide and now in the Hub's Archive.</figcaption></figure>
+            <figure><img src="assets/img/migration/archive-coins-overview.png" alt="Archived COINS Workflow Overview in the Hub" loading="lazy"><figcaption>Legacy COINS steps live in the Archive, marked so no one follows them on a new job.</figcaption></figure>
+            <figure><img src="assets/img/migration/archive-servicetrade-jobs.png" alt="Archived Creating Jobs in ServiceTrade article in the Hub" loading="lazy"><figcaption>ServiceTrade job steps, kept for older jobs that started before the migration.</figcaption></figure>
+            <figure><img src="assets/img/dispatch-onboarding/10-archived-cost-code-structure.png" alt="Archived COINS cost code structure article" loading="lazy"><figcaption>COINS cost codes, kept for reading older jobs.</figcaption></figure>
+            <figure><img src="assets/img/migration/week-one-sops-email.png" alt="Week-one SOP email" loading="lazy"><figcaption>End of week one: Service Coordinator SOPs shared, plus editable OneNote pages.</figcaption></figure>
+            <figure><img src="assets/img/migration/manager-endorsement.png" alt="Director's reply" loading="lazy"><figcaption>The Director asked for it to continue through the ServiceTitan rollout.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 7. PM Efficiency, Visibility, and Reporting -->
+  <article class="project" id="pm-reporting" data-lens="growth operations">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>PM Efficiency, Visibility, and Reporting</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Efficiency</span></p>
+        <p class="lede">Preventive maintenance status for every audience: each technician's own list, an all-staff summary, and a management view with parts and coverage.</p>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="PM reports for staff, management and technicians">
+        <div class="slide" data-label="All-staff summary"><img src="assets/img/emails/pm-all-staff.png" alt="All-staff email listing outstanding PMs by month, technician, and status" loading="lazy"></div>
+        <div class="slide" data-label="Management view"><img src="assets/img/emails/pm-management-status.png" alt="Management status table color-coded by stage, with technician, backup, account manager, and parts" loading="lazy"></div>
+        <div class="slide" data-label="Technician email"><img src="assets/img/emails/pm-monthly-v1.png" alt="Monthly email listing one technician's PMs" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Preventive maintenance is the work that's easiest to put off: the lowest margin and lowest priority, buried under quoted work. Visits get pushed down the road until the backlog is massive. In October 2026, some visits from August 2025 were still incomplete. That costs three ways. Revenue is lost, because past a certain point a missed visit can't be recouped. Trust breaks, when customers have to reach out themselves to get their maintenance scheduled. And risk grows, because PMs exist to catch problems early, and a missed one can become a costly failure. Lead technicians had no line of sight into which PMs had been started, stalled, or completed.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Technicians, account managers, and leadership all see which PMs are started, stalled, or completed, so visits get scheduled, finished, and billed instead of buried.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ul class="build-list">
+          <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
+          <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
+          <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager, and parts status on one line.</span></li>
+          </ul>
+          <ul class="tags" aria-label="Skills used">
+          <li>Reporting by audience</li><li>Excel VBA</li><li>Email automation</li><li>Information design</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>PMs are where customer trust is kept or lost. With one shared view of every visit, the backlog stays visible and shrinks instead of growing. Many stalled PMs only need notes or tasking to close, and each one closed is billable work that would otherwise be left on the table. Keeping visits on schedule protects recurring maintenance revenue, keeps customers from having to chase us, and catches equipment problems while they're still small.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of how each PM email is built and read.</span></div>
+        </div>
+        <div class="media-pane" data-pane="gallery" data-label="Gallery">
+          <h5 class="pane-title">Gallery</h5>
+          <div class="carousel" aria-label="PM reporting screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="assets/img/emails/pm-all-staff.png" alt="All-staff outstanding PM summary" loading="lazy"><figcaption>All-staff summary: outstanding PMs by month, technician, and status.</figcaption></figure>
+            <figure><img src="assets/img/emails/pm-management-status.png" alt="Management PM status table" loading="lazy"><figcaption>Management view: stage, coverage, and parts at a glance.</figcaption></figure>
+            <figure><img src="assets/img/emails/pm-monthly-v1.png" alt="Technician monthly PM email" loading="lazy"><figcaption>First version of the monthly technician email.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 8. Technician Follow-Ups -->
   <article class="project" id="follow-ups" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
-          <h3>Technician Job Follow-Ups</h3>
+          <h3>Technician Follow-Ups</h3>
         </div>
         <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Efficiency</span></p>
         <p class="lede">Personalized emails that show each technician their open service jobs, grouped by what's needed to close them: notes, a return visit, parts, or scheduling.</p>
@@ -672,80 +814,12 @@
     </details>
   </article>
 
-  <!-- 7. PM reporting -->
-  <article class="project" id="pm-reporting" data-lens="growth operations">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Preventive Maintenance Reporting</h3>
-        </div>
-        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Efficiency</span></p>
-        <p class="lede">Preventive maintenance status for every audience: each technician's own list, an all-staff summary, and a management view with parts and coverage.</p>
-      </div>
-      <div class="card-media rotator" role="group" aria-label="PM reports for staff, management and technicians">
-        <div class="slide" data-label="All-staff summary"><img src="assets/img/emails/pm-all-staff.png" alt="All-staff email listing outstanding PMs by month, technician, and status" loading="lazy"></div>
-        <div class="slide" data-label="Management view"><img src="assets/img/emails/pm-management-status.png" alt="Management status table color-coded by stage, with technician, backup, account manager, and parts" loading="lazy"></div>
-        <div class="slide" data-label="Technician email"><img src="assets/img/emails/pm-monthly-v1.png" alt="Monthly email listing one technician's PMs" loading="lazy"></div>
-      </div>
-    </div>
-
-    <details class="case">
-      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
-      <div class="case-body">
-        <div class="card-folder">
-        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
-          <h4 class="panel-title">The challenge</h4>
-          <p>Preventive maintenance is the work that's easiest to put off: the lowest margin and lowest priority, buried under quoted work. Visits get pushed down the road until the backlog is massive. In October 2026, some visits from August 2025 were still incomplete. That costs three ways. Revenue is lost, because past a certain point a missed visit can't be recouped. Trust breaks, when customers have to reach out themselves to get their maintenance scheduled. And risk grows, because PMs exist to catch problems early, and a missed one can become a costly failure. Lead technicians had no line of sight into which PMs had been started, stalled, or completed.</p>
-        </section>
-        <section class="card-panel" data-tab="built" data-label="What I Built">
-          <h4 class="panel-title">What I built</h4>
-          <p class="built-summary">Technicians, account managers, and leadership all see which PMs are started, stalled, or completed, so visits get scheduled, finished, and billed instead of buried.</p>
-        </section>
-        <section class="card-panel" data-tab="details" data-label="Details">
-          <h4 class="panel-title">Details</h4>
-          <ul class="build-list">
-          <li class="build-item"><strong>A monthly email per technician</strong><span>Only their outstanding and upcoming PMs, with sales and backup technicians copied so everyone covering the account stays informed.</span></li>
-          <li class="build-item"><strong>An all-staff summary</strong><span>Every outstanding PM by month, with the technician and its status: ready to schedule, pending customer OK, or return visit needed.</span></li>
-          <li class="build-item"><strong>A management view</strong><span>Color-coded by stage, with the job, technician, backup, account manager, and parts status on one line.</span></li>
-          </ul>
-          <ul class="tags" aria-label="Skills used">
-          <li>Reporting by audience</li><li>Excel VBA</li><li>Email automation</li><li>Information design</li>
-        </ul>
-        </section>
-        <section class="card-panel" data-tab="impact" data-label="Business Impact">
-          <h4 class="panel-title">Business impact</h4>
-          <p>PMs are where customer trust is kept or lost. With one shared view of every visit, the backlog stays visible and shrinks instead of growing. Many stalled PMs only need notes or tasking to close, and each one closed is billable work that would otherwise be left on the table. Keeping visits on schedule protects recurring maintenance revenue, keeps customers from having to chase us, and catches equipment problems while they're still small.</p>
-        </section>
-        <section class="card-panel" data-tab="media" data-label="Media">
-          <h4 class="panel-title">Media</h4>
-          <div class="media-set">
-        <div class="media-pane" data-pane="video" data-label="Video">
-          <h5 class="pane-title">Video</h5>
-          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of how each PM email is built and read.</span></div>
-        </div>
-        <div class="media-pane" data-pane="gallery" data-label="Gallery">
-          <h5 class="pane-title">Gallery</h5>
-          <div class="carousel" aria-label="PM reporting screenshots">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/emails/pm-all-staff.png" alt="All-staff outstanding PM summary" loading="lazy"><figcaption>All-staff summary: outstanding PMs by month, technician, and status.</figcaption></figure>
-            <figure><img src="assets/img/emails/pm-management-status.png" alt="Management PM status table" loading="lazy"><figcaption>Management view: stage, coverage, and parts at a glance.</figcaption></figure>
-            <figure><img src="assets/img/emails/pm-monthly-v1.png" alt="Technician monthly PM email" loading="lazy"><figcaption>First version of the monthly technician email.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-          </div>
-        </section>
-        </div>
-      </div>
-    </details>
-  </article>
-
-  <!-- 8. PM parts ordering -->
+  <!-- 9. PM Parts Auditing and Automations -->
   <article class="project" id="pm-parts" data-lens="growth operations">
     <div class="card-top">
       <div class="card-text">
         <div class="project-head">
-          <h3>PM Parts Auditing and Ordering</h3>
+          <h3>PM Parts Auditing and Automations</h3>
         </div>
         <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Efficiency · Cohesion</span></p>
         <p class="lede">Every customer's parts list standardized, then built into an automated ordering system with a technician review, so each order is checked by the person who knows the equipment before it's placed.</p>
@@ -813,7 +887,7 @@
     </details>
   </article>
 
-  <!-- 9. Service coordination database -->
+  <!-- 10. Service Coordination Database -->
   <article class="project" id="database" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
@@ -884,76 +958,6 @@
     </details>
   </article>
 
-  <!-- 10. Site Security -->
-  <article class="project" id="site-security" data-lens="growth operations systems">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Security &amp; Reliability Hardening</h3>
-        </div>
-        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Security · Reliability</span></p>
-        <p class="lede">The safeguards behind the Dispatch Hub, Start-Up SOPs, and Employee Lifecycle sites: every control mapped to a type of risk, an IT-style security review, and a costed plan for private hosting as the team grows.</p>
-      </div>
-      <div class="card-media rotator" role="group" aria-label="Risk framework, IT security review, and page history">
-        <div class="slide" data-label="Risk framework"><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"></div>
-        <div class="slide" data-label="IT review"><img src="assets/img/security/security-it-review.png" alt="IT security review: 19 checks in place, 3 that need GitHub Enterprise, 1 that needs private hosting" loading="lazy"></div>
-        <div class="slide" data-label="Audit trail"><img src="assets/img/security/security-audit-trail.png" alt="Page history showing a blocked save, the corrected save, a before-and-after edit, and restore buttons" loading="lazy"></div>
-      </div>
-    </div>
-
-    <details class="case">
-      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
-      <div class="case-body">
-        <div class="card-folder">
-        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
-          <h4 class="panel-title">The challenge</h4>
-          <p>The dispatch and start-up sites had become daily tools, and more supervisors were starting to edit them. The question changed from whether the sites worked to whether IT would sign off on them. They needed enterprise-level safeguards on a free plan, and a clear path for when the company is ready to fund private hosting.</p>
-        </section>
-        <section class="card-panel" data-tab="built" data-label="What I Built">
-          <h4 class="panel-title">What I built</h4>
-          <p class="built-summary">I treated the sites like any internal system an IT team would review, and built each control around a type of risk instead of a checklist alone. If one control misses, another catches it.</p>
-        </section>
-        <section class="card-panel" data-tab="details" data-label="Details">
-          <h4 class="panel-title">Details</h4>
-          <ul class="build-list">
-          <li class="build-item"><strong>Integrity</strong><span>Every save is signed by the editor, checked automatically, and reversible in one click. Broken or unsafe changes never go live.</span></li>
-          <li class="build-item"><strong>Confidentiality</strong><span>A classification rule decides what belongs on a page and what stays on SharePoint. Screenshots use anonymized sample data, and the publish check blocks phone numbers and emails.</span></li>
-          <li class="build-item"><strong>Identity and access</strong><span>A company-owned organization, required two-step sign-in, edit-only rights, same-day removal, and a quarterly access review.</span></li>
-          <li class="build-item"><strong>Supply chain</strong><span>Outside code is pinned, integrity-checked, and served from the site itself, with alerts for known vulnerabilities.</span></li>
-          <li class="build-item"><strong>People and process</strong><span>Plain-language error messages and an editor guide, so a blocked save tells the editor exactly how to fix it.</span></li>
-          <li class="build-item"><strong>Continuity and scale</strong><span>Ownership sits with the company, with two owners and written guides. Capacity math and four costed hosting options show what changes as the team grows.</span></li>
-        </ul>
-          <ul class="tags" aria-label="Skills used">
-          <li>Risk assessment</li><li>Security controls</li><li>Access management</li><li>Change control</li><li>Vendor evaluation</li><li>Cost modeling</li>
-        </ul>
-        </section>
-        <section class="card-panel" data-tab="impact" data-label="Business Impact">
-          <h4 class="panel-title">Business impact</h4>
-          <p>19 of 23 IT security checks are met on the free plan, at $0. The other four are mapped to paid hosting, with a funding plan that compares four options. The cheapest gives company sign-in for $0, against about $3,500 a year for GitHub Enterprise at the same team size. Capacity math puts plan limits in plain terms: a 14-person team could publish about 1,000 edits a month on the free private tier.</p>
-        </section>
-        <section class="card-panel" data-tab="media" data-label="Media">
-          <h4 class="panel-title">Media</h4>
-          <div class="media-set">
-        <div class="media-pane" data-pane="video" data-label="Video">
-          <h5 class="pane-title">Video</h5>
-          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a blocked save, the fix, and a one-click restore.</span></div>
-        </div>
-        <div class="media-pane" data-pane="gallery" data-label="Gallery">
-          <h5 class="pane-title">Gallery</h5>
-          <div class="carousel" aria-label="Security plan visuals">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
-            <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
-            <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-          </div>
-        </section>
-        </div>
-      </div>
-    </details>
-  </article>
   </div><!-- /work-list -->
 
 </main>
@@ -962,6 +966,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=12" defer></script>
+<script src="assets/site.js?v=13" defer></script>
 </body>
 </html>

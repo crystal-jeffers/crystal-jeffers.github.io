@@ -903,3 +903,40 @@
     });
   });
 })();
+
+/* ---------- Round 4: each section flies off to the right once you scroll
+   past it, and flies back in from the left when you scroll back up.
+   Content is always visible at rest; only scrolled-past sections move. ---------- */
+(function () {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var sections = Array.prototype.slice.call(document.querySelectorAll("main .page-section")).slice(0, -1);
+  if (!sections.length) return;
+  var groups = sections.map(function (sec) {
+    var items = [];
+    Array.prototype.forEach.call(sec.children, function (ch) {
+      if (ch.matches("ul.chips")) Array.prototype.push.apply(items, ch.children);
+      else items.push(ch);
+    });
+    items.forEach(function (el, i) { el.classList.add("fly-item"); el.style.setProperty("--fly-i", Math.min(i, 10)); });
+    return { sec: sec, items: items, out: false };
+  });
+  var tick = false;
+  var check = function () {
+    tick = false;
+    var vh = window.innerHeight;
+    groups.forEach(function (g) {
+      var bottom = g.sec.getBoundingClientRect().bottom;
+      if (!g.out && bottom < vh * 0.3) {
+        g.out = true;
+        g.items.forEach(function (el) { el.classList.remove("fly-back"); el.classList.add("fly-out"); });
+      } else if (g.out && bottom > vh * 0.42) {
+        g.out = false;
+        g.items.forEach(function (el) { el.classList.remove("fly-out"); el.classList.add("fly-prep"); });
+        void g.sec.offsetWidth;
+        g.items.forEach(function (el) { el.classList.remove("fly-prep"); el.classList.add("fly-back"); });
+      }
+    });
+  };
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; window.requestAnimationFrame(check); } }, { passive: true });
+  check();
+})();
