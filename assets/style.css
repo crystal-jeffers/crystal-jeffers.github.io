@@ -1793,3 +1793,13 @@ main { overflow-x: clip; }
 .tabs-on .card-folder { background: #f3f3f1; border-color: #d6d6d3; }
 /* Details: no orange left edge, since the folder already frames them */
 .build-item { border-left: 1px solid #ffd2b0; }
+
+/* Round 6b: Details show headlines only, tap to open */
+.bi-ready .build-item { cursor: pointer; position: relative; padding-right: 2.4rem; }
+.bi-ready .build-item > span { display: none; }
+.bi-ready .build-item.open > span { display: block; animation: drawer-in 0.25s ease both; }
+.bi-ready .build-item::after { content: "+"; position: absolute; right: 0.85rem; top: 0.45rem; font-size: 1.25rem; font-weight: 700; color: var(--color-orange); transition: transform 0.2s ease; }
+.bi-ready .build-item.open::after { transform: rotate(45deg); }
+.bi-ready .build-item:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+.bi-hint { margin: 0 0 0.6rem; font-size: 0.85rem; color: #555; }
+@media print { .bi-ready .build-item > span { display: block; } }

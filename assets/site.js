@@ -950,3 +950,20 @@
   }, { threshold: 0.25 });
   io.observe(trio);
 })();
+
+/* ---------- Round 6b: Details headlines open on tap ---------- */
+(function () {
+  var items = document.querySelectorAll(".card-panel[data-tab='details'] .build-item");
+  if (!items.length) return;
+  document.documentElement.classList.add("bi-ready");
+  document.querySelectorAll(".card-panel[data-tab='details'] .build-list").forEach(function (list) {
+    var hint = document.createElement("p"); hint.className = "bi-hint"; hint.textContent = "Tap any item for the details.";
+    list.parentNode.insertBefore(hint, list);
+  });
+  items.forEach(function (it) {
+    it.setAttribute("tabindex", "0"); it.setAttribute("role", "button"); it.setAttribute("aria-expanded", "false");
+    var toggle = function () { var o = it.classList.toggle("open"); it.setAttribute("aria-expanded", o ? "true" : "false"); };
+    it.addEventListener("click", toggle);
+    it.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+})();
