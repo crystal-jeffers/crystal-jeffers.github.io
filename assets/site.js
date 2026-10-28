@@ -940,3 +940,13 @@
   window.addEventListener("scroll", function () { if (!tick) { tick = true; window.requestAnimationFrame(check); } }, { passive: true });
   check();
 })();
+
+/* ---------- Round 5: Year in Review cards fold down the page ---------- */
+(function () {
+  var trio = document.querySelector(".why-trio");
+  if (!trio || !document.documentElement.classList.contains("anim-ready")) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { trio.classList.add("fallen"); io.disconnect(); } });
+  }, { threshold: 0.25 });
+  io.observe(trio);
+})();

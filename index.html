@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=19">
+<link rel="stylesheet" href="assets/style.css?v=20">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -69,16 +69,16 @@
       <button type="button" class="lens" data-lens-id="all" aria-pressed="true"
         data-note="All ten projects.">All work</button>
       <button type="button" class="lens" data-lens-id="growth" aria-pressed="false"
-        data-order="site-security,lifecycle,dispatch,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding"
+        data-order="lifecycle,dispatch,site-security,pm-parts,follow-ups,pm-reporting,database,dispatch-onboarding"
         data-note="For leaders whose departments are growing: systems that let a team take on more people, more work and more customers without the coordination load growing at the same rate.">Managing growth</button>
       <button type="button" class="lens" data-lens-id="operations" aria-pressed="false"
-        data-order="site-security,lifecycle,dispatch,follow-ups,pm-parts,migration,database,pm-reporting"
+        data-order="lifecycle,dispatch,site-security,follow-ups,pm-parts,migration,database,pm-reporting"
         data-note="For leaders running the division: consistent hand-offs across HR, IT, Safety, Fleet and the field, and capacity that grows without adding coordination overhead.">Division operations</button>
       <button type="button" class="lens" data-lens-id="people" aria-pressed="false"
         data-order="dispatch-onboarding,lifecycle,sops,migration"
         data-note="For leaders investing in people: new hires productive sooner, clear expectations by role, and knowledge that stays when people move on.">People &amp; onboarding</button>
       <button type="button" class="lens" data-lens-id="systems" aria-pressed="false"
-        data-order="site-security,lifecycle,sops,dispatch,follow-ups,dispatch-onboarding,database"
+        data-order="lifecycle,sops,dispatch,site-security,follow-ups,dispatch-onboarding,database"
         data-note="For anyone weighing design and analysis skills: research with the people who do the work, information architecture, data modeling, and automation that keeps a person in the loop.">Systems &amp; UX design</button>
     </div>
     <p class="lens-note" aria-live="polite"></p>
@@ -86,7 +86,198 @@
   </div>
   <div class="work-list">
 
-  <!-- 1. Security & Reliability Hardening -->
+  <!-- 1. Employee Lifecycle System -->
+  <article class="project" id="lifecycle" data-lens="growth operations people systems">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Employee Lifecycle System</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill done">Archived</span><span class="improves">Cohesion · Efficiency</span></p>
+        <p class="lede">A complete management interface designed to automate routine steps, track case progress, and support faster turnaround for every new hire, role change, and departure.</p>
+        <div class="project-links">
+          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">View user guides ↗</a>
+          <a class="btn btn-light" href="https://crystal-jeffers.github.io/onboarding/guide.html?role=hr&amp;file=guides%2Fhow-it-works.md" target="_blank" rel="noopener">How it works ↗</a>
+        </div>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="A walk through the HR workspace">
+        <div class="slide" data-label="HR Home"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"></div>
+        <div class="slide" data-label="Upcoming Risk"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"></div>
+        <div class="slide" data-label="Case Progress"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"></div>
+        <div class="slide" data-label="Task Library"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"></div>
+        <div class="slide" data-label="New Hire Kickoff"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"></div>
+        <div class="slide" data-label="New Hire Email"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"></div>
+        <div class="slide" data-label="Manager Triage"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"></div>
+        <div class="slide" data-label="Draft Queue"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-draft.png" alt="A drafted request email open and ready to edit" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and sometimes the union hall. The steps were written down, but not who owned each one across teams. People relied on memory or assumption to know who handled what, which made it hard to follow up and work as a team to make sure every new hire was fully set up on day one. Role changes and departures raised the same coordination needs, with added care for confidentiality. With Workday still months away and the workforce changing, Start-Up and Service needed something to hold the process together in the meantime.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">Every team can see which steps it owns, and every step is tracked through to confirmation, so new hires are fully set up on day one without relying on memory.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ul class="build-list">
+          <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change, and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle, and more.</span></li>
+          <li class="build-item"><strong>One owner per step</strong><span>Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</span></li>
+          <li class="build-item"><strong>Automation with judgment</strong><span>Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</span></li>
+          <li class="build-item"><strong>Docs for each audience</strong><span>A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</span></li>
+          </ul>
+          <ul class="tags" aria-label="Skills used">
+          <li>Requirements from stakeholder docs</li><li>Data model</li><li>Rules engine</li><li>Human-in-the-loop</li><li>Role-based UX</li><li>Documentation</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>The Manager Workspace carried Start-Up and Service through a period of workforce changes, so new hires were set up on day one while the company prepared for Workday. Clear ownership turned the hand-offs between HR, IT, Safety, Fleet, and Accounting into one shared checklist that every team could see and follow up on. Now that Workday handles most of the tracking, drafting, and request emails, the system is archived. The HR side was a design exercise in how two systems can share one process without confusion, and that thinking about visibility and ownership carries into onboarding readiness today.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a case, from the first form to the completion email.</span></div>
+        </div>
+        <div class="media-pane" data-pane="starting" data-label="Starting Cases">
+          <h5 class="pane-title">Starting Cases</h5>
+          <p class="pane-intro">Managers start every case with a form, and HR approves it before any steps go out.</p>
+          <div class="carousel" aria-label="Starting cases">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"><figcaption>New hire: one short form with the start date, role, and location. Every step for that hire is built from those answers, so no one retypes the details.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"><figcaption>The hiring manager hears right away, with a link to their steps, so they know what is coming before day one.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-role-change.png" alt="Role Change form" loading="lazy"><figcaption>Role change: the manager picks the employee, and their current role, department, and manager fill in on their own. The manager only enters what is changing.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-role-change-review.png" alt="Role change review email sent to HR" loading="lazy"><figcaption>HR approves before anything moves. The review email lists exactly what is changing, and no steps go out until HR marks it approved.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-offboarding.png" alt="Offboarding form" loading="lazy"><figcaption>Departure: the manager starts it the same way, with the employee and their last day. HR adds separation notes, approves, and the offboarding steps go out.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+        <div class="media-pane" data-pane="tracking" data-label="Tracking Cases">
+          <h5 class="pane-title">Tracking Cases</h5>
+          <p class="pane-intro">Once a case is approved, every step has an owner and a due date. Here is how a manager keeps up, from the first notice to the finish.</p>
+          <div class="carousel" aria-label="Tracking cases">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-dashboard.png" alt="Manager dashboard with hire progress" loading="lazy"><figcaption>Manager dashboard: active hires, overdue steps, steps due soon, and drafts ready to send, with each hire's progress bar below.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"><figcaption>Triage: the manager's own steps, sorted by status. One click opens a step with its instructions and notes.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-queue.png" alt="Draft queue of pre-written requests" loading="lazy"><figcaption>Draft queue: requests to other teams, like building access or a mobile device, come pre-written. The manager reviews and sends instead of starting from scratch.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-quick-deploy.png" alt="Quick Deploy list of drafts by start date" loading="lazy"><figcaption>Quick Deploy: every draft for upcoming starts in one list, so a whole week of requests goes out in a few clicks.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-hr-remind-manager.png" alt="HR check-in email listing overdue steps" loading="lazy"><figcaption>Overdue email: a check-in lists everything overdue on the team's cases, and who is responsible for each step.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-overdue.png" alt="Overdue tasks grouped by hire" loading="lazy"><figcaption>Overdue tasks: the same list inside the workspace, grouped by hire, so steps get closed out right there.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"><figcaption>Case progress: every step for one hire, its owner, and its status, so anyone can see what is left without asking.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-email-settings.png" alt="Manager email settings" loading="lazy"><figcaption>Email settings: each manager chooses which notices they get. Security and audit emails always stay on.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-case-complete.png" alt="Case complete email" loading="lazy"><figcaption>Complete: when every step is done, the case closes and a confirmation goes out.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+        <div class="media-pane" data-pane="hr" data-label="HR Oversight">
+          <h5 class="pane-title">HR Oversight</h5>
+          <p class="pane-intro">HR sees every case at once, and keeps the step library current.</p>
+          <div class="carousel" aria-label="HR oversight">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"><figcaption>HR home: every open case, and what is overdue, in one view.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"><figcaption>Upcoming risk: hires starting soon whose steps are behind, flagged before day one.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"><figcaption>The shared step library HR maintains. Every new case is built from it.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 2. Start-Up Tracking & Dispatch -->
+  <article class="project" id="dispatch" data-lens="growth operations systems">
+    <div class="card-top">
+      <div class="card-text">
+        <div class="project-head">
+          <h3>Start-Up Tracking &amp; Dispatch</h3>
+        </div>
+        <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Cohesion · Access</span></p>
+        <p class="lede">A shared scheduling board for the Start-Up crew that tracks every job and accounts for each technician's union holidays, so scheduling stays consistent as the crew grows.</p>
+        <div class="project-links">
+          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
+        </div>
+      </div>
+      <div class="card-media rotator" role="group" aria-label="A walk through the dispatch board">
+        <div class="slide" data-label="Timeline"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline of each technician's jobs" loading="lazy"></div>
+        <div class="slide" data-label="Calendar"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Calendar with a union holiday conflict flagged" loading="lazy"></div>
+        <div class="slide" data-label="Job Tracker"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker cards with phase and schedule status" loading="lazy"></div>
+        <div class="slide" data-label="Job Detail"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker-detail.png" alt="One job opened with progress, deadline and contacts" loading="lazy"></div>
+        <div class="slide" data-label="Checklist"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Start-up checklist for a job" loading="lazy"></div>
+      </div>
+    </div>
+
+    <details class="case">
+      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
+      <div class="case-body">
+        <div class="card-folder">
+        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+          <h4 class="panel-title">The challenge</h4>
+          <p>Crew schedules and job status lived in a monthly spreadsheet. It was time-consuming to update, hard to view at a glance, difficult to search, visually overwhelming, and not viewable on mobile. It offered limited functions and awkward back-end upkeep, and union holidays, which vary by local and agreement, were all tracked by hand. Checking one technician's availability meant cross-referencing on the fly.</p>
+        </section>
+        <section class="card-panel" data-tab="built" data-label="What I Built">
+          <h4 class="panel-title">What I built</h4>
+          <p class="built-summary">The spreadsheet became a live board: supervisors plan, track, and adjust the whole crew in one place, and every technician sees their own schedule from a phone.</p>
+        </section>
+        <section class="card-panel" data-tab="details" data-label="Details">
+          <h4 class="panel-title">Details</h4>
+          <ul class="build-list">
+          <li class="build-item"><strong>The whole crew at a glance</strong><span>Timeline view: one row per technician and one bar per assignment, color-coded by union. Gaps, overlaps, and open capacity show up before a date is committed.</span></li>
+          <li class="build-item"><strong>Coverage by date</strong><span>Calendar view: filter to see who's out and when, so coverage for a holiday week or a long job is clear before it's booked.</span></li>
+          <li class="build-item"><strong>Every job's progress, without a phone call</strong><span>Job tracker: phase, schedule status, deadline, and contacts on every job, each with its own start-up checklist, so progress is visible without asking for an update.</span></li>
+          <li class="build-item"><strong>Holidays that fill themselves in</strong><span>Each technician's own local's paid holidays and off days are added automatically, about 90 days ahead. New crew members get theirs the moment they're added.</span></li>
+          <li class="build-item"><strong>Conflicts caught at booking</strong><span>If a job lands on someone's holiday, a warning appears right on the assignment and clears when the job moves. The supervisor still makes the final call.</span></li>
+          <li class="build-item"><strong>A view-only board in every pocket</strong><span>Technicians open a read-only live feed on their phones that shows only their own assignments. They always see the current schedule, and the board stays accurate because only the supervisor edits it.</span></li>
+          <li class="build-item"><strong>Two weeks of coverage, planned ahead</strong><span>Built with the superintendents: a labor forecasting board looks two weeks out, flags any job without a crew and any technician without work, and lets the supervisor fill the gap in one click.</span></li>
+          <li class="build-item"><strong>Next week, in their inbox every Friday</strong><span>An automated email every Friday afternoon lists each technician's jobs for the coming week, so Monday starts with a plan instead of a phone call.</span></li>
+          </ul>
+          <ul class="tags" aria-label="Skills used">
+          <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li><li>Mobile access</li><li>Automated email</li>
+        </ul>
+        </section>
+        <section class="card-panel" data-tab="impact" data-label="Business Impact">
+          <h4 class="panel-title">Business impact</h4>
+          <p>After one demo, the superintendents and service manager adopted the board on the spot, and it is now how the Start-Up crew is scheduled. Scheduling moved from manual upkeep to a board that maintains itself, so supervisor time goes to planning the work instead of updating cells. Technicians see their own schedule anytime and get next week's plan every Friday, which cuts the calls and texts that used to fill the gaps. Holiday conflicts are caught at booking instead of on the day, avoiding last-minute reschedules with customers. And the board grows with the crew: at launch, 132 holiday entries for 16 union technicians, with new crew members added automatically. The labor forecasting board, built with the superintendents, keeps every job and every technician covered two weeks into the future.</p>
+        </section>
+        <section class="card-panel" data-tab="media" data-label="Media">
+          <h4 class="panel-title">Media</h4>
+          <div class="media-set">
+        <div class="media-pane" data-pane="video" data-label="Video">
+          <h5 class="pane-title">Video</h5>
+          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of booking and moving a crew on the dispatch board.</span></div>
+        </div>
+        <div class="media-pane" data-pane="gallery" data-label="Gallery">
+          <h5 class="pane-title">Gallery</h5>
+          <div class="carousel" aria-label="Dispatch board screenshots">
+          <div class="carousel-track" tabindex="0">
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline" loading="lazy"><figcaption>Timeline: the whole crew at a glance.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-filter-out.png" alt="Dispatch calendar filtered to show who is out" loading="lazy"><figcaption>Calendar filtered to who's out, and when.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Dispatch calendar with a holiday conflict warning" loading="lazy"><figcaption>A job that overlaps a union holiday is flagged right on the assignment.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker gallery" loading="lazy"><figcaption>Job tracker: phase and schedule status for every job.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Job checklist" loading="lazy"><figcaption>Each job carries its own start-up checklist.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/holidays-list.png" alt="Holiday list by union local" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
+            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Every Friday, each technician gets next week's schedule by email.</figcaption></figure>
+          </div>
+          </div>
+        </div>
+          </div>
+        </section>
+        </div>
+      </div>
+    </details>
+  </article>
+
+  <!-- 3. Security & Reliability Hardening -->
   <article class="project" id="site-security" data-lens="growth operations systems">
     <div class="card-top">
       <div class="card-text">
@@ -150,196 +341,6 @@
             <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
             <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
             <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-          </div>
-        </section>
-        </div>
-      </div>
-    </details>
-  </article>
-
-  <!-- 2. Employee Lifecycle System -->
-  <article class="project" id="lifecycle" data-lens="growth operations people systems">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Employee Lifecycle System</h3>
-        </div>
-        <p class="meta-row"><span class="status-pill">Pilot Pending</span><span class="improves">Cohesion · Efficiency</span></p>
-        <p class="lede">A complete management interface designed to automate routine steps, track case progress, and support faster turnaround for every new hire, role change, and departure.</p>
-        <div class="project-links">
-          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/onboarding/" target="_blank" rel="noopener">View user guides ↗</a>
-          <a class="btn btn-light" href="https://crystal-jeffers.github.io/onboarding/guide.html?role=hr&amp;file=guides%2Fhow-it-works.md" target="_blank" rel="noopener">How it works ↗</a>
-        </div>
-      </div>
-      <div class="card-media rotator" role="group" aria-label="A walk through the HR workspace">
-        <div class="slide" data-label="HR Home"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"></div>
-        <div class="slide" data-label="Upcoming Risk"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"></div>
-        <div class="slide" data-label="Case Progress"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"></div>
-        <div class="slide" data-label="Task Library"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"></div>
-        <div class="slide" data-label="New Hire Kickoff"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"></div>
-        <div class="slide" data-label="New Hire Email"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"></div>
-        <div class="slide" data-label="Manager Triage"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"></div>
-        <div class="slide" data-label="Draft Queue"><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-draft.png" alt="A drafted request email open and ready to edit" loading="lazy"></div>
-      </div>
-    </div>
-
-    <details class="case">
-      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
-      <div class="case-body">
-        <div class="card-folder">
-        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
-          <h4 class="panel-title">The challenge</h4>
-          <p>Bringing on a new hire involves IT, Safety, Fleet, Facilities, Accounting, and sometimes the union hall. The steps were written down, but not who owned each one across teams. People relied on memory or assumption to know who handled what, which made it hard to follow up and work as a team to make sure every new hire was fully set up on day one. Role changes and departures raised the same coordination needs, with added care for confidentiality.</p>
-        </section>
-        <section class="card-panel" data-tab="built" data-label="What I Built">
-          <h4 class="panel-title">What I built</h4>
-          <p class="built-summary">Every team can see which steps it owns, and every step is tracked through to confirmation, so new hires are fully set up on day one without relying on memory.</p>
-        </section>
-        <section class="card-panel" data-tab="details" data-label="Details">
-          <h4 class="panel-title">Details</h4>
-          <ul class="build-list">
-          <li class="build-item"><strong>One engine, three case types</strong><span>Onboarding, role change, and offboarding each start with one form and build their own checklist from a shared step library, filtered by role, location, union, vehicle, and more.</span></li>
-          <li class="build-item"><strong>One owner per step</strong><span>Every hand-off is split into a request step and a confirmation step, so nothing stalls between teams.</span></li>
-          <li class="build-item"><strong>Automation with judgment</strong><span>Managers choose whether routine emails send for them or wait as drafts. Sensitive cases, like involuntary exits, always wait for a person.</span></li>
-          <li class="build-item"><strong>Docs for each audience</strong><span>A guide site with separate paths for HR and managers, a timeline, an FAQ keyed to every email, and plain-language definitions.</span></li>
-          </ul>
-          <ul class="tags" aria-label="Skills used">
-          <li>Requirements from stakeholder docs</li><li>Data model</li><li>Rules engine</li><li>Human-in-the-loop</li><li>Role-based UX</li><li>Documentation</li>
-        </ul>
-        </section>
-        <section class="card-panel" data-tab="impact" data-label="Business Impact">
-          <h4 class="panel-title">Business impact</h4>
-          <p>Supports the goal of enhancing onboarding and ongoing support as new hires join the division and learn the NorCal Way. Clear ownership turns the hand-offs between HR, IT, Safety, Fleet, and Accounting into one shared checklist that every team can see and follow up on, so a new hire's first day is spent getting started, not waiting on equipment or access. Because it was built from the superintendents' own New Hire Protocols, it reflects a process they already know.</p>
-        </section>
-        <section class="card-panel" data-tab="media" data-label="Media">
-          <h4 class="panel-title">Media</h4>
-          <div class="media-set">
-        <div class="media-pane" data-pane="video" data-label="Video">
-          <h5 class="pane-title">Video</h5>
-          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a case, from the first form to the completion email.</span></div>
-        </div>
-        <div class="media-pane" data-pane="starting" data-label="Starting Cases">
-          <h5 class="pane-title">Starting Cases</h5>
-          <p class="pane-intro">Managers start every case with a form, and HR approves it before any steps go out.</p>
-          <div class="carousel" aria-label="Starting cases">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-new-hire-kickoff.png" alt="New Hire Kickoff form" loading="lazy"><figcaption>New hire: one short form with the start date, role, and location. Every step for that hire is built from those answers, so no one retypes the details.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-new-case.png" alt="Email telling a manager a new hire was added to their team" loading="lazy"><figcaption>The hiring manager hears right away, with a link to their steps, so they know what is coming before day one.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-role-change.png" alt="Role Change form" loading="lazy"><figcaption>Role change: the manager picks the employee, and their current role, department, and manager fill in on their own. The manager only enters what is changing.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-role-change-review.png" alt="Role change review email sent to HR" loading="lazy"><figcaption>HR approves before anything moves. The review email lists exactly what is changing, and no steps go out until HR marks it approved.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/forms/form-offboarding.png" alt="Offboarding form" loading="lazy"><figcaption>Departure: the manager starts it the same way, with the employee and their last day. HR adds separation notes, approves, and the offboarding steps go out.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-        <div class="media-pane" data-pane="tracking" data-label="Tracking Cases">
-          <h5 class="pane-title">Tracking Cases</h5>
-          <p class="pane-intro">Once a case is approved, every step has an owner and a due date. Here is how a manager keeps up, from the first notice to the finish.</p>
-          <div class="carousel" aria-label="Tracking cases">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-dashboard.png" alt="Manager dashboard with hire progress" loading="lazy"><figcaption>Manager dashboard: active hires, overdue steps, steps due soon, and drafts ready to send, with each hire's progress bar below.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-triage-detail.png" alt="Manager triage board with a step opened in detail" loading="lazy"><figcaption>Triage: the manager's own steps, sorted by status. One click opens a step with its instructions and notes.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-draft-queue.png" alt="Draft queue of pre-written requests" loading="lazy"><figcaption>Draft queue: requests to other teams, like building access or a mobile device, come pre-written. The manager reviews and sends instead of starting from scratch.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-quick-deploy.png" alt="Quick Deploy list of drafts by start date" loading="lazy"><figcaption>Quick Deploy: every draft for upcoming starts in one list, so a whole week of requests goes out in a few clicks.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-hr-remind-manager.png" alt="HR check-in email listing overdue steps" loading="lazy"><figcaption>Overdue email: a check-in lists everything overdue on the team's cases, and who is responsible for each step.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-overdue.png" alt="Overdue tasks grouped by hire" loading="lazy"><figcaption>Overdue tasks: the same list inside the workspace, grouped by hire, so steps get closed out right there.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-case-progress.png" alt="Case progress: each step, its owner and status" loading="lazy"><figcaption>Case progress: every step for one hire, its owner, and its status, so anyone can see what is left without asking.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/manager/mgr-email-settings.png" alt="Manager email settings" loading="lazy"><figcaption>Email settings: each manager chooses which notices they get. Security and audit emails always stay on.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/emails/email-case-complete.png" alt="Case complete email" loading="lazy"><figcaption>Complete: when every step is done, the case closes and a confirmation goes out.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-        <div class="media-pane" data-pane="hr" data-label="HR Oversight">
-          <h5 class="pane-title">HR Oversight</h5>
-          <p class="pane-intro">HR sees every case at once, and keeps the step library current.</p>
-          <div class="carousel" aria-label="HR oversight">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-home-dashboard.png" alt="HR home dashboard: active hires, overdue and due-soon steps" loading="lazy"><figcaption>HR home: every open case, and what is overdue, in one view.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-program-insights.png" alt="Program insights: hires starting soon who are not yet ready" loading="lazy"><figcaption>Upcoming risk: hires starting soon whose steps are behind, flagged before day one.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/onboarding/assets/img/hr/hr-task-library.png" alt="The shared task library" loading="lazy"><figcaption>The shared step library HR maintains. Every new case is built from it.</figcaption></figure>
-          </div>
-          </div>
-        </div>
-          </div>
-        </section>
-        </div>
-      </div>
-    </details>
-  </article>
-
-  <!-- 3. Start-Up Tracking & Dispatch -->
-  <article class="project" id="dispatch" data-lens="growth operations systems">
-    <div class="card-top">
-      <div class="card-text">
-        <div class="project-head">
-          <h3>Start-Up Tracking &amp; Dispatch</h3>
-        </div>
-        <p class="meta-row"><span class="status-pill">Pilot Pending</span><span class="improves">Cohesion · Access</span></p>
-        <p class="lede">A shared scheduling board for the Start-Up crew that tracks every job and accounts for each technician's union holidays, so scheduling stays consistent as the crew grows.</p>
-        <div class="project-links">
-          <a class="btn btn-dark" href="https://crystal-jeffers.github.io/start-up-procedures/supervisor.html" target="_blank" rel="noopener">Supervisor guide ↗</a>
-        </div>
-      </div>
-      <div class="card-media rotator" role="group" aria-label="A walk through the dispatch board">
-        <div class="slide" data-label="Timeline"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline of each technician's jobs" loading="lazy"></div>
-        <div class="slide" data-label="Calendar"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Calendar with a union holiday conflict flagged" loading="lazy"></div>
-        <div class="slide" data-label="Job Tracker"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker cards with phase and schedule status" loading="lazy"></div>
-        <div class="slide" data-label="Job Detail"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker-detail.png" alt="One job opened with progress, deadline and contacts" loading="lazy"></div>
-        <div class="slide" data-label="Checklist"><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Start-up checklist for a job" loading="lazy"></div>
-      </div>
-    </div>
-
-    <details class="case">
-      <summary><span class="when-closed">Challenge, build &amp; impact</span><span class="when-open">Close</span></summary>
-      <div class="case-body">
-        <div class="card-folder">
-        <section class="card-panel" data-tab="challenge" data-label="The Challenge">
-          <h4 class="panel-title">The challenge</h4>
-          <p>Crew schedules and job status lived in a monthly spreadsheet. It was time-consuming to update, hard to view at a glance, difficult to search, visually overwhelming, and not viewable on mobile. It offered limited functions and awkward back-end upkeep, and union holidays, which vary by local and agreement, were all tracked by hand. Checking one technician's availability meant cross-referencing on the fly.</p>
-        </section>
-        <section class="card-panel" data-tab="built" data-label="What I Built">
-          <h4 class="panel-title">What I built</h4>
-          <p class="built-summary">The spreadsheet became a live board: supervisors plan, track, and adjust the whole crew in one place, and every technician sees their own schedule from a phone.</p>
-        </section>
-        <section class="card-panel" data-tab="details" data-label="Details">
-          <h4 class="panel-title">Details</h4>
-          <ul class="build-list">
-          <li class="build-item"><strong>The whole crew at a glance</strong><span>Timeline view: one row per technician and one bar per assignment, color-coded by union. Gaps, overlaps, and open capacity show up before a date is committed.</span></li>
-          <li class="build-item"><strong>Coverage by date</strong><span>Calendar view: filter to see who's out and when, so coverage for a holiday week or a long job is clear before it's booked.</span></li>
-          <li class="build-item"><strong>Every job's progress, without a phone call</strong><span>Job tracker: phase, schedule status, deadline, and contacts on every job, each with its own start-up checklist, so progress is visible without asking for an update.</span></li>
-          <li class="build-item"><strong>Holidays that fill themselves in</strong><span>Each technician's own local's paid holidays and off days are added automatically, about 90 days ahead. New crew members get theirs the moment they're added.</span></li>
-          <li class="build-item"><strong>Conflicts caught at booking</strong><span>If a job lands on someone's holiday, a warning appears right on the assignment and clears when the job moves. The supervisor still makes the final call.</span></li>
-          <li class="build-item"><strong>A view-only board in every pocket</strong><span>Technicians open a read-only live feed on their phones that shows only their own assignments. They always see the current schedule, and the board stays accurate because only the supervisor edits it.</span></li>
-          <li class="build-item"><strong>Next week, in their inbox every Friday</strong><span>An automated email every Friday afternoon lists each technician's jobs for the coming week, so Monday starts with a plan instead of a phone call.</span></li>
-          </ul>
-          <ul class="tags" aria-label="Skills used">
-          <li>Spreadsheet-to-database migration</li><li>Rules modeling</li><li>Scheduling UX</li><li>Exception handling</li><li>Mobile access</li><li>Automated email</li>
-        </ul>
-        </section>
-        <section class="card-panel" data-tab="impact" data-label="Business Impact">
-          <h4 class="panel-title">Business impact</h4>
-          <p>Scheduling moved from manual upkeep to a board that maintains itself, so supervisor time goes to planning the work instead of updating cells. Technicians see their own schedule anytime and get next week's plan every Friday, which cuts the calls and texts that used to fill the gaps. Holiday conflicts are caught at booking instead of on the day, avoiding last-minute reschedules with customers. And the board grows with the crew: at launch, 132 holiday entries for 16 union technicians, with new crew members added automatically.</p>
-        </section>
-        <section class="card-panel" data-tab="media" data-label="Media">
-          <h4 class="panel-title">Media</h4>
-          <div class="media-set">
-        <div class="media-pane" data-pane="video" data-label="Video">
-          <h5 class="pane-title">Video</h5>
-          <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of booking and moving a crew on the dispatch board.</span></div>
-        </div>
-        <div class="media-pane" data-pane="gallery" data-label="Gallery">
-          <h5 class="pane-title">Gallery</h5>
-          <div class="carousel" aria-label="Dispatch board screenshots">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/timeline-overview.png" alt="Dispatch timeline" loading="lazy"><figcaption>Timeline: the whole crew at a glance.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-filter-out.png" alt="Dispatch calendar filtered to show who is out" loading="lazy"><figcaption>Calendar filtered to who's out, and when.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/calendar-holiday.png" alt="Dispatch calendar with a holiday conflict warning" loading="lazy"><figcaption>A job that overlaps a union holiday is flagged right on the assignment.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-tracker.png" alt="Job tracker gallery" loading="lazy"><figcaption>Job tracker: phase and schedule status for every job.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/job-checklist.png" alt="Job checklist" loading="lazy"><figcaption>Each job carries its own start-up checklist.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/holidays-list.png" alt="Holiday list by union local" loading="lazy"><figcaption>Holiday rules by local, maintained in one list.</figcaption></figure>
-            <figure><img src="https://crystal-jeffers.github.io/start-up-procedures/assets/img/supervisor/my-schedule-email.png" alt="Weekly schedule email to a technician" loading="lazy"><figcaption>Every Friday, each technician gets next week's schedule by email.</figcaption></figure>
           </div>
           </div>
         </div>
@@ -966,6 +967,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=13" defer></script>
+<script src="assets/site.js?v=14" defer></script>
 </body>
 </html>

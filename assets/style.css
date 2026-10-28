@@ -1741,3 +1741,55 @@ main { overflow-x: clip; }
 .why-trio > div:nth-child(2) { background: #dcdcda; }
 .why-trio > div:nth-child(3) { background: var(--color-orange-deep); border-top-color: var(--color-black); }
 .why-trio > div:nth-child(3) h3, .why-trio > div:nth-child(3) p { color: #fff; }
+
+/* =========================================================================
+   ROUND 5 (Oct 23, restored Oct 28)
+   ========================================================================= */
+.case-play { background: #fff; border: 2.5px solid var(--color-black); box-shadow: none; }
+.case-play:hover { background: #fff; }
+.case-play .play-icon { border-color: transparent transparent transparent var(--color-black); }
+.deck-card:nth-child(2) p:not(.about-me-lead):not(.deck-kicker) { color: #4a4a4a; }
+.deck-more { margin-top: 0.6rem; }
+.deck-more > summary { list-style: none; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: inherit; }
+.deck-more > summary::-webkit-details-marker { display: none; }
+.deck-more > summary:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; border-radius: 4px; }
+.deck-more-arrow { width: 28px; height: 28px; border-radius: 50%; border: 2px solid currentColor; position: relative; transition: transform 0.25s ease; }
+.deck-more-arrow::after { content: ""; position: absolute; left: 50%; top: 45%; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translate(-50%, -50%) rotate(45deg); }
+.deck-more[open] .deck-more-arrow { transform: rotate(180deg); }
+.deck-more-label::before { content: "More"; }
+.deck-more[open] .deck-more-label::before { content: "Less"; }
+.deck-more-body { padding-top: 0.5rem; }
+.deck-card:nth-child(1) .deck-more > summary { color: var(--color-orange); }
+.deck-card:nth-child(2) .deck-more > summary { color: #a84300; }
+.deck-card:nth-child(3) .deck-more > summary { color: #9a3d00; }
+.yir-summary { max-width: none; margin: 0 0 1.5rem !important; }
+.yir-grid { grid-template-columns: minmax(0, 23rem) minmax(0, 1fr); gap: 1rem; }
+.yir-grid .about-why { display: flex; flex-direction: column; gap: 0.9rem; margin: 0; perspective: 1100px; }
+.yir-grid .about-why > div { flex: 1; justify-content: center; padding: 1.1rem 1.3rem; }
+.yir-grid .about-why h3 { font-size: 0.8rem; }
+.yir-grid .about-why p { font-size: 1rem; max-width: 60ch; }
+@media (max-width: 1000px) { .yir-grid { grid-template-columns: minmax(0, 21rem) minmax(0, 1fr); } .yir-grid .phone { grid-column: auto; justify-self: stretch; width: auto; } }
+@media (max-width: 720px) { .yir-grid { grid-template-columns: 1fr; } .yir-grid .phone { justify-self: center; width: min(100%, 23rem); } }
+.anim-ready .why-trio > div { transform-origin: top center; transform: rotateX(-85deg); opacity: 0; transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.25, 1.12), opacity 0.35s ease; }
+.anim-ready .why-trio > div:nth-child(2) { transition-delay: 0.22s; }
+.anim-ready .why-trio > div:nth-child(3) { transition-delay: 0.44s; }
+.anim-ready .why-trio.fallen > div { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .anim-ready .why-trio > div { transform: none; opacity: 1; } }
+.phone .msg-img { padding: 0; background: none; max-width: 70%; }
+.phone .msg-img img { display: block; width: 100%; border-radius: 16px; border: 1px solid #e3e3e6; }
+.phone .msg-emoji { background: none; padding: 0; font-size: 2.1rem; line-height: 1.1; }
+.phone .msg-emoji.msg-in .msg-who { font-size: 0.68rem; line-height: 1.3; }
+
+/* =========================================================================
+   ROUND 6 (Oct 28): readable tab panels
+   ========================================================================= */
+/* The tab folder runs the full width of the card, lined up with the title */
+.case-body { padding-left: 0; padding-right: 0; }
+.case-body > * { max-width: none; }
+/* Larger, darker text on the panels */
+.case-body p, .case-body p.built-summary { font-size: 1.06rem; line-height: 1.6; color: #1f1f1f; }
+.build-item strong { font-size: 1rem; color: #111; }
+.build-item span { font-size: 0.98rem; color: #2a2a2a; }
+.tabs-on .card-folder { background: #f3f3f1; border-color: #d6d6d3; }
+/* Details: no orange left edge, since the folder already frames them */
+.build-item { border-left: 1px solid #ffd2b0; }
