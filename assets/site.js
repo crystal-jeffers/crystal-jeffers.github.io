@@ -967,3 +967,95 @@
     it.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
   });
 })();
+
+/* ---------- Round 7: About me cards turn over ---------- */
+(function () {
+  var deck = document.querySelector(".about-deck");
+  if (!deck) return;
+  document.documentElement.classList.add("turn-ready");
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var show = function (card, back) {
+    card.classList.toggle("show-back", back);
+    var target = card.querySelector(back ? ".deck-back .deck-turn" : ".deck-front .deck-turn");
+    if (target) target.focus({ preventScroll: true });
+  };
+  deck.addEventListener("click", function (e) {
+    var btn = e.target.closest(".deck-turn");
+    if (btn) {
+      var card = btn.closest(".deck-card");
+      var back = btn.getAttribute("data-to") === "back";
+      if (calm || !card.animate) return show(card, back);
+      var a = card.animate([{ transform: "perspective(1400px) rotateY(0deg)" }, { transform: "perspective(1400px) rotateY(90deg)" }], { duration: 210, easing: "ease-in" });
+      a.onfinish = function () {
+        show(card, back);
+        card.animate([{ transform: "perspective(1400px) rotateY(-90deg)" }, { transform: "perspective(1400px) rotateY(0deg)" }], { duration: 260, easing: "ease-out" });
+      };
+      return;
+    }
+    if (e.target.closest(".deck-next")) {
+      // Moving to the next card turns every card face up again.
+      setTimeout(function () { deck.querySelectorAll(".deck-card.show-back").forEach(function (c) { c.classList.remove("show-back"); }); }, 340);
+    }
+  });
+})();
+
+/* ---------- Round 7: Year in Review zigzag, pulse, and phone caption ---------- */
+(function () {
+  var trio = document.querySelector(".yir-grid .why-trio");
+  var note = document.querySelector(".phone-note");
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (note) {
+    var nio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { setTimeout(function () { note.classList.add("popped"); }, 600); nio.disconnect(); } });
+    }, { threshold: 0.4 });
+    nio.observe(note.parentNode);
+  }
+  if (!trio) return;
+  var NS = "http://www.w3.org/2000/svg";
+  var cards = Array.prototype.slice.call(trio.children);
+  var svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("class", "zig");
+  svg.setAttribute("aria-hidden", "true");
+  var base = document.createElementNS(NS, "path"); base.setAttribute("class", "zig-base");
+  var pulse = document.createElementNS(NS, "path"); pulse.setAttribute("class", "zig-pulse");
+  svg.appendChild(base); svg.appendChild(pulse);
+  trio.appendChild(svg); // last, so the cards keep their nth-child colors
+  var len = 0;
+  var draw = function () {
+    var w = trio.clientWidth, h = trio.clientHeight;
+    if (!w || !h) return;
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    // Run from the middle of the first card to the middle of the last, so the line only shows between cards.
+    var y0 = cards[0].offsetTop + cards[0].offsetHeight / 2;
+    var last = cards[cards.length - 1], y1 = last.offsetTop + last.offsetHeight / 2;
+    var cx = w / 2, amp = Math.min(16, w * 0.05), step = 14, d = "M " + cx + " " + y0, y = y0, side = 1;
+    while (y < y1) { y = Math.min(y1, y + step); d += " L " + (cx + amp * side) + " " + y; side = -side; }
+    base.setAttribute("d", d); pulse.setAttribute("d", d);
+    len = pulse.getTotalLength();
+  };
+  draw();
+  if (window.ResizeObserver) new ResizeObserver(draw).observe(trio);
+  if (calm || !pulse.animate) return;
+  var travel = 3200, timer = null;
+  var fire = function () {
+    if (!len) return;
+    var dash = 110;
+    pulse.style.strokeDasharray = dash + " " + (len + dash);
+    pulse.animate([{ strokeDashoffset: dash, opacity: 1 }, { strokeDashoffset: -len, opacity: 1 }], { duration: travel, easing: "linear" });
+    var top = trio.getBoundingClientRect().top, h = trio.clientHeight;
+    cards.forEach(function (c) {
+      var r = c.getBoundingClientRect();
+      var at = ((r.top - top) + r.height / 2) / h;
+      setTimeout(function () {
+        c.classList.remove("zapped"); void c.offsetWidth; c.classList.add("zapped");
+      }, Math.max(0, at * travel - 150));
+    });
+  };
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting && !timer) { fire(); timer = setInterval(fire, 5000); }
+      else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+    });
+  }, { threshold: 0.2 });
+  io.observe(trio);
+})();

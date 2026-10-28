@@ -1803,3 +1803,71 @@ main { overflow-x: clip; }
 .bi-ready .build-item:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
 .bi-hint { margin: 0 0 0.6rem; font-size: 0.85rem; color: #555; }
 @media print { .bi-ready .build-item > span { display: block; } }
+
+/* Round 7: About me cards turn over instead of expanding */
+.deck-turn { display: none; }
+.turn-ready .deck-turn {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0;
+  background: none; border: 0; cursor: pointer; font: inherit; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: inherit;
+}
+.turn-ready .deck-turn:focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; border-radius: 4px; }
+.deck-turn-icon { width: 28px; height: 28px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; transition: transform 0.3s ease; }
+.deck-turn-icon::before { content: "\21BB"; font-size: 0.95rem; line-height: 1; font-weight: 700; }
+.deck-turn:hover .deck-turn-icon { transform: rotate(180deg); }
+.deck-card:nth-child(1) .deck-turn { color: var(--color-orange); }
+.deck-card:nth-child(2) .deck-turn { color: #a84300; }
+.deck-card:nth-child(3) .deck-turn { color: #9a3d00; }
+.deck-back { margin-top: 1rem; }
+.turn-ready .deck-back { display: none; margin-top: 0; }
+.turn-ready .deck-card.show-back .deck-back { display: block; }
+.turn-ready .deck-card.show-back .deck-front { display: none; }
+.deck-back p:not(.deck-kicker) { font-size: 1.02rem; line-height: 1.6; }
+.deck-card:nth-child(1) .deck-back p:not(.deck-kicker) { color: #e9e9e9; }
+.deck-card:nth-child(3) .deck-back p:not(.deck-kicker) { color: var(--color-black); }
+
+/* Round 7: Year in Review spotlight bubble */
+.yir-spotlight {
+  position: relative; isolation: isolate;
+  margin-top: 1rem; padding: 1.6rem 1.6rem 2rem !important;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 100%);
+  box-shadow: 0 -18px 40px -32px rgba(201,79,0,0.45);
+}
+.yir-spotlight::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  border-radius: inherit; border: 1px solid rgba(22,22,22,0.16);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
+}
+.yir-spotlight .yir-summary { margin-bottom: 3.4rem !important; }
+@media (max-width: 640px) { .yir-spotlight { padding: 1.2rem 1rem 1.6rem !important; border-radius: 22px; } }
+
+/* Phone caption */
+.phone-wrap { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.phone-wrap .phone { flex: 1; }
+.phone-note {
+  position: absolute; z-index: 3; top: -2.35rem; right: 0.4rem; margin: 0 !important; white-space: nowrap;
+  padding: 0.38rem 0.75rem; border-radius: 999px;
+  background: var(--color-black); color: #fff !important; font-size: 0.74rem !important; line-height: 1.3; font-weight: 600;
+  box-shadow: 0 10px 22px -12px rgba(0,0,0,0.55); transform-origin: bottom right;
+}
+.phone-note::after { content: ""; position: absolute; right: 1.6rem; bottom: -5px; width: 10px; height: 10px; background: var(--color-black); transform: rotate(45deg); border-radius: 2px; }
+.anim-ready .phone-note { opacity: 0; transform: scale(0.6) translateY(6px); transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.35); }
+.anim-ready .phone-note.popped { opacity: 1; transform: none; }
+@media (max-width: 1000px) { .yir-grid .phone-wrap .phone { width: 100%; justify-self: auto; } }
+@media (max-width: 720px) { .yir-grid .phone-wrap { justify-self: center; width: min(100%, 23rem); } .phone-note { right: 0; } }
+
+/* Impact cards: shorter, threaded by a zigzag line with a moving pulse */
+.yir-grid .about-why { position: relative; justify-content: center; gap: 2.4rem; }
+.yir-grid .about-why > div { flex: 0 0 auto; position: relative; z-index: 1; padding: 1rem 1.3rem 1.1rem; }
+.yir-grid .about-why > .zig { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; padding: 0; background: none; border: 0; box-shadow: none; overflow: visible; pointer-events: none; transform: none !important; opacity: 1 !important; }
+.zig-base { fill: none; stroke: #c94f00; stroke-opacity: 0.45; stroke-width: 2; stroke-linejoin: round; }
+.zig-pulse { fill: none; stroke: #ff9a3c; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 4px #ff8a1f) drop-shadow(0 0 9px rgba(255,138,31,0.8)); opacity: 0; }
+.why-trio > div.zapped { animation: zap 0.9s ease-out; }
+@keyframes zap {
+  0% { box-shadow: 0 0 0 0 rgba(255,138,31,0); }
+  25% { box-shadow: 0 0 0 3px rgba(255,138,31,0.7), 0 0 26px 2px rgba(255,120,0,0.45); }
+  100% { box-shadow: 0 0 0 0 rgba(255,138,31,0), 0 10px 24px -18px rgba(0,0,0,0.35); }
+}
+@media (prefers-reduced-motion: reduce) { .why-trio > div.zapped { animation: none; } .anim-ready .phone-note { opacity: 1; transform: none; } }
