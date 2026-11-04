@@ -543,7 +543,7 @@
       return;
     }
     box.classList.add("thread-live");
-    var n = 0, started = false, timer = null;
+    var n = 0, started = false, timer = null, paused = false;
     var later = function (fn, ms) { clearTimeout(timer); timer = setTimeout(fn, ms); };
     var place = function (it) {
       var over = it.offsetTop + it.offsetHeight - box.clientHeight + 16;
@@ -572,6 +572,8 @@
     };
     jump = function (k) {
       started = true;
+      if (paused) { paused = false; box.classList.remove("thread-calm"); box.classList.add("thread-live"); box.scrollTop = 0;
+        var pzb = pillBox && pillBox.querySelector(".thread-pause"); if (pzb) { pzb.setAttribute("aria-pressed", "false"); pzb.textContent = "Pause and show all"; } }
       box.classList.add("thread-reset");
       later(function () {
         items.forEach(function (it) { it.classList.remove("in"); });
@@ -580,6 +582,26 @@
         n = k; mark(currentTopic(k)); show();
       }, 300);
     };
+    // Pause shows the whole thread as a scrollable list, which also gives
+    // screen readers every message (WCAG 2.2.2 Pause, Stop, Hide).
+    if (pillBox) {
+      var pz = document.createElement("button");
+      pz.type = "button"; pz.className = "thread-pill thread-pause";
+      pz.setAttribute("aria-pressed", "false"); pz.textContent = "Pause and show all";
+      pz.addEventListener("click", function () {
+        paused = !paused;
+        pz.setAttribute("aria-pressed", paused ? "true" : "false");
+        pz.textContent = paused ? "Play" : "Pause and show all";
+        if (paused) {
+          clearTimeout(timer); list.style.transform = "";
+          box.classList.remove("thread-live"); box.classList.add("thread-calm");
+        } else {
+          box.classList.remove("thread-calm"); box.classList.add("thread-live"); box.scrollTop = 0;
+          jump(Math.max(0, currentTopic(Math.max(0, n - 1))));
+        }
+      });
+      pillBox.appendChild(pz); pillBox.hidden = false;
+    }
     var tio = new IntersectionObserver(function (en) {
       if (!started && en[0].isIntersecting) { started = true; show(); tio.disconnect(); }
     }, { threshold: 0.3 });

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=23">
+<link rel="stylesheet" href="assets/style.css?v=24">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -23,6 +23,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="sticky">
   <div class="top-row">
@@ -47,7 +48,7 @@
   </div>
 </section>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- ===================== PROJECTS =====================
        Card: text + buttons left, image right. A .rotator is the animated
@@ -62,7 +63,7 @@
        straight to Gallery, where photos open full size.
        data-lens on each card lists the audience views it appears in; each
        view's order and description live on its button in the lens bar. -->
-  <p class="section-label" id="work">Portfolio Work</p>
+  <p class="section-label" role="heading" aria-level="2" id="work">Portfolio Work</p>
   <div class="lens-bar" role="group" aria-label="Filter projects by what matters most to you">
     <p class="lens-ask">See the work that matters most to you. Filter with the buttons below:</p>
     <div class="lens-buttons">
@@ -984,6 +985,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=17" defer></script>
+<script src="assets/site.js?v=18" defer></script>
 </body>
 </html>

@@ -483,7 +483,7 @@ img { max-width: 100%; height: auto; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  color: #a6a6a6;
+  color: #707070;
 }
 .project .lede,
 .card-panel p {
@@ -1947,3 +1947,10 @@ body.egg-open { overflow: hidden; }
   .egg-dock, .egg-scene { transition: none; }
   .egg-dock.egg-in, .egg-scene.on * { animation: none !important; }
 }
+
+/* Round 9b: accessibility */
+.skip-link { position: absolute; left: 0.75rem; top: -3rem; z-index: 100; padding: 0.6rem 1rem; border-radius: 8px; background: var(--color-black); color: #fff; font-weight: 700; text-decoration: none; }
+.skip-link:focus { top: 0.75rem; }
+main:focus { outline: none; }
+.thread-pause { border-style: dashed; }
+.thread-pause[aria-pressed="true"] { border-style: solid; border-color: var(--color-orange); }
