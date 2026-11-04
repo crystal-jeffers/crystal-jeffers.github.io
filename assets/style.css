@@ -1871,3 +1871,79 @@ main { overflow-x: clip; }
   100% { box-shadow: 0 0 0 0 rgba(255,138,31,0), 0 10px 24px -18px rgba(0,0,0,0.35); }
 }
 @media (prefers-reduced-motion: reduce) { .why-trio > div.zapped { animation: none; } .anim-ready .phone-note { opacity: 1; transform: none; } }
+
+/* ---------- Round 9: thread pills, homepage thread link, easter egg ---------- */
+.hero-link.hero-thread { margin-left: 0.6rem; }
+.thread-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.2rem 0 0.7rem; }
+.thread-pill { min-height: 36px; padding: 0.3rem 0.8rem; border: 1px solid #c9c9c9; border-radius: 999px; background: #fff; color: var(--color-black); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.thread-pill:hover { border-color: var(--color-orange); }
+.thread-pill.is-now { background: var(--color-black); border-color: var(--color-black); color: #fff; }
+.thread-calm { height: 26rem; overflow-y: auto; }
+
+/* The tag hides behind the card's right edge and slides out a few seconds after the card opens. */
+.egg-dock { position: absolute; right: 0; top: 0; z-index: 5; display: flex; align-items: stretch; max-width: min(17rem, 80%); transform: translateX(110%); opacity: 0; pointer-events: none; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.15), opacity 0.3s ease; }
+.egg-dock.egg-in { transform: translateX(0); opacity: 1; pointer-events: auto; animation: egg-wiggle 0.5s ease 0.8s 2; }
+.egg-tag { display: flex; gap: 0.55rem; align-items: center; text-align: left; padding: 0.55rem 0.7rem; border: 0; border-radius: 10px 0 0 10px; background: var(--color-black); color: #fff; font: inherit; font-size: 0.85rem; line-height: 1.3; cursor: pointer; box-shadow: -4px 6px 16px -6px rgba(0,0,0,0.4); }
+.egg-tag b { color: var(--color-orange); }
+.egg-tag:hover .egg-tag-play { transform: scale(1.12); }
+.egg-tag-play { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #fff; position: relative; transition: transform 0.2s ease; }
+.egg-tag-play::after { content: ""; position: absolute; left: 10px; top: 7px; border-left: 9px solid var(--color-black); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.egg-hide { flex: none; width: 28px; border: 0; background: #333; color: #fff; font-size: 1rem; cursor: pointer; }
+@keyframes egg-wiggle { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(-6px); } 70% { transform: translateX(2px); } }
+
+.egg { width: min(40rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 0; border-radius: 18px; background: #fff; color: var(--ink); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5); }
+.egg::backdrop { background: rgba(22,22,22,0.6); }
+body.egg-open { overflow: hidden; }
+.egg-frame { display: flex; flex-direction: column; }
+.egg-head { position: relative; padding: 1.1rem 3.2rem 0.6rem 1.3rem; }
+.egg-kicker { margin: 0; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-orange-deep); }
+.egg-head h2 { margin: 0.15rem 0 0; font-size: 1.25rem; color: var(--color-black); }
+.egg-close { position: absolute; right: 0.8rem; top: 0.8rem; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--color-grey-light); font-size: 1.3rem; cursor: pointer; }
+.egg-stage { position: relative; min-height: 22rem; margin: 0 1rem; border-radius: 14px; background: var(--color-orange-tint); overflow: hidden; }
+.egg-scene { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
+.egg-scene.on { opacity: 1; transform: none; pointer-events: auto; }
+.egg-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; flex: 1; text-align: center; min-height: 0; }
+.egg-big { font-size: 5rem; font-weight: 800; line-height: 1; color: var(--color-orange); }
+.egg-q { font-size: 1.6rem; font-weight: 800; color: var(--color-black); line-height: 1.2; }
+.egg-sub { font-size: 0.95rem; color: var(--color-grey); }
+.egg-visual img { max-width: 100%; max-height: 8.5rem; border-radius: 8px; box-shadow: 0 6px 16px -8px rgba(0,0,0,0.35); object-fit: contain; }
+.egg-walls { flex-direction: row; align-items: stretch; gap: 0.6rem; }
+.egg-box { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; padding: 0.7rem; border-radius: 10px; background: #fff; border: 1px solid #e4e4e4; font-size: 0.85rem; text-align: left; }
+.egg-box strong { color: var(--color-black); }
+.egg-box.is-new { border: 2px dashed var(--color-orange); }
+.egg-scene.on .egg-box.is-new { animation: egg-pop 0.6s ease 1.5s both; }
+.egg-checks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; text-align: left; }
+.egg-checks li { padding-left: 1.6rem; position: relative; font-weight: 600; color: var(--color-black); }
+.egg-checks li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 1.2rem; height: 1.2rem; border-radius: 50%; background: var(--color-orange); color: #fff; font-size: 0.75rem; text-align: center; line-height: 1.2rem; }
+.egg-scene.on .egg-checks li { animation: egg-pop 0.5s ease both; }
+.egg-scene.on .egg-checks li:nth-child(2) { animation-delay: 6s; }
+.egg-scene.on .egg-checks li:nth-child(3) { animation-delay: 9s; }
+.egg-cost { width: 100%; }
+.egg-track { position: relative; width: 82%; height: 6px; margin: 1.4rem 0 1.2rem; border-radius: 3px; background: linear-gradient(90deg, #ffd2b0, var(--color-orange)); }
+.egg-dot { position: absolute; left: var(--at); top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; border: 3px solid var(--color-orange); }
+.egg-dot b { position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem; color: var(--color-black); }
+.egg-steps { align-items: stretch; gap: 0.35rem; width: 100%; }
+.egg-steps span { align-self: flex-start; padding: 0.45rem 0.8rem; border-radius: 8px; background: #fff; border: 1px solid #e4e4e4; font-weight: 700; color: var(--color-black); }
+.egg-steps span:nth-child(2) { margin-left: 12%; } .egg-steps span:nth-child(3) { margin-left: 24%; }
+.egg-steps span:nth-child(4) { margin-left: 36%; background: var(--color-black); color: #fff; border-color: var(--color-black); }
+.egg-scene.on .egg-steps span { animation: egg-pop 0.5s ease both; }
+.egg-scene.on .egg-steps span:nth-child(2) { animation-delay: 4.5s; } .egg-scene.on .egg-steps span:nth-child(3) { animation-delay: 5.5s; } .egg-scene.on .egg-steps span:nth-child(4) { animation-delay: 9s; }
+.egg-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 0.6rem; }
+.egg-cap { margin: 0; min-height: 0; max-height: 0; overflow: hidden; opacity: 0; font-size: 0.98rem; line-height: 1.45; color: var(--color-black); background: rgba(255,255,255,0.9); border-radius: 8px; transition: opacity 0.4s ease; }
+.egg-cap.on { max-height: none; opacity: 1; padding: 0.6rem 0.75rem; }
+.egg-controls { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.3rem 1.1rem; }
+.egg-pause { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--color-black); color: #fff; font-size: 0.85rem; cursor: pointer; }
+.egg-bar { flex: 1; height: 5px; border-radius: 3px; background: var(--color-grey-light); overflow: hidden; }
+.egg-bar span { display: block; height: 100%; width: 0; background: var(--color-orange); }
+@keyframes egg-pop { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: none; } }
+@media (max-width: 560px) {
+  .egg-stage { min-height: 25rem; }
+  .egg-walls { flex-direction: column; }
+  .egg-big { font-size: 4rem; }
+  .egg-q { font-size: 1.35rem; }
+  .hero-link.hero-thread { display: inline-block; margin: 0.4rem 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .egg-dock, .egg-scene { transition: none; }
+  .egg-dock.egg-in, .egg-scene.on * { animation: none !important; }
+}

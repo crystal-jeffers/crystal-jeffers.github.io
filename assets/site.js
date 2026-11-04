@@ -505,19 +505,56 @@
     }, 6000);
   });
 
-  /* ---------- 2k. Year in Review: the message thread plays itself ---------- */
+  /* ---------- 2k. Year in Review: the message thread plays itself ----------
+     Untouched, it plays the whole thread on a loop. The pills above the phone
+     are built from each .msg-topic with a data-pill: a tap restarts the
+     thread at that topic, and it carries on looping from there. */
   each(".thread", function (box) {
     var list = box.querySelector(".thread-list");
     var items = list ? Array.prototype.slice.call(list.children) : [];
-    if (!items.length || calm) return;
+    if (!items.length) return;
+    var wrap = box.closest(".phone-wrap");
+    var pillBox = wrap ? wrap.querySelector(".thread-pills") : null;
+    var pills = [];
+    var mark = function (topicIdx) {
+      pills.forEach(function (pb) { pb.classList.toggle("is-now", +pb.getAttribute("data-at") === topicIdx); });
+    };
+    if (pillBox) {
+      items.forEach(function (it, k) {
+        var label = it.getAttribute("data-pill");
+        if (!label) return;
+        var pb = document.createElement("button");
+        pb.type = "button"; pb.className = "thread-pill"; pb.textContent = label;
+        pb.setAttribute("data-at", k);
+        pb.addEventListener("click", function () { jump(k); });
+        pillBox.appendChild(pb); pills.push(pb);
+      });
+      if (pills.length) pillBox.hidden = false;
+    }
+    var currentTopic = function (k) {
+      for (var j = k; j >= 0; j--) if (items[j].hasAttribute("data-pill")) return j;
+      return -1;
+    };
+    if (calm) {
+      // No animation: the whole thread is shown, and a pill scrolls it to that topic.
+      var jumpCalm = function (k) { box.scrollTop = items[k].offsetTop; mark(k); };
+      box.classList.add("thread-calm");
+      var jump = jumpCalm;
+      return;
+    }
     box.classList.add("thread-live");
-    var n = 0, started = false;
+    var n = 0, started = false, timer = null;
+    var later = function (fn, ms) { clearTimeout(timer); timer = setTimeout(fn, ms); };
+    var place = function (it) {
+      var over = it.offsetTop + it.offsetHeight - box.clientHeight + 16;
+      list.style.transform = over > 0 ? "translateY(" + (-over) + "px)" : "";
+    };
     var show = function () {
-      if (document.hidden) return setTimeout(show, 1000);
+      if (document.hidden) return later(show, 1000);
       if (n >= items.length) {
-        return setTimeout(function () {
+        return later(function () {
           box.classList.add("thread-reset");
-          setTimeout(function () {
+          later(function () {
             items.forEach(function (it) { it.classList.remove("in"); });
             box.classList.remove("thread-reset");
             list.style.transform = "";
@@ -525,13 +562,23 @@
           }, 600);
         }, 4500);
       }
-      var it = items[n++];
+      var it = items[n];
       it.classList.add("in");
-      // keep the newest message at the bottom of the window
-      var over = it.offsetTop + it.offsetHeight - box.clientHeight + 16;
-      list.style.transform = over > 0 ? "translateY(" + (-over) + "px)" : "";
+      if (it.hasAttribute("data-pill")) mark(n);
+      n++;
+      place(it); // keep the newest message at the bottom of the window
       var wait = it.classList.contains("msg-topic") ? 900 : 1500 + Math.min(it.textContent.length * 18, 1600);
-      setTimeout(show, wait);
+      later(show, wait);
+    };
+    jump = function (k) {
+      started = true;
+      box.classList.add("thread-reset");
+      later(function () {
+        items.forEach(function (it) { it.classList.remove("in"); });
+        list.style.transform = "";
+        box.classList.remove("thread-reset");
+        n = k; mark(currentTopic(k)); show();
+      }, 300);
     };
     var tio = new IntersectionObserver(function (en) {
       if (!started && en[0].isIntersecting) { started = true; show(); tio.disconnect(); }
@@ -1058,4 +1105,85 @@
     });
   }, { threshold: 0.2 });
   io.observe(trio);
+})();
+
+/* ---------- Easter egg: "Making It Safe to Scale" ----------
+   A few seconds after the Start-Up Procedures card opens, a tag slides in
+   at the card's edge. Tapping it plays a captioned clip in a dialog. Each
+   caption stays up for its word count at about 150 words a minute, so the
+   clip runs about 75 seconds. */
+(function () {
+  var card = document.getElementById("sops");
+  var dlg = document.getElementById("egg-clip");
+  if (!card || !dlg || typeof dlg.showModal !== "function") return;
+  var det = card.querySelector("details.case");
+  var dock = card.querySelector(".egg-dock");
+  var tag = dock && dock.querySelector(".egg-tag");
+  if (!det || !tag) return;
+  var hidden = false, tagTimer = null;
+  var placeDock = function () { dock.style.top = (det.offsetTop + 6) + "px"; };
+  var reveal = function () {
+    if (hidden) return;
+    clearTimeout(tagTimer);
+    if (det.open) {
+      tagTimer = setTimeout(function () { placeDock(); dock.classList.add("egg-in"); }, 3000);
+    } else dock.classList.remove("egg-in");
+  };
+  det.addEventListener("toggle", reveal);
+  dock.querySelector(".egg-hide").addEventListener("click", function () { hidden = true; dock.classList.remove("egg-in"); });
+  window.addEventListener("resize", function () { if (dock.classList.contains("egg-in")) placeDock(); });
+
+  var scenes = Array.prototype.slice.call(dlg.querySelectorAll(".egg-scene"));
+  var steps = [];
+  scenes.forEach(function (sc, si) {
+    Array.prototype.forEach.call(sc.querySelectorAll(".egg-cap"), function (cap) {
+      var words = cap.textContent.trim().split(/\s+/).length;
+      steps.push({ scene: si, cap: cap, ms: Math.max(2600, words * 400 + 600) });
+    });
+  });
+  var total = steps.reduce(function (t, st) { return t + st.ms; }, 0);
+  var bar = dlg.querySelector(".egg-bar span");
+  var pauseBtn = dlg.querySelector(".egg-pause");
+  var idx = 0, left = 0, startedAt = 0, timer = null, playing = false, done = 0;
+  var showStep = function (k) {
+    var st = steps[k];
+    scenes.forEach(function (sc, j) { sc.classList.toggle("on", j === st.scene); });
+    dlg.querySelectorAll(".egg-cap").forEach(function (c) { c.classList.toggle("on", c === st.cap); });
+  };
+  var progress = function () {
+    var elapsed = done + (steps[idx].ms - left) + (playing ? Date.now() - startedAt : 0);
+    bar.style.width = Math.min(100, elapsed / total * 100) + "%";
+    if (playing) requestAnimationFrame(progress);
+  };
+  var run = function (ms) {
+    playing = true; startedAt = Date.now(); left = ms;
+    pauseBtn.textContent = "❚❚"; pauseBtn.setAttribute("aria-label", "Pause");
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      done += steps[idx].ms; playing = false;
+      if (idx < steps.length - 1) { idx++; showStep(idx); run(steps[idx].ms); }
+      else { pauseBtn.textContent = "↺"; pauseBtn.setAttribute("aria-label", "Replay"); bar.style.width = "100%"; }
+    }, ms);
+    requestAnimationFrame(progress);
+  };
+  var play = function () { idx = 0; done = 0; showStep(0); run(steps[0].ms); };
+  pauseBtn.addEventListener("click", function () {
+    if (playing) {
+      clearTimeout(timer); playing = false;
+      left -= Date.now() - startedAt;
+      pauseBtn.textContent = "▶"; pauseBtn.setAttribute("aria-label", "Play");
+    } else if (idx === steps.length - 1 && bar.style.width === "100%") play();
+    else run(left);
+  });
+  var open = function () { dlg.showModal(); document.body.classList.add("egg-open"); play(); };
+  var close = function () { clearTimeout(timer); playing = false; dlg.close(); };
+  dlg.addEventListener("close", function () { clearTimeout(timer); playing = false; document.body.classList.remove("egg-open"); });
+  tag.addEventListener("click", open);
+  dlg.querySelector(".egg-close").addEventListener("click", close);
+  dlg.querySelector(".egg-replay").addEventListener("click", play);
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+  dlg.querySelector(".egg-visuals").addEventListener("click", function () {
+    close();
+    if (card.openGallery) card.openGallery("security-risk-framework.png");
+  });
 })();
