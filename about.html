@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Crystal Jeffers</title>
 <meta name="description" content="Crystal Jeffers builds systems that clarify and empower: finding where time, information, and confidence slip, then developing and refining the fix.">
-<link rel="stylesheet" href="assets/style.css?v=24">
+<link rel="stylesheet" href="assets/style.css?v=25">
 <script>
   document.documentElement.classList.add("js");
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
@@ -51,25 +51,51 @@
 <nav class="side-nav" aria-label="On this page">
   <p class="side-nav-title">On this page</p>
   <ol>
-    <li><a href="#review">Year in Review</a></li>
     <li><a href="#focus">My Focus</a></li>
-    <li><a href="#bring">What I Bring</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#approach">How I Work</a></li>
+    <li><a href="#review">Year in Review</a></li>
     <li><a href="#about">About Me</a></li>
+    <li><a href="#bring">What I Bring</a></li>
+    <li><a href="#approach">How I Work</a></li>
+    <li><a href="#skills">Skills</a></li>
   </ol>
 </nav>
 
 <main id="main" tabindex="-1">
 
+  <!-- ===================== MY FOCUS: flip cards =====================
+       Front: what the word means to me, with the second thought in an
+       orange bubble. Back: the business case, with the returns as chips. -->
+  <section class="page-section" id="focus" aria-labelledby="focus-label">
+  <p class="section-label" role="heading" aria-level="2" id="focus-label">My Focus</p>
+  <p class="section-intro intro-full">Three outcomes behind every project, tied to NorCal's focus on people, workflow unity, and lasting customer relationships.</p>
+  <p class="flip-hint"><span class="hint-hover">Hover over each card for the business case.</span><span class="hint-touch">Tap each card for the business case.</span></p>
+  <ul class="pillars">
+    <li style="--i:0"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Cohesion</strong><span class="face-label">What it means to me</span><span class="face-text">Being in sync: each person self-sufficient, working from the same information with the same confidence.</span><span class="face-callout">Teams always have to work together. The systems that connect them decide whether that feels like friction or flow, and that shapes the culture we build.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good cohesion&hellip;</span><span class="face-text">hand-offs land the first time. Jobs close with less follow-up, people trust the information they're handed, and leaders see status without chasing it.</span><span class="return-label">The return</span><span class="return-chips"><span>Fewer repeat visits</span><span>Faster close-out and billing</span><span>Teams that pull in the same direction</span></span></span>
+      </span></button></li>
+    <li style="--i:1"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Efficiency</strong><span class="face-label">What it means to me</span><span class="face-text">Ease of doing business, every day. Nothing wears a team down like fighting through confusion, clunky systems, and rework.</span><span class="face-callout">Clear systems give that energy back, and people spend it on catching errors and doing things right.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good efficiency&hellip;</span><span class="face-text">people start the day with clear work instead of a search for it. The energy saved goes to spotting errors and fixing them when something looks off, before they turn into rework.</span><span class="return-label">The return</span><span class="return-chips"><span>Less rework</span><span>Lower cost per job</span><span>Capacity that grows faster than headcount</span></span></span>
+      </span></button></li>
+    <li style="--i:2"><button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner">
+        <span class="face front"><strong>Access</strong><span class="face-label">What it means to me</span><span class="face-text">Information people can actually take in. Not only where it lives, but how it reads: edited, chunked, and shaped for where it's used, from a phone on a job site to a desk.</span><span class="face-callout">Information that's easy to grasp builds confidence, competence, and agency.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
+        <span class="face back"><span class="back-lead">With good access&hellip;</span><span class="face-text">people become self-sufficient sooner and stay longer. They know where to find the answers. Procedures and expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="return-label">The return</span><span class="return-chips"><span>Shorter ramp-up</span><span>Less rework</span><span>A protected investment in every hire</span></span></span>
+      </span></button></li>
+  </ul>
+  </section>
+
   <!-- ===================== A YEAR IN REVIEW ===================== -->
   <section class="page-section yir-spotlight" id="review" aria-labelledby="review-label">
   <p class="section-label" role="heading" aria-level="2" id="review-label">A Year in Review</p>
     <p class="yir-summary">Over the past year, I’ve turned scattered notes, long documents, and manual follow-ups into time-saving tools that improve communication every day. New dispatchers find their footing in weeks instead of months, and they answer their own questions without waiting on a busy teammate. Supervisors book crews with confidence, because a holiday conflict surfaces long before it turns into an empty job site and a disappointed customer. Technicians find their next step in seconds from the field, and leaders hear about what’s coming instead of what went wrong. The team feels it as fewer interruptions, fewer surprises, and more time for the work and the customer.</p>
+    <div class="thread-pills" role="group" aria-label="Conversation controls" hidden></div>
     <div class="yir-grid">
     <div class="phone-wrap">
     <p class="phone-note" role="note">Real interactions, paraphrased for conciseness</p>
-    <div class="thread-pills" role="group" aria-label="Jump to a part of the conversation" hidden></div>
     <div class="phone">
       <div class="phone-bar" aria-hidden="true"><span class="phone-island"></span><span class="phone-avatar">ST</span><span class="phone-name">Service Team</span><span class="phone-sub">Group chat</span></div>
     <div class="thread" aria-label="How the year's improvements came about, as a conversation">
@@ -149,30 +175,53 @@
     </div>
   </section>
 
-  <!-- ===================== MY FOCUS: flip cards =====================
-       Front: what the word means to me, with the second thought in an
-       orange bubble. Back: the business case, with the returns as chips. -->
-  <section class="page-section" id="focus" aria-labelledby="focus-label">
-  <p class="section-label" role="heading" aria-level="2" id="focus-label">My Focus</p>
-  <p class="section-intro intro-full">Three outcomes behind every project, tied to NorCal's focus on people, workflow unity, and lasting customer relationships.</p>
-  <p class="flip-hint"><span class="hint-hover">Hover over each card for the business case.</span><span class="hint-touch">Tap each card for the business case.</span></p>
-  <ul class="pillars">
-    <li style="--i:0"><button type="button" class="flip" aria-pressed="false">
-      <span class="flip-inner">
-        <span class="face front"><strong>Cohesion</strong><span class="face-label">What it means to me</span><span class="face-text">Being in sync: each person self-sufficient, working from the same information with the same confidence.</span><span class="face-callout">Teams always have to work together. The systems that connect them decide whether that feels like friction or flow, and that shapes the culture we build.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good cohesion&hellip;</span><span class="face-text">hand-offs land the first time. Jobs close with less follow-up, people trust the information they're handed, and leaders see status without chasing it.</span><span class="return-label">The return</span><span class="return-chips"><span>Fewer repeat visits</span><span>Faster close-out and billing</span><span>Teams that pull in the same direction</span></span></span>
-      </span></button></li>
-    <li style="--i:1"><button type="button" class="flip" aria-pressed="false">
-      <span class="flip-inner">
-        <span class="face front"><strong>Efficiency</strong><span class="face-label">What it means to me</span><span class="face-text">Ease of doing business, every day. Nothing wears a team down like fighting through confusion, clunky systems, and rework.</span><span class="face-callout">Clear systems give that energy back, and people spend it on catching errors and doing things right.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good efficiency&hellip;</span><span class="face-text">people start the day with clear work instead of a search for it. The energy saved goes to spotting errors and fixing them when something looks off, before they turn into rework.</span><span class="return-label">The return</span><span class="return-chips"><span>Less rework</span><span>Lower cost per job</span><span>Capacity that grows faster than headcount</span></span></span>
-      </span></button></li>
-    <li style="--i:2"><button type="button" class="flip" aria-pressed="false">
-      <span class="flip-inner">
-        <span class="face front"><strong>Access</strong><span class="face-label">What it means to me</span><span class="face-text">Information people can actually take in. Not only where it lives, but how it reads: edited, chunked, and shaped for where it's used, from a phone on a job site to a desk.</span><span class="face-callout">Information that's easy to grasp builds confidence, competence, and agency.</span><span class="flip-cue" aria-hidden="true">&#8635;</span></span>
-        <span class="face back"><span class="back-lead">With good access&hellip;</span><span class="face-text">people become self-sufficient sooner and stay longer. They know where to find the answers. Procedures and expectations are clear from day one, and knowledge stays with the company when people move roles.</span><span class="return-label">The return</span><span class="return-chips"><span>Shorter ramp-up</span><span>Less rework</span><span>A protected investment in every hire</span></span></span>
-      </span></button></li>
-  </ul>
+  <!-- ===================== ABOUT ME, then my work at Southland ===================== -->
+  <section class="page-section" id="about" aria-labelledby="about-label">
+  <p class="section-label" role="heading" aria-level="2" id="about-label">About me</p>
+  <div class="about-me about-deck">
+    <div class="deck-cards">
+      <div class="deck-card">
+        <div class="deck-front">
+        <p class="deck-kicker">What I notice</p>
+        <p class="about-me-lead">I notice the small frictions most people have learned to work around.</p>
+        <p>The question that gets asked every week. The spreadsheet kept "just in case." The new hire who doesn't want to ask again. I can't leave those alone when I know I can improve the situation. As someone who prides themselves on excellence and efficiency, I understand the hidden costs behind each point of friction. I would rather spend an afternoon making something clear than watch a team lose an hour to confusion every day.</p>
+        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="deck-back">
+          <p class="deck-kicker">What I notice</p>
+          <p>I once showed a very rough draft of my training guide to a dispatcher, and she said, “Man, I wish there had been something like this when I started!” I think a lot of people feel that way.</p><p>Tool and knowledge gaps tend to live in a weird middle ground where they don’t get addressed until they’re painful enough to demand something better than the clunky workaround that’s “good enough for now.” Even daily friction rarely gets attention until it becomes an emergency. I have a hard time accepting that when this work comes so naturally to me. I don’t just notice the friction, I can’t look away! When I know I can improve the situation, I’m not happy until I do.</p>
+          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div class="deck-card">
+        <div class="deck-front">
+        <p class="deck-kicker">How I work</p>
+        <p class="about-me-lead">I listen for friction, uncover root causes and nuances, then develop iterative solutions that spark delight and fit within the ecosystem.</p>
+        <p>I design for the person on the other end of the system, and I keep refining long after something is "good enough," because I take pride in a proper polish. I learn whatever the problem needs, whether that's a database, a macro, or a website, and I'm comfortable using AI tools to get there faster.</p>
+        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="deck-back">
+          <p class="deck-kicker">How I work</p>
+          <p>The sweetest sound in the world to me is someone saying, “Wow.” I got an “Oh damn!” from the Superintendent when I showed them role-based SOP views and interactive checklists for start-up technicians. Another said, “This looks good. REAL good,” when he saw how I had reworked and expanded the dispatch board.</p><p>I like building things people can get excited about: things that go beyond the ask, plan for the future, and account for everything my solutions touch. That’s how I work. It’s not just fixing today’s problem. It’s designing tomorrow’s solution.</p>
+          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div class="deck-card">
+        <div class="deck-front">
+        <p class="deck-kicker">What I believe</p>
+        <p class="about-me-lead">Confidence is built on clarity and certainty.</p>
+        <p>When people know what to do and where to find the answer, they are empowered to act faster, make fewer mistakes, and take ownership over their piece of the pie. That's what I bring to a team: curiosity, thoughtfulness, and the tenacity to take an idea from "would be nice" all the way into everyday use.</p>
+        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="deck-back">
+          <p class="deck-kicker">What I believe</p>
+          <p>Flow is a big part of how I operate. It’s my happy place. And flow only happens when you have the tools, trust, and team dynamics to execute tasks with confidence. When I improve processes, I don’t just see that as making someone’s day a little more pleasant, I see it as a path to empowerment. I see it as giving people the ability to take ownership and operate at a higher level. That’s what I strive to bring to the workplace.</p>
+          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </section>
 
   <!-- ===================== WHAT I BRING: a ripple, top to bottom =====================
@@ -226,23 +275,6 @@
       </div>
     </li>
   </ol>
-  </section>
-
-  <!-- ===================== SKILLS ===================== -->
-  <section class="page-section" id="skills" aria-labelledby="skills-label">
-  <p class="section-label" role="heading" aria-level="2" id="skills-label">Skills</p>
-  <ul class="chips chips-live" aria-label="Skills">
-    <li>Process &amp; workflow design</li>
-    <li>UX for internal tools</li>
-    <li>Stakeholder interviews &amp; requirements</li>
-    <li>Human-in-the-loop automation</li>
-    <li>Data modeling (Airtable, Excel)</li>
-    <li>Excel VBA &amp; email automation</li>
-    <li>Knowledge base &amp; documentation</li>
-    <li>Information architecture</li>
-    <li>Content editing &amp; formatting</li>
-    <li>AI-assisted building</li>
-  </ul>
   </section>
 
   <!-- ===================== HOW I WORK: five steps, in focus as you scroll =====================
@@ -351,53 +383,21 @@
   </ol>
   </section>
 
-  <!-- ===================== ABOUT ME, then my work at Southland ===================== -->
-  <section class="page-section" id="about" aria-labelledby="about-label">
-  <p class="section-label" role="heading" aria-level="2" id="about-label">About me</p>
-  <div class="about-me about-deck">
-    <div class="deck-cards">
-      <div class="deck-card">
-        <div class="deck-front">
-        <p class="deck-kicker">What I notice</p>
-        <p class="about-me-lead">I notice the small frictions most people have learned to work around.</p>
-        <p>The question that gets asked every week. The spreadsheet kept "just in case." The new hire who doesn't want to ask again. I can't leave those alone when I know I can improve the situation. As someone who prides themselves on excellence and efficiency, I understand the hidden costs behind each point of friction. I would rather spend an afternoon making something clear than watch a team lose an hour to confusion every day.</p>
-        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-        <div class="deck-back">
-          <p class="deck-kicker">What I notice</p>
-          <p>I once showed a very rough draft of my training guide to a dispatcher, and she said, “Man, I wish there had been something like this when I started!” I think a lot of people feel that way.</p><p>Tool and knowledge gaps tend to live in a weird middle ground where they don’t get addressed until they’re painful enough to demand something better than the clunky workaround that’s “good enough for now.” Even daily friction rarely gets attention until it becomes an emergency. I have a hard time accepting that when this work comes so naturally to me. I don’t just notice the friction, I can’t look away! When I know I can improve the situation, I’m not happy until I do.</p>
-          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-      </div>
-      <div class="deck-card">
-        <div class="deck-front">
-        <p class="deck-kicker">How I work</p>
-        <p class="about-me-lead">I listen for friction, uncover root causes and nuances, then develop iterative solutions that spark delight and fit within the ecosystem.</p>
-        <p>I design for the person on the other end of the system, and I keep refining long after something is "good enough," because I take pride in a proper polish. I learn whatever the problem needs, whether that's a database, a macro, or a website, and I'm comfortable using AI tools to get there faster.</p>
-        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-        <div class="deck-back">
-          <p class="deck-kicker">How I work</p>
-          <p>The sweetest sound in the world to me is someone saying, “Wow.” I got an “Oh damn!” from the Superintendent when I showed them role-based SOP views and interactive checklists for start-up technicians. Another said, “This looks good. REAL good,” when he saw how I had reworked and expanded the dispatch board.</p><p>I like building things people can get excited about: things that go beyond the ask, plan for the future, and account for everything my solutions touch. That’s how I work. It’s not just fixing today’s problem. It’s designing tomorrow’s solution.</p>
-          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-      </div>
-      <div class="deck-card">
-        <div class="deck-front">
-        <p class="deck-kicker">What I believe</p>
-        <p class="about-me-lead">Confidence is built on clarity and certainty.</p>
-        <p>When people know what to do and where to find the answer, they are empowered to act faster, make fewer mistakes, and take ownership over their piece of the pie. That's what I bring to a team: curiosity, thoughtfulness, and the tenacity to take an idea from "would be nice" all the way into everyday use.</p>
-        <button type="button" class="deck-turn" data-to="back" aria-label="Turn the card over for more"><span class="deck-turn-label">More</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-        <div class="deck-back">
-          <p class="deck-kicker">What I believe</p>
-          <p>Flow is a big part of how I operate. It’s my happy place. And flow only happens when you have the tools, trust, and team dynamics to execute tasks with confidence. When I improve processes, I don’t just see that as making someone’s day a little more pleasant, I see it as a path to empowerment. I see it as giving people the ability to take ownership and operate at a higher level. That’s what I strive to bring to the workplace.</p>
-          <button type="button" class="deck-turn deck-turn-back" data-to="front" aria-label="Turn the card back over"><span class="deck-turn-label">Back</span><span class="deck-turn-icon" aria-hidden="true"></span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <!-- ===================== SKILLS ===================== -->
+  <section class="page-section" id="skills" aria-labelledby="skills-label">
+  <p class="section-label" role="heading" aria-level="2" id="skills-label">Skills</p>
+  <ul class="chips chips-live" aria-label="Skills">
+    <li>Process &amp; workflow design</li>
+    <li>UX for internal tools</li>
+    <li>Stakeholder interviews &amp; requirements</li>
+    <li>Human-in-the-loop automation</li>
+    <li>Data modeling (Airtable, Excel)</li>
+    <li>Excel VBA &amp; email automation</li>
+    <li>Knowledge base &amp; documentation</li>
+    <li>Information architecture</li>
+    <li>Content editing &amp; formatting</li>
+    <li>AI-assisted building</li>
+  </ul>
   </section>
 
   <p class="page-next"><a class="btn btn-dark" href="index.html">View Portfolio &rarr;</a></p>
@@ -408,6 +408,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=18" defer></script>
+<script src="assets/site.js?v=19" defer></script>
 </body>
 </html>

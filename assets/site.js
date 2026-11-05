@@ -126,6 +126,22 @@
     pickStep();
   });
 
+  /* ---------- 2b-2. How I work: the friction signals float ----------
+     Like the "Real interactions" note on the phone: each signal floats up
+     into view, stays about 5 seconds, drifts up and fades, then comes back
+     10 seconds later. They start one after another, 3 seconds apart, and
+     only while the list is on screen. Hovering the list holds them all in
+     view. The text is always there for screen readers. */
+  if (!calm && "IntersectionObserver" in window) {
+    each(".signals", function (ul) {
+      Array.prototype.forEach.call(ul.children, function (li, k) { li.style.setProperty("--sig-i", k); });
+      var sio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ul.classList.toggle("floating", e.isIntersecting); });
+      }, { threshold: 0.4 });
+      sio.observe(ul);
+    });
+  }
+
   /* ---------- 2c. Project cards: the orange + toggle, tabs, and gallery ----------
      An orange + beside each card's buttons opens and closes its details.
      Inside, site.js turns each <section class="card-panel"> into a binder
@@ -173,8 +189,9 @@
 
     // Tabs
     var body = det.querySelector(".case-body");
-    var folder = det.querySelector(".card-folder");
-    var panels = Array.prototype.slice.call(det.querySelectorAll(".card-panel"));
+    // The card's own folder only; a connected project inside it gets its own tabs (2c-2).
+    var folder = body ? body.querySelector(":scope > .card-folder") : null;
+    var panels = folder ? Array.prototype.slice.call(folder.querySelectorAll(":scope > .card-panel")) : [];
     var tabs = [];
     if (folder && panels.length) {
       var list = document.createElement("div");
@@ -301,6 +318,70 @@
   });
   openGallery = function (card, src) { if (card && card.openGallery) card.openGallery(src); };
 
+  /* ---------- 2c-2. Connected projects ----------
+     A <details class="linked-project"> inside a card's details opens below
+     the card's tabs, with tabs of its own. linked.openTo("media", "gallery")
+     opens it at a tab (and a Media story), then scrolls to it. */
+  each("details.linked-project", function (lp) {
+    var folder = lp.querySelector(".card-folder");
+    if (!folder) return;
+    var base = lp.id || "linked";
+    var panels = Array.prototype.slice.call(folder.querySelectorAll(":scope > .card-panel"));
+    var list = document.createElement("div");
+    list.className = "card-tabs";
+    list.setAttribute("role", "tablist");
+    list.setAttribute("aria-label", "Connected project details");
+    var tabs = panels.map(function (pn, k) {
+      pn.id = base + "-panel-" + pn.getAttribute("data-tab");
+      pn.setAttribute("role", "tabpanel");
+      pn.setAttribute("tabindex", "0");
+      var t = document.createElement("button");
+      t.type = "button"; t.className = "card-tab";
+      t.id = base + "-tab-" + pn.getAttribute("data-tab");
+      t.setAttribute("role", "tab");
+      t.setAttribute("aria-controls", pn.id);
+      t.textContent = pn.getAttribute("data-label");
+      pn.setAttribute("aria-labelledby", t.id);
+      t.addEventListener("click", function () { pick(k, false); });
+      t.addEventListener("keydown", function (e) {
+        var m = panels.length, j = null;
+        if (e.key === "ArrowRight") j = (k + 1) % m;
+        else if (e.key === "ArrowLeft") j = (k - 1 + m) % m;
+        else if (e.key === "Home") j = 0;
+        else if (e.key === "End") j = m - 1;
+        if (j !== null) { e.preventDefault(); pick(j, true); }
+      });
+      list.appendChild(t);
+      return t;
+    });
+    folder.parentNode.insertBefore(list, folder);
+    function pick(k, focus) {
+      tabs.forEach(function (t, j) {
+        var on = j === k;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[k].focus();
+    }
+    pick(0, false);
+    lp.openTo = function (tab, pane) {
+      var outer = lp.parentNode.closest("details");
+      if (outer) outer.open = true;
+      lp.open = true;
+      panels.forEach(function (pn, k) {
+        if (pn.getAttribute("data-tab") !== tab) return;
+        pick(k, false);
+        var set = pn.querySelector(".media-set");
+        if (set && set.pickPane && pane) set.panes.forEach(function (p, j) { if (p.getAttribute("data-pane") === pane) set.pickPane(j); });
+      });
+      window.requestAnimationFrame(function () {
+        var top = lp.getBoundingClientRect().top;
+        window.scrollBy({ top: top - 90, behavior: calm ? "auto" : "smooth" });
+      });
+    };
+  });
+
   /* ---------- 2d. About page: "The result" drops in when it scrolls into view ---------- */
   var result = document.querySelector(".ripple-result");
   if (result && document.documentElement.classList.contains("anim-ready")) {
@@ -389,6 +470,42 @@
     window.addEventListener("resize", update);
     box.classList.add("is-live");
     update();
+
+    // Plays itself: one view every 4.5 seconds while it's on screen, back to
+    // the start after the last. Waits while the pointer or keyboard focus is
+    // on it, for 9 seconds after any manual step, and whenever Pause is on.
+    if (calm) return;
+    var hold = false, lastUser = 0, stopped = false;
+    var pause = document.createElement("button");
+    pause.type = "button";
+    pause.className = "ver-pause";
+    pause.setAttribute("aria-pressed", "false");
+    pause.setAttribute("aria-label", "Pause the timeline");
+    pause.innerHTML = '<span class="ctl-icon" aria-hidden="true"></span>';
+    count.parentNode.insertBefore(pause, count);
+    var row = document.createElement("div");
+    row.className = "ver-foot";
+    count.parentNode.insertBefore(row, pause);
+    row.appendChild(pause); row.appendChild(count);
+    pause.addEventListener("click", function () {
+      stopped = !stopped;
+      pause.setAttribute("aria-pressed", stopped ? "true" : "false");
+      pause.setAttribute("aria-label", stopped ? "Play the timeline" : "Pause the timeline");
+    });
+    box.addEventListener("mouseenter", function () { hold = true; });
+    box.addEventListener("mouseleave", function () { hold = false; });
+    box.addEventListener("focusin", function () { hold = true; });
+    box.addEventListener("focusout", function () { hold = false; });
+    [prev, next].forEach(function (b) { b.addEventListener("click", function () { lastUser = Date.now(); }); });
+    ["touchstart", "wheel"].forEach(function (ev) { track.addEventListener(ev, function () { lastUser = Date.now(); }, { passive: true }); });
+    setInterval(function () {
+      if (stopped || hold || document.hidden || Date.now() - lastUser < 9000) return;
+      var r = box.getBoundingClientRect();
+      if (r.bottom < 80 || r.top > window.innerHeight - 80) return;
+      var max = track.scrollWidth - track.clientWidth - 2;
+      if (track.scrollLeft >= max) track.scrollTo({ left: 0, behavior: "smooth" });
+      else stepBy(1);
+    }, 4500);
   });
 
   /* ---------- 2h. About page, What I bring: the orange bar over each title
@@ -411,6 +528,45 @@
       });
     }, { rootMargin: "0px 0px -28% 0px", threshold: 0 });
     rows.forEach(function (li) { rowIO.observe(li); });
+  }
+
+  /* ---------- 2h-2. What I bring: the cascade ----------
+     When the list comes into view, a glow runs down it one row at a time,
+     like the pulse on the Year in Review cards. The first time through,
+     each row opens as the glow reaches it, so the whole chain reads top to
+     bottom without a click, and The result lights up last. After that the
+     glow repeats every 9 seconds while the list is on screen. */
+  if (ripple && "IntersectionObserver" in window) {
+    var chain = Array.prototype.slice.call(ripple.children);
+    var opened = false, runTimer = null, cascading = false;
+    var cascade = function () {
+      if (cascading) return;
+      cascading = true;
+      var first = !opened;
+      opened = true;
+      chain.forEach(function (li, k) {
+        setTimeout(function () {
+          li.classList.add("lit");
+          var target = li.querySelector(".bring-item, .ripple-result");
+          if (target) { target.classList.remove("zapped"); void target.offsetWidth; target.classList.add("zapped"); }
+          var det = li.querySelector("details.bring-item");
+          if (first && det) det.open = true;
+          if (k === chain.length - 1) setTimeout(function () { cascading = false; }, 900);
+        }, k * (first ? 520 : 380));
+      });
+    };
+    if (calm) {
+      chain.forEach(function (li) { li.classList.add("lit"); var d = li.querySelector("details.bring-item"); if (d) d.open = true; });
+    } else {
+      ripple.classList.add("cascade-ready");
+      var cio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && !runTimer) { cascade(); runTimer = setInterval(cascade, 9000); }
+          else if (!e.isIntersecting && runTimer) { clearInterval(runTimer); runTimer = null; }
+        });
+      }, { rootMargin: "0px 0px -30% 0px", threshold: 0.15 });
+      cio.observe(ripple);
+    }
   }
 
   /* ---------- 2i. About me: a deck of three cards ----------
@@ -506,20 +662,32 @@
   });
 
   /* ---------- 2k. Year in Review: the message thread plays itself ----------
-     Untouched, it plays the whole thread on a loop. The pills above the phone
-     are built from each .msg-topic with a data-pill: a tap restarts the
-     thread at that topic, and it carries on looping from there. */
+     Untouched, it plays the whole thread on a loop. The pill row above the
+     grid is built from each .msg-topic with a data-pill: a tap restarts the
+     thread at that topic. Two separate controls sit at the end of the row:
+     Pause freezes the thread exactly where it is (Play carries on from
+     there), and Show all opens the whole thread as a scrollable list,
+     scrolled to the message you were on (WCAG 2.2.2 Pause, Stop, Hide). */
   each(".thread", function (box) {
     var list = box.querySelector(".thread-list");
     var items = list ? Array.prototype.slice.call(list.children) : [];
     if (!items.length) return;
-    var wrap = box.closest(".phone-wrap");
-    var pillBox = wrap ? wrap.querySelector(".thread-pills") : null;
+    var sec = box.closest("section") || document;
+    var pillBox = sec.querySelector(".thread-pills");
     var pills = [];
+    var jump = function () {};
     var mark = function (topicIdx) {
-      pills.forEach(function (pb) { pb.classList.toggle("is-now", +pb.getAttribute("data-at") === topicIdx); });
+      pills.forEach(function (pb) {
+        var on = +pb.getAttribute("data-at") === topicIdx;
+        pb.classList.toggle("is-now", on);
+        if (on) pb.setAttribute("aria-current", "step"); else pb.removeAttribute("aria-current");
+      });
     };
+    var topicRow = null;
     if (pillBox) {
+      topicRow = document.createElement("div");
+      topicRow.className = "thread-topics";
+      pillBox.appendChild(topicRow);
       items.forEach(function (it, k) {
         var label = it.getAttribute("data-pill");
         if (!label) return;
@@ -527,7 +695,7 @@
         pb.type = "button"; pb.className = "thread-pill"; pb.textContent = label;
         pb.setAttribute("data-at", k);
         pb.addEventListener("click", function () { jump(k); });
-        pillBox.appendChild(pb); pills.push(pb);
+        topicRow.appendChild(pb); pills.push(pb);
       });
       if (pills.length) pillBox.hidden = false;
     }
@@ -537,19 +705,19 @@
     };
     if (calm) {
       // No animation: the whole thread is shown, and a pill scrolls it to that topic.
-      var jumpCalm = function (k) { box.scrollTop = items[k].offsetTop; mark(k); };
       box.classList.add("thread-calm");
-      var jump = jumpCalm;
+      jump = function (k) { box.scrollTop = items[k].offsetTop; mark(k); };
       return;
     }
     box.classList.add("thread-live");
-    var n = 0, started = false, timer = null, paused = false;
+    var n = 0, started = false, timer = null, paused = false, all = false;
     var later = function (fn, ms) { clearTimeout(timer); timer = setTimeout(fn, ms); };
     var place = function (it) {
       var over = it.offsetTop + it.offsetHeight - box.clientHeight + 16;
       list.style.transform = over > 0 ? "translateY(" + (-over) + "px)" : "";
     };
     var show = function () {
+      if (paused || all) return;
       if (document.hidden) return later(show, 1000);
       if (n >= items.length) {
         return later(function () {
@@ -570,10 +738,59 @@
       var wait = it.classList.contains("msg-topic") ? 900 : 1500 + Math.min(it.textContent.length * 18, 1600);
       later(show, wait);
     };
+
+    // Controls
+    var mkCtl = function (cls, text) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "thread-ctl " + cls;
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="ctl-icon" aria-hidden="true"></span><span class="ctl-text"></span>';
+      b.querySelector(".ctl-text").textContent = text;
+      return b;
+    };
+    var pz = mkCtl("thread-pause", "Pause");
+    var sa = mkCtl("thread-all", "Show all");
+    var setPaused = function (on) {
+      paused = on;
+      pz.setAttribute("aria-pressed", on ? "true" : "false");
+      pz.querySelector(".ctl-text").textContent = on ? "Play" : "Pause";
+      box.classList.toggle("thread-paused", on);
+    };
+    var setAll = function (on) {
+      all = on;
+      sa.setAttribute("aria-pressed", on ? "true" : "false");
+      sa.querySelector(".ctl-text").textContent = on ? "Back to playing" : "Show all";
+      pz.disabled = on;
+      if (on) {
+        clearTimeout(timer);
+        list.style.transform = "";
+        box.classList.remove("thread-live"); box.classList.add("thread-calm");
+        // Keep your place: the last message you saw sits at the bottom of the window.
+        var cur = items[Math.max(0, n - 1)];
+        box.scrollTop = Math.max(0, cur.offsetTop + cur.offsetHeight - box.clientHeight + 16);
+      } else {
+        box.classList.remove("thread-calm"); box.classList.add("thread-live");
+        box.scrollTop = 0;
+        if (n > 0) place(items[n - 1]);
+        if (!paused) later(show, 600);
+      }
+    };
+    pz.addEventListener("click", function () {
+      setPaused(!paused);
+      if (!paused) { started = true; later(show, 400); } else clearTimeout(timer);
+    });
+    sa.addEventListener("click", function () { setAll(!all); });
+    if (pillBox) {
+      var ctlRow = document.createElement("div");
+      ctlRow.className = "thread-ctls";
+      ctlRow.appendChild(pz); ctlRow.appendChild(sa);
+      pillBox.appendChild(ctlRow); pillBox.hidden = false;
+    }
+
     jump = function (k) {
       started = true;
-      if (paused) { paused = false; box.classList.remove("thread-calm"); box.classList.add("thread-live"); box.scrollTop = 0;
-        var pzb = pillBox && pillBox.querySelector(".thread-pause"); if (pzb) { pzb.setAttribute("aria-pressed", "false"); pzb.textContent = "Pause and show all"; } }
+      if (all) setAll(false);
+      if (paused) setPaused(false);
       box.classList.add("thread-reset");
       later(function () {
         items.forEach(function (it) { it.classList.remove("in"); });
@@ -582,26 +799,6 @@
         n = k; mark(currentTopic(k)); show();
       }, 300);
     };
-    // Pause shows the whole thread as a scrollable list, which also gives
-    // screen readers every message (WCAG 2.2.2 Pause, Stop, Hide).
-    if (pillBox) {
-      var pz = document.createElement("button");
-      pz.type = "button"; pz.className = "thread-pill thread-pause";
-      pz.setAttribute("aria-pressed", "false"); pz.textContent = "Pause and show all";
-      pz.addEventListener("click", function () {
-        paused = !paused;
-        pz.setAttribute("aria-pressed", paused ? "true" : "false");
-        pz.textContent = paused ? "Play" : "Pause and show all";
-        if (paused) {
-          clearTimeout(timer); list.style.transform = "";
-          box.classList.remove("thread-live"); box.classList.add("thread-calm");
-        } else {
-          box.classList.remove("thread-calm"); box.classList.add("thread-live"); box.scrollTop = 0;
-          jump(Math.max(0, currentTopic(Math.max(0, n - 1))));
-        }
-      });
-      pillBox.appendChild(pz); pillBox.hidden = false;
-    }
     var tio = new IntersectionObserver(function (en) {
       if (!started && en[0].isIntersecting) { started = true; show(); tio.disconnect(); }
     }, { threshold: 0.3 });
@@ -997,12 +1194,17 @@
       var bottom = g.sec.getBoundingClientRect().bottom;
       if (!g.out && bottom < vh * 0.3) {
         g.out = true;
+        clearTimeout(g.settle);
         g.items.forEach(function (el) { el.classList.remove("fly-back"); el.classList.add("fly-out"); });
       } else if (g.out && bottom > vh * 0.42) {
         g.out = false;
         g.items.forEach(function (el) { el.classList.remove("fly-out"); el.classList.add("fly-prep"); });
         void g.sec.offsetWidth;
         g.items.forEach(function (el) { el.classList.remove("fly-prep"); el.classList.add("fly-back"); });
+        // Once they've landed, drop the staggered delay so hover effects
+        // (like the Skills chips lighting up) respond straight away.
+        clearTimeout(g.settle);
+        g.settle = setTimeout(function () { g.items.forEach(function (el) { el.classList.remove("fly-back"); }); }, 1200);
       }
     });
   };
@@ -1206,6 +1408,102 @@
   dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
   dlg.querySelector(".egg-visuals").addEventListener("click", function () {
     close();
-    if (card.openGallery) card.openGallery("security-risk-framework.png");
+    var lp = document.getElementById("site-security");
+    if (lp && lp.openTo) lp.openTo("challenge");
   });
+  // The connected project's Video tab can play this clip until the real video is ready.
+  Array.prototype.forEach.call(document.querySelectorAll(".egg-launch"), function (b) { b.addEventListener("click", open); });
+})();
+
+/* ---------- Round 10: where am I? A progress rail for the portfolio ----------
+   Wide screens: a rail on the left lists every project in the current view,
+   with a fill line, "3 of 9", and the project you're reading highlighted.
+   Each name jumps to its card. Narrower screens: a slim bar under the header
+   with "Project 3 of 9". Both follow the audience filter, and only show
+   while the project list is on screen. */
+(function () {
+  var work = document.querySelector(".work-list");
+  var header = document.querySelector("header.sticky");
+  if (!work) return;
+  var rail = document.createElement("nav");
+  rail.className = "work-rail";
+  rail.setAttribute("aria-label", "Project progress");
+  rail.innerHTML = '<p class="rail-title">Projects <span class="rail-count"></span></p><div class="rail-body"><span class="rail-fill" aria-hidden="true"></span><ol></ol></div>';
+  var ol = rail.querySelector("ol");
+  var railCount = rail.querySelector(".rail-count");
+  var railFill = rail.querySelector(".rail-fill");
+  var bar = document.createElement("div");
+  bar.className = "work-progress";
+  bar.setAttribute("aria-hidden", "true");
+  bar.innerHTML = '<span class="wp-fill"></span><span class="wp-label"></span>';
+  var barFill = bar.querySelector(".wp-fill"), barLabel = bar.querySelector(".wp-label");
+  document.body.appendChild(rail);
+  document.body.appendChild(bar);
+
+  var cards = [], links = [];
+  var build = function () {
+    cards = Array.prototype.slice.call(work.querySelectorAll(":scope > .project")).filter(function (c) { return !c.hidden; });
+    ol.innerHTML = "";
+    links = cards.map(function (c, k) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + c.id;
+      var h = c.querySelector("h3");
+      a.innerHTML = '<span class="rail-dot" aria-hidden="true"></span><span class="rail-name"></span>';
+      a.querySelector(".rail-name").textContent = h ? h.textContent : "Project " + (k + 1);
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var top = c.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0) - 16;
+        window.scrollTo({ top: top, behavior: "smooth" });
+        if (history.replaceState) history.replaceState(null, "", window.location.search + "#" + c.id);
+      });
+      li.appendChild(a); ol.appendChild(li);
+      return a;
+    });
+    update();
+  };
+
+  var update = function () {
+    if (!cards.length) return;
+    var vh = window.innerHeight, line = vh * 0.42;
+    var wr = work.getBoundingClientRect();
+    var on = wr.top < vh * 0.7 && wr.bottom > vh * 0.25;
+    rail.classList.toggle("is-shown", on);
+    bar.classList.toggle("is-shown", on);
+    if (header) bar.style.top = header.offsetHeight + "px";
+    var cur = 0, frac = 0;
+    for (var k = 0; k < cards.length; k++) {
+      var r = cards[k].getBoundingClientRect();
+      if (r.top <= line) { cur = k; frac = Math.max(0, Math.min(1, (line - r.top) / Math.max(r.height, 1))); }
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    if (atBottom) { cur = cards.length - 1; frac = 1; }
+    var pct = Math.min(100, ((cur + frac) / cards.length) * 100);
+    links.forEach(function (a, k) {
+      a.classList.toggle("is-past", k < cur);
+      if (k === cur) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
+    });
+    var label = (cur + 1) + " of " + cards.length;
+    railCount.textContent = label;
+    railFill.style.height = pct + "%";
+    barFill.style.width = pct + "%";
+    barLabel.textContent = "Project " + label;
+  };
+
+  var wait = false;
+  window.addEventListener("scroll", function () {
+    if (wait) return;
+    wait = true;
+    window.requestAnimationFrame(function () { wait = false; update(); });
+  }, { passive: true });
+  window.addEventListener("resize", update);
+  // The audience filter hides and re-orders cards: rebuild when it does.
+  if (window.MutationObserver) {
+    var t = null;
+    new MutationObserver(function (muts) {
+      var hit = muts.some(function (m) { return m.type === "childList" ? m.target === work : m.target.parentNode === work; });
+      if (hit) { clearTimeout(t); t = setTimeout(build, 50); }
+    }).observe(work, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
+  }
+  build();
 })();

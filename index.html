@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal Jeffers · Systems & Workflow Design</title>
 <meta name="description" content="Crystal Jeffers: thoughtful systems that help a growing service team work consistently, stay connected and serve customers well.">
-<link rel="stylesheet" href="assets/style.css?v=24">
+<link rel="stylesheet" href="assets/style.css?v=25">
 <script>
   /* Set up the My Focus fly-in before first paint. Safety net: if anything
      goes wrong, the cards are revealed after 4 seconds regardless. */
@@ -390,20 +390,71 @@
           </div>
           </div>
         </div>
-        <div class="media-pane" data-pane="scale" data-label="Safe to Scale">
-          <h5 class="pane-title">Safe to Scale</h5>
-          <p class="pane-intro">The safeguards behind the site, and the hosting plan for leadership. <a href="assets/docs/internal-sites-security-plan.pdf" target="_blank" rel="noopener">View the security plan (PDF) ↗</a></p>
-          <div class="carousel" aria-label="Security plan visuals">
-          <div class="carousel-track" tabindex="0">
-            <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
-            <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
-            <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
-          </div>
-          </div>
-        </div>
           </div>
         </section>
         </div>
+
+        <!-- Connected project: opens below the tabs, inside this card, so it reads as part of the same work.
+             site.js builds its tabs the same way as the card's own. -->
+        <details class="linked-project" id="site-security">
+          <summary class="linked-summary">
+            <span class="linked-kicker">Connected project</span>
+            <span class="linked-title">Security &amp; Reliability Hardening</span>
+            <span class="linked-lede">The safeguards that make this site, the Dispatch Hub, and the Employee Lifecycle guides safe for a whole team to edit.</span>
+            <span class="linked-open" aria-hidden="true"><span class="when-closed">Open</span><span class="when-open">Close</span></span>
+          </summary>
+          <div class="linked-body">
+            <p class="meta-row"><span class="status-pill live">In Use</span><span class="improves">Access · Cohesion</span></p>
+            <p class="linked-intro">Every control mapped to a type of risk, an IT-style security review, and a costed plan for private hosting as the team grows. <a href="assets/docs/internal-sites-security-plan.pdf" target="_blank" rel="noopener">View the security plan (PDF) ↗</a></p>
+            <div class="card-folder">
+            <section class="card-panel" data-tab="challenge" data-label="The Challenge">
+              <h4 class="panel-title">The challenge</h4>
+              <p>The sites debuted in a private demo with the service manager and field supervisors. They loved them right away and wanted to put them into use. Before the first day of official use, I proactively worked through what an IT team would want to see: who can edit, what belongs on a public page, and what happens when something goes wrong. The goal was quality and integrity from day one, on a free plan, with a clear path for when the company is ready to fund private hosting.</p>
+            </section>
+            <section class="card-panel" data-tab="built" data-label="What I Built">
+              <h4 class="panel-title">What I built</h4>
+              <p class="built-summary">I treated the sites like any internal system an IT team would review, and built each control around a type of risk instead of a checklist alone. If one control misses, another catches it.</p>
+            </section>
+            <section class="card-panel" data-tab="details" data-label="Details">
+              <h4 class="panel-title">Details</h4>
+              <ul class="build-list">
+              <li class="build-item"><strong>Integrity</strong><span>Every save is signed by the editor, checked automatically, and reversible in one click. Broken or unsafe changes never go live.</span></li>
+              <li class="build-item"><strong>Confidentiality</strong><span>A classification rule decides what belongs on a page and what stays on SharePoint. Screenshots use anonymized sample data, and the publish check blocks phone numbers and emails.</span></li>
+              <li class="build-item"><strong>Identity and access</strong><span>A company-owned organization, required two-step sign-in, edit-only rights, same-day removal, and a quarterly access review.</span></li>
+              <li class="build-item"><strong>Supply chain</strong><span>Outside code is pinned, integrity-checked, and served from the site itself, with alerts for known vulnerabilities.</span></li>
+              <li class="build-item"><strong>People and process</strong><span>Plain-language error messages and an editor guide, so a blocked save tells the editor exactly how to fix it.</span></li>
+              <li class="build-item"><strong>Continuity and scale</strong><span>Ownership sits with the company, with two owners and written guides. Capacity math and four costed hosting options show what changes as the team grows.</span></li>
+              </ul>
+              <ul class="tags" aria-label="Skills used">
+              <li>Risk assessment</li><li>Security controls</li><li>Access management</li><li>Change control</li><li>Vendor evaluation</li><li>Cost modeling</li>
+              </ul>
+            </section>
+            <section class="card-panel" data-tab="impact" data-label="Business Impact">
+              <h4 class="panel-title">Business impact</h4>
+              <p>19 of 23 IT security checks are met on the free plan, at $0. The other four are mapped to paid hosting, with a funding plan that compares four options. The cheapest gives company sign-in for $0, against about $3,500 a year for GitHub Enterprise at the same team size. Capacity math puts plan limits in plain terms: a 14-person team could publish about 1,000 edits a month on the free private tier.</p>
+            </section>
+            <section class="card-panel" data-tab="media" data-label="Media">
+              <h4 class="panel-title">Media</h4>
+              <div class="media-set">
+              <div class="media-pane" data-pane="video" data-label="Video">
+                <h5 class="pane-title">Video</h5>
+                <div class="video-soon"><span class="video-soon-icon" aria-hidden="true"></span><strong>Video coming soon</strong><span>A walkthrough of a blocked save, the fix, and a one-click restore.</span><button type="button" class="btn btn-light egg-launch">Watch the captioned clip for now</button></div>
+              </div>
+              <div class="media-pane" data-pane="gallery" data-label="Gallery">
+                <h5 class="pane-title">Gallery</h5>
+                <div class="carousel" aria-label="Security plan visuals">
+                <div class="carousel-track" tabindex="0">
+                  <figure><img src="assets/img/security/security-risk-framework.png" alt="Nine risk categories, each with its question and the controls that answer it" loading="lazy"><figcaption>Risk framework: nine categories, each with the question it asks and the controls that answer it.</figcaption></figure>
+                  <figure><img src="assets/img/security/security-it-review.png" alt="IT security review status bar and key checks" loading="lazy"><figcaption>IT security review: 23 checks an IT team would confirm. 19 are in place on the free plan, and the rest are mapped to paid hosting.</figcaption></figure>
+                  <figure><img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save, the corrected save, and restore buttons" loading="lazy"><figcaption>Audit trail: every save shows who made it and what changed. A save with a phone number is blocked with fix steps, and any version restores in one click. Names are samples.</figcaption></figure>
+                </div>
+                </div>
+              </div>
+              </div>
+            </section>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
     <!-- Easter egg: a tag slides in a few seconds after the card opens. Tapping it plays a captioned clip.
@@ -931,16 +982,22 @@
         <p class="egg-cap">Who owns it? Who can see it? Who can edit? How are accounts and permissions set up?</p>
         <p class="egg-cap">GitHub is a public-facing platform, so it added a new layer: what happens outside our walls, too.</p>
       </section>
-      <section class="egg-scene" data-look="checks">
-        <div class="egg-visual egg-checks">
+      <section class="egg-scene egg-pic" data-look="framework">
+        <div class="egg-visual egg-shot">
+          <img src="assets/img/security/security-risk-framework.png" alt="Risk framework: nine risk categories, each with its question and the controls that answer it">
+          <span class="egg-sub">Risk framework: nine categories, each with the question IT would ask</span>
+        </div>
+        <p class="egg-cap">Security isn't my background, so I started by learning the questions IT would ask, and then built an answer for each one.</p>
+      </section>
+      <section class="egg-scene egg-pic" data-look="checks">
+        <div class="egg-visual egg-shot egg-checks">
           <ul>
             <li>A broken change never goes live</li>
             <li>Sensitive material stays on SharePoint</li>
             <li>The company owns the sites</li>
           </ul>
-          <img src="assets/img/security/security-audit-trail.png" alt="Page history with a blocked save and restore buttons" loading="lazy">
+          <img src="assets/img/security/security-audit-trail.png" alt="Audit trail: page history with a blocked save, the corrected save, and restore buttons">
         </div>
-        <p class="egg-cap">Security isn't my background, so I started by learning the questions IT would ask, and then built an answer for each one.</p>
         <p class="egg-cap">You can save anything, but a broken change never goes live.</p>
         <p class="egg-cap">Sensitive material stays on SharePoint.</p>
         <p class="egg-cap">And the company owns the sites, not me.</p>
@@ -949,11 +1006,11 @@
         <div class="egg-visual"><span class="egg-q">What happens if I leave?</span><span class="egg-sub">Two owners, written guides, and a company-owned account</span></div>
         <p class="egg-cap">The question that kept me honest was: what happens if I leave?</p>
       </section>
-      <section class="egg-scene" data-look="cost">
-        <div class="egg-visual egg-cost">
+      <section class="egg-scene egg-pic" data-look="cost">
+        <div class="egg-visual egg-shot egg-cost">
           <div class="egg-track"><span class="egg-dot" style="--at:0%"><b>$0</b></span><span class="egg-dot" style="--at:45%"><b>Path 2</b></span><span class="egg-dot" style="--at:100%"><b>~$3,500/yr</b></span></div>
-          <span class="egg-sub">Three costed paths to private hosting</span>
-          <img src="assets/img/security/security-it-review.png" alt="IT security review: checks in place on the free plan and those mapped to paid hosting" loading="lazy">
+          <img src="assets/img/security/security-it-review.png" alt="IT security review: 19 of 23 checks in place on the free plan, the rest mapped to paid hosting">
+          <span class="egg-sub">IT security review: 19 of 23 checks in place at $0</span>
         </div>
         <p class="egg-cap">Then I gave leadership a decision instead of a problem: three costed paths to private hosting, from $0 to about $3,500 a year.</p>
       </section>
@@ -968,7 +1025,7 @@
           <div class="egg-actions">
             <button type="button" class="btn btn-dark egg-replay">Replay</button>
             <a class="btn btn-light" href="assets/docs/internal-sites-security-plan.pdf" target="_blank" rel="noopener">View the security plan ↗</a>
-            <button type="button" class="btn btn-light egg-visuals">See the visuals</button>
+            <button type="button" class="btn btn-light egg-visuals">Open the full project</button>
           </div>
         </div>
         <p class="egg-cap">I've been learning the whole way, and I'm nowhere near done.</p>
@@ -985,6 +1042,6 @@
   Systems shown were built at Southland Industries. Screenshots are shared for internal review. Status labels reflect each project's current stage.
 </footer>
 
-<script src="assets/site.js?v=18" defer></script>
+<script src="assets/site.js?v=19" defer></script>
 </body>
 </html>
