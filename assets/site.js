@@ -1556,48 +1556,43 @@
   });
 })();
 
-/* ---------- Filter tip ----------
-   The first time the filter buttons come into view (once per visit), a
-   "Psst..." tip appears and an orange outline moves across each view
-   button in turn, twice. Picking a view or tapping x hides the tip.
-   With reduced motion, the tip shows without the moving outline. */
+/* ---------- Filter tip and spark ----------
+   Whenever the filter buttons are fully on screen, the "Psst..." tip shows
+   and a spark runs down the buttons (each one lifts and flashes orange),
+   repeating every 5 seconds while they stay on screen. Once a visitor picks
+   a view or taps x, the tip and spark stop for the rest of the visit.
+   Reduced motion: the tip shows, without the spark. */
 (function () {
   var bar = document.querySelector(".lens-bar");
+  var row = bar && bar.querySelector(".lens-buttons");
   var hint = bar && bar.querySelector(".lens-hint");
-  if (!bar || !hint || !("IntersectionObserver" in window)) return;
-  var seen = false;
-  try { seen = sessionStorage.getItem("lensHintSeen") === "1"; } catch (e) {}
-  if (seen) return;
-  var btns = Array.prototype.slice.call(bar.querySelectorAll(".lens")).filter(function (b) { return b.getAttribute("data-lens-id") !== "all"; });
+  if (!row || !hint || !("IntersectionObserver" in window)) return;
+  var btns = Array.prototype.slice.call(row.querySelectorAll(".lens"));
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timers = [];
-  var hide = function () {
-    timers.forEach(clearTimeout);
-    btns.forEach(function (b) { b.classList.remove("lens-glow"); });
+  var done = false, loop = null, timers = [];
+  var spark = function () {
+    if (calm || done) return;
+    btns.forEach(function (b, i) {
+      if (b.getAttribute("aria-pressed") === "true") return;
+      timers.push(setTimeout(function () { b.classList.remove("zapped"); void b.offsetWidth; b.classList.add("zapped"); }, i * 160));
+    });
+  };
+  var stopLoop = function () { clearInterval(loop); loop = null; timers.forEach(clearTimeout); timers = []; };
+  var finish = function () {
+    done = true; stopLoop();
     hint.classList.remove("in");
     setTimeout(function () { hint.hidden = true; }, 300);
-  };
-  var sweep = function () {
-    if (calm) return;
-    var t = 700;
-    for (var round = 0; round < 2; round++) {
-      btns.forEach(function (b) {
-        timers.push(setTimeout(function () { b.classList.add("lens-glow"); }, t));
-        timers.push(setTimeout(function () { b.classList.remove("lens-glow"); }, t + 650));
-        t += 450;
-      });
-      t += 500;
-    }
+    io.disconnect();
   };
   var io = new IntersectionObserver(function (es) {
-    if (!es[0].isIntersecting) return;
-    io.disconnect();
-    try { sessionStorage.setItem("lensHintSeen", "1"); } catch (e) {}
-    hint.hidden = false;
-    requestAnimationFrame(function () { hint.classList.add("in"); });
-    sweep();
-  }, { threshold: 0.6 });
-  io.observe(bar);
-  hint.querySelector(".lens-hint-x").addEventListener("click", hide);
-  btns.concat(bar.querySelector('.lens[data-lens-id="all"]')).forEach(function (b) { if (b) b.addEventListener("click", hide); });
+    if (done) return;
+    if (es[0].isIntersecting) {
+      hint.hidden = false;
+      requestAnimationFrame(function () { hint.classList.add("in"); });
+      if (!loop) { spark(); loop = setInterval(spark, 5000); }
+    } else stopLoop();
+  }, { threshold: 1, rootMargin: "-80px 0px 0px 0px" });
+  io.observe(row);
+  hint.querySelector(".lens-hint-x").addEventListener("click", finish);
+  btns.forEach(function (b) { b.addEventListener("click", finish); });
 })();

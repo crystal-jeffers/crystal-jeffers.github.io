@@ -2157,11 +2157,13 @@ details.case .linked-project[open] .when-closed { display: none; }
   background: var(--color-black); color: #fff; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
   box-shadow: 0 4px 12px -4px rgba(0,0,0,0.4);
 }
-@media (min-width: 1260px) {
+@media (min-width: 1360px) {
   .work-progress { display: none; }
   .work-rail {
-    display: block; position: fixed; top: 50%; z-index: 20; width: 10rem;
-    left: max(0.75rem, calc((100vw - 960px) / 2 - 11.25rem));
+    display: block; position: fixed; top: 50%; z-index: 20;
+    /* Right edge sits 2rem left of the cards, like the About page menu; narrower screens get a narrower rail */
+    width: min(10rem, calc((100vw - 960px) / 2 - 2.75rem));
+    left: max(0.5rem, calc((100vw - 960px) / 2 - 2rem - min(10rem, calc((100vw - 960px) / 2 - 2.75rem))));
     transform: translateY(-50%); max-height: calc(100vh - 120px); overflow-y: auto; padding: 0.25rem 0.25rem 0.25rem 8px;
     opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s;
   }
@@ -2212,6 +2214,12 @@ details.case .linked-project[open] .when-closed { display: none; }
 .lens-hint b { color: var(--color-orange); }
 .lens-hint-x { flex: none; width: 26px; height: 26px; border: 0; border-radius: 50%; background: transparent; color: #d9d9d9; font-size: 1.1rem; line-height: 1; cursor: pointer; }
 .lens-hint-x:hover { color: #fff; }
-.lens { transition: box-shadow 0.3s ease; }
-.lens.lens-glow { box-shadow: 0 0 0 3px var(--color-orange), 0 0 14px 2px rgba(255,120,0,0.35); }
-@media (prefers-reduced-motion: reduce) { .lens-hint { transition: none; } .lens { transition: none; } }
+/* Filter buttons: a spark runs down the line, like the About page impact cards.
+   Each button flashes an orange outline and tint and lifts up, then settles. */
+.lens.zapped { animation: lens-zap 0.85s cubic-bezier(0.2, 0.9, 0.3, 1.2); }
+@keyframes lens-zap {
+  0% { transform: none; }
+  30% { transform: translateY(-4px); border-color: var(--color-orange); background: #fff1e6; box-shadow: 0 0 0 3px rgba(255,138,31,0.6), 0 8px 18px -6px rgba(255,120,0,0.55); }
+  100% { transform: none; box-shadow: 0 0 0 0 rgba(255,138,31,0); }
+}
+@media (prefers-reduced-motion: reduce) { .lens-hint { transition: none; } .lens.zapped { animation: none; } }
