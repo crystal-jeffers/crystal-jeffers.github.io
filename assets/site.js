@@ -181,9 +181,10 @@
         });
       };
       set.panes = panes;
-      // Open on the first story with pictures, not the video placeholder
+      // Open on the video when it's ready, otherwise the first story with pictures
       var first = 0;
-      panes.forEach(function (pn, j) { if (!first && pn.getAttribute("data-pane") !== "video") first = j; });
+      panes.forEach(function (pn, j) { if (!first && (pn.getAttribute("data-pane") !== "video" || pn.querySelector(".yt"))) first = j; });
+      panes.forEach(function (pn, j) { if (pn.getAttribute("data-pane") === "video" && pn.querySelector(".yt")) first = j; });
       set.pickPane(first);
     });
 
@@ -256,8 +257,9 @@
       var play = document.createElement("button");
       play.type = "button";
       play.className = "case-play";
-      play.setAttribute("aria-label", "Watch the video (coming soon)");
-      play.title = "Video coming soon";
+      var ready = !!panels[mediaIdx].querySelector(":scope .media-set > .media-pane[data-pane='video'] .yt");
+      play.setAttribute("aria-label", ready ? "Watch the video" : "Watch the video (coming soon)");
+      play.title = ready ? "Watch the video" : "Video coming soon";
       play.innerHTML = '<span class="play-icon" aria-hidden="true"></span>';
       play.addEventListener("click", function () {
         det.open = true;
@@ -1506,4 +1508,23 @@
     }).observe(work, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
   }
   build();
+})();
+
+/* ---------- Videos: click to load ----------
+   Each .yt button shows a still. The YouTube player (privacy-enhanced, no
+   cookies until played) loads only when someone presses play. */
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll(".yt[data-yt]"), function (b) {
+    b.addEventListener("click", function () {
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + b.getAttribute("data-yt") + "?autoplay=1&rel=0&playsinline=1";
+      f.title = (b.getAttribute("aria-label") || "Video").replace(/^Play video: /, "");
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      f.className = "yt-frame";
+      b.replaceWith(f);
+      f.focus();
+    });
+  });
 })();
